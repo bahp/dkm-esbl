@@ -1,0 +1,101 @@
+patient_id,age,sex,unit_type,admission_source,weight,bsi_source,microorganism,diabetes,hypertension,ckd,copd,malignancy,asthma,mech_vent,cardiac_arrest,inappropriate_abx,vasopressor_use,hypotension,mental_status_score,abx_inappropriate_flag,hosp_abroad_12m,prev_3gcr_culture,prev_3gcr_rectal_swab,prior_esbl_365d,nursing_home_resident,urinary_catheter_present,prior_f_c_abx_90d,prior_esbl_180d,prior_abx_30d,chronic_dialysis,transfer_from_hosp,prior_esbl_history,hosp_last_90d,abx_last_90d,hosp_last_1y,prior_abx_90d,diabetes_icd,hypertension_icd,malignancy_icd,risk,sepsis_case
+101,69,M,SICU,Emergency,136.3,Unknown,E. coli,0,1,1,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,N/A,I15.9,N/A,34.5,0
+102,44,M,MICU,Transfer,77.9,Catheter,Klebsiella spp.,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,N/A,N/A,C91.0,22.0,0
+103,57,M,MICU,Direct Admit,77.0,Catheter,E. coli,0,1,0,0,0,0,1,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,N/A,I15.9,N/A,28.5,0
+104,71,M,SICU,Transfer,139.7,Respiratory,Enterobacter spp.,0,0,0,0,1,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,N/A,N/A,C81.9,35.5,0
+105,51,F,MICU,Direct Admit,96.6,Intra-abdominal,Other ESBL,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,N/A,N/A,N/A,25.5,0
+106,27,M,SICU,Direct Admit,99.7,Respiratory,Other ESBL,0,0,0,0,0,0,1,0,0,0,0,1,1,0,0,0,1,0,1,1,0,1,0,1,0,1,1,0,0,N/A,N/A,N/A,13.5,0
+107,72,M,General Floor,Clinic,81.7,Unknown,Klebsiella spp.,0,1,1,0,0,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,N/A,I10,N/A,36.0,0
+108,21,M,SICU,Direct Admit,90.3,Urinary,Klebsiella spp.,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,10.5,0
+109,65,F,SICU,Clinic,64.1,Urinary,Klebsiella spp.,0,1,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,N/A,I10,N/A,32.5,0
+110,71,F,CCU,Clinic,74.8,Catheter,E. coli,0,1,1,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,N/A,I10,N/A,35.5,0
+111,66,F,General Floor,Clinic,50.7,Intra-abdominal,Klebsiella spp.,1,1,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,E11.9,I15.9,N/A,53.0,1
+112,47,F,General Floor,Clinic,64.4,Intra-abdominal,Other ESBL,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,N/A,N/A,N/A,23.5,0
+113,84,F,General Floor,Direct Admit,132.7,Respiratory,Klebsiella spp.,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,N/A,I10,N/A,42.0,1
+114,86,F,CCU,Direct Admit,66.8,Urinary,Other ESBL,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,N/A,I15.9,N/A,43.0,1
+115,53,M,General Floor,Transfer,132.3,Urinary,E. coli,0,0,1,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,26.5,0
+116,88,M,General Floor,Direct Admit,50.4,Intra-abdominal,Other ESBL,0,1,0,0,0,0,1,1,0,0,0,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,1,N/A,I10,N/A,44.0,1
+117,55,F,MICU,Direct Admit,122.9,Intra-abdominal,Klebsiella spp.,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,27.5,0
+118,53,F,SICU,Direct Admit,140.1,Urinary,Enterobacter spp.,0,0,0,1,0,0,1,1,1,0,0,1,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1,N/A,N/A,N/A,26.5,0
+119,59,M,SICU,Emergency,124.4,Unknown,E. coli,0,1,0,0,0,1,0,0,0,1,0,1,1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,N/A,I15.9,N/A,29.5,0
+120,86,M,General Floor,Direct Admit,106.6,Respiratory,Other ESBL,0,1,0,1,0,0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,N/A,I10,N/A,43.0,1
+121,35,F,General Floor,Direct Admit,100.0,Catheter,Other ESBL,1,1,0,0,1,0,1,0,0,0,0,1,1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,E11.9,I15.9,C81.9,37.5,0
+122,68,F,General Floor,Clinic,70.6,Respiratory,Enterobacter spp.,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,N/A,N/A,N/A,34.0,0
+123,36,M,MICU,Clinic,60.6,Urinary,Enterobacter spp.,0,1,0,1,0,0,0,1,0,1,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,N/A,I10,N/A,18.0,0
+124,41,M,General Floor,Clinic,86.6,Catheter,Klebsiella spp.,0,0,0,0,0,0,1,1,0,1,1,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,1,N/A,N/A,N/A,20.5,0
+125,34,M,SICU,Clinic,82.9,Intra-abdominal,Enterobacter spp.,0,1,0,0,1,1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,N/A,I15.9,C81.9,17.0,0
+126,49,M,SICU,Clinic,130.6,Catheter,Enterobacter spp.,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,N/A,I10,N/A,24.5,0
+127,67,M,SICU,Transfer,125.9,Intra-abdominal,Other ESBL,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1,N/A,N/A,N/A,33.5,0
+128,65,F,MICU,Emergency,142.8,Intra-abdominal,E. coli,1,0,0,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,E11.9,N/A,N/A,52.5,1
+129,71,M,SICU,Clinic,84.7,Intra-abdominal,Other ESBL,1,0,0,0,0,0,0,0,0,1,0,1,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0,E11.65,N/A,N/A,55.5,1
+130,25,F,MICU,Direct Admit,62.0,Urinary,Enterobacter spp.,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,E10.9,N/A,N/A,32.5,0
+131,44,M,SICU,Clinic,78.4,Catheter,Klebsiella spp.,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,N/A,N/A,N/A,22.0,0
+132,35,M,MICU,Transfer,93.0,Unknown,E. coli,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,E11.65,N/A,N/A,37.5,0
+133,57,F,SICU,Emergency,112.4,Intra-abdominal,Enterobacter spp.,1,0,0,0,0,1,0,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,E11.9,N/A,N/A,48.5,1
+134,63,M,CCU,Direct Admit,128.9,Urinary,E. coli,0,0,0,1,0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,N/A,N/A,N/A,31.5,0
+135,38,F,MICU,Direct Admit,146.1,Catheter,Klebsiella spp.,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,0,N/A,N/A,N/A,19.0,0
+136,69,F,SICU,Clinic,93.8,Unknown,Other ESBL,0,0,1,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,34.5,0
+137,24,F,MICU,Direct Admit,57.3,Unknown,Klebsiella spp.,0,0,0,0,1,1,0,1,1,1,0,0,1,0,0,0,0,0,0,1,1,0,0,0,1,0,1,1,1,N/A,N/A,C81.9,12.0,0
+138,38,M,General Floor,Transfer,73.3,Catheter,Klebsiella spp.,0,1,1,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,N/A,I10,N/A,19.0,0
+139,20,F,MICU,Clinic,135.7,Urinary,E. coli,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,E11.9,I10,N/A,30.0,0
+140,24,F,General Floor,Clinic,86.2,Unknown,Other ESBL,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,N/A,N/A,N/A,12.0,0
+141,84,M,MICU,Transfer,86.9,Intra-abdominal,E. coli,0,0,0,0,0,0,1,0,1,0,1,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,N/A,N/A,N/A,42.0,1
+142,80,F,General Floor,Emergency,147.9,Respiratory,Other ESBL,0,1,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,N/A,I15.9,N/A,40.0,1
+143,23,F,MICU,Direct Admit,119.8,Respiratory,E. coli,1,0,1,0,0,0,0,1,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,E11.65,N/A,N/A,31.5,0
+144,46,F,MICU,Direct Admit,109.3,Respiratory,Other ESBL,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,23.0,0
+145,37,F,General Floor,Transfer,115.5,Catheter,Other ESBL,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,18.5,0
+146,64,F,General Floor,Emergency,107.5,Urinary,E. coli,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,1,N/A,N/A,N/A,32.0,0
+147,18,F,CCU,Transfer,140.8,Intra-abdominal,Other ESBL,0,1,0,0,0,0,0,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,N/A,I15.9,N/A,9.0,0
+148,29,M,MICU,Transfer,124.7,Catheter,Other ESBL,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,N/A,I15.9,N/A,14.5,0
+149,80,M,MICU,Transfer,90.6,Intra-abdominal,Klebsiella spp.,0,0,1,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,1,N/A,N/A,N/A,40.0,1
+150,44,F,CCU,Transfer,77.4,Urinary,Klebsiella spp.,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,N/A,I15.9,N/A,22.0,0
+151,65,F,CCU,Emergency,53.7,Unknown,E. coli,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,32.5,0
+152,24,M,MICU,Emergency,101.0,Catheter,Other ESBL,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,E11.9,N/A,N/A,32.0,0
+153,69,M,MICU,Clinic,117.7,Urinary,Other ESBL,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,N/A,I15.9,N/A,34.5,0
+154,43,M,CCU,Direct Admit,118.0,Catheter,Enterobacter spp.,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,1,0,N/A,N/A,N/A,21.5,0
+155,58,F,SICU,Clinic,134.7,Intra-abdominal,E. coli,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,N/A,N/A,N/A,29.0,0
+156,74,F,MICU,Transfer,67.6,Catheter,Enterobacter spp.,0,0,0,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,37.0,0
+157,77,F,CCU,Clinic,79.8,Catheter,Other ESBL,0,1,1,0,0,1,1,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,N/A,I15.9,N/A,38.5,1
+158,53,M,CCU,Emergency,90.4,Urinary,E. coli,0,1,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,N/A,I15.9,N/A,26.5,0
+159,45,F,SICU,Direct Admit,88.7,Intra-abdominal,Klebsiella spp.,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,N/A,N/A,N/A,22.5,0
+160,93,F,MICU,Direct Admit,148.5,Unknown,Other ESBL,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,1,0,N/A,N/A,C91.0,46.5,1
+161,75,M,MICU,Clinic,85.4,Catheter,E. coli,1,0,0,0,0,1,0,0,0,1,0,1,1,0,0,0,0,0,1,1,0,0,0,0,1,0,1,0,1,E11.9,N/A,N/A,57.5,1
+162,76,F,SICU,Emergency,69.1,Intra-abdominal,Klebsiella spp.,0,0,0,0,0,1,1,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,N/A,N/A,N/A,38.0,1
+163,56,F,MICU,Transfer,141.9,Respiratory,Enterobacter spp.,0,1,0,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,N/A,I10,N/A,28.0,0
+164,33,M,SICU,Clinic,60.2,Urinary,E. coli,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,1,0,N/A,N/A,N/A,16.5,0
+165,29,M,CCU,Emergency,128.1,Unknown,Enterobacter spp.,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,14.5,0
+166,91,F,General Floor,Clinic,114.9,Intra-abdominal,Enterobacter spp.,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,E11.65,I10,N/A,65.5,1
+167,83,F,MICU,Transfer,105.8,Catheter,Klebsiella spp.,1,0,1,1,0,1,0,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,E10.9,N/A,N/A,61.5,1
+168,46,M,CCU,Emergency,54.5,Respiratory,Klebsiella spp.,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,E10.9,I15.9,N/A,43.0,1
+169,86,M,SICU,Emergency,67.8,Catheter,Other ESBL,1,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,1,0,0,E11.9,N/A,N/A,63.0,1
+170,85,F,CCU,Emergency,149.4,Urinary,Other ESBL,1,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,E11.65,N/A,C81.9,62.5,1
+171,82,M,MICU,Clinic,80.4,Intra-abdominal,E. coli,0,1,0,0,0,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,N/A,I10,N/A,41.0,1
+172,37,M,General Floor,Direct Admit,63.9,Urinary,Klebsiella spp.,0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,N/A,I10,N/A,18.5,0
+173,54,M,General Floor,Direct Admit,50.3,Unknown,Klebsiella spp.,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,27.0,0
+174,40,M,General Floor,Transfer,110.4,Urinary,E. coli,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,E11.9,N/A,N/A,40.0,1
+175,86,F,General Floor,Emergency,107.6,Unknown,Other ESBL,1,1,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,E11.9,I10,N/A,63.0,1
+176,56,M,General Floor,Transfer,131.6,Unknown,E. coli,0,0,0,0,0,1,0,0,1,1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,1,0,0,N/A,N/A,N/A,28.0,0
+177,34,F,CCU,Transfer,110.0,Unknown,Enterobacter spp.,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,17.0,0
+178,33,F,General Floor,Transfer,102.0,Catheter,Other ESBL,0,0,0,0,0,1,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,N/A,N/A,N/A,16.5,0
+179,29,F,SICU,Emergency,140.4,Unknown,E. coli,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,N/A,N/A,N/A,14.5,0
+180,37,F,CCU,Emergency,99.9,Catheter,Other ESBL,1,0,0,0,0,1,0,1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,E11.65,N/A,N/A,38.5,1
+181,24,M,CCU,Clinic,72.1,Intra-abdominal,Enterobacter spp.,0,1,0,0,1,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,N/A,I15.9,C91.0,12.0,0
+182,30,M,CCU,Emergency,75.5,Unknown,Enterobacter spp.,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,N/A,N/A,N/A,15.0,0
+183,25,M,General Floor,Clinic,58.3,Urinary,E. coli,0,0,1,1,0,0,0,0,0,0,1,0,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,12.5,0
+184,83,M,MICU,Direct Admit,139.6,Intra-abdominal,Enterobacter spp.,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,N/A,N/A,N/A,41.5,1
+185,42,F,CCU,Transfer,54.1,Unknown,Other ESBL,0,1,0,0,0,0,0,1,1,0,0,0,0,1,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,N/A,I15.9,N/A,21.0,0
+186,50,M,MICU,Emergency,113.1,Unknown,Enterobacter spp.,0,0,0,0,0,0,1,1,1,1,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,1,N/A,N/A,N/A,25.0,0
+187,75,M,MICU,Transfer,137.6,Urinary,Klebsiella spp.,0,1,0,1,0,0,1,1,1,1,0,1,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,N/A,I10,N/A,37.5,0
+188,48,M,General Floor,Clinic,90.1,Respiratory,E. coli,0,0,0,0,0,1,1,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,N/A,N/A,N/A,24.0,0
+189,93,M,SICU,Direct Admit,110.2,Urinary,Enterobacter spp.,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,N/A,I10,N/A,46.5,1
+190,95,M,MICU,Direct Admit,139.5,Unknown,Klebsiella spp.,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,N/A,N/A,N/A,47.5,1
+191,54,F,General Floor,Direct Admit,106.4,Intra-abdominal,Other ESBL,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,27.0,0
+192,80,M,General Floor,Emergency,57.7,Respiratory,E. coli,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,1,1,0,0,0,N/A,N/A,N/A,40.0,1
+193,26,M,General Floor,Direct Admit,74.2,Catheter,Klebsiella spp.,1,1,0,0,0,1,1,0,1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,E11.9,I10,N/A,33.0,0
+194,24,F,SICU,Emergency,93.8,Catheter,E. coli,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,N/A,N/A,N/A,12.0,0
+195,66,F,General Floor,Transfer,98.3,Intra-abdominal,Klebsiella spp.,0,1,0,0,0,1,1,0,1,0,1,0,1,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,N/A,I10,N/A,33.0,0
+196,26,F,MICU,Direct Admit,107.1,Intra-abdominal,Klebsiella spp.,0,0,0,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,N/A,N/A,N/A,13.0,0
+197,62,M,SICU,Emergency,79.1,Unknown,Klebsiella spp.,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,31.0,0
+198,66,M,SICU,Clinic,78.9,Catheter,Enterobacter spp.,0,1,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,N/A,I10,N/A,33.0,0
+199,25,F,CCU,Direct Admit,136.7,Respiratory,Other ESBL,1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,E10.9,N/A,N/A,32.5,0
+200,65,F,General Floor,Clinic,127.3,Catheter,Other ESBL,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,N/A,N/A,N/A,32.5,0
