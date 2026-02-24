@@ -1,56 +1,81 @@
 # 🏥 Clinical Scoring Evaluation Pipeline
 
-Welcome to the Clinical Scoring Evaluation Pipeline! This project 
-is a highly modular, configuration-driven architecture designed to 
-generate synthetic patient data, engineer complex clinical features 
-(like rolling averages and clinical phenotypes), and evaluate 
-predictive scoring systems (like MEWS, SOFA, and INCREMENT-ESBL).
+A modular, configuration-driven pipeline to generate synthetic patient 
+data, engineer clinical features, and audit predictive scoring systems 
+(e.g., INCREMENT-ESBL, Gavaghan, Jones, Holmgren).
 
 ---
+## 📁 Key Directories
 
-## 🚀 The 3-Step Workflow
+```
+config/        → YAML configuration files controlling:
+                   • Data generation probabilities
+                   • Feature engineering rules
+                 (No Python changes required)
 
-This pipeline is broken into three distinct scripts. This means if 
-you want to tweak a clinical score, you don't have to wait for the 
-data generation step to run all over again!
+src/           → Core logic modules
+   ├── scores.py      → Pure mathematical clinical scoring functions
+   ├── features.py    → Pipeline transformation logic
+   └── generators.py  → Synthetic data creation utilities
 
-Run these in order from your terminal at the root of the project:
+scripts/       → Executable pipeline orchestration scripts
+                   • Step 1
+                   • Step 2
+                   • Step 3
+
+tests/         → Validation and regression testing
+   ├── cases.csv      → "Ground Truth" patient profiles
+   └── test_scores.py → Unit tests validating scoring accuracy
+```
+
+## 🚀 Quick Start: The pipeline
+
+Run all commands from the root of the project directory using the -m (module) flag.
 
 ---
 
 ### 1️⃣ Generate Synthetic Data
 
+Generates a synthetic patient cohort with demographics, comorbidities, 
+and time-series vitals/labs based on your YAML configurations.
+
 ```bash
-python scripts/01_generate_data.py
+python -m scripts.01_generate_data
 ```
 
-**What it does:**  
-Reads `config/data_config.yaml`, generates a synthetic patient 
-cohort with demographics, comorbidities, and time-series vitals/labs, 
-and applies realistic missingness.
-
-**Outputs to:**  
-`data/synthetic/<timestamp>/`
+  - **Reads:** `config/data_config.yaml` and `config/icd_config.yaml` 
+  - **Outputs:** `data/synthetic/<timestamp>/`
 
 ---
 
 ### 2️⃣ Build Features & Compute Scores
 
+Merges raw data, handles missing value imputation, calculates time-windowed 
+features, and runs the clinical scoring algorithms across the generated cohort.
+
 ```bash
-python scripts/02_build_features.py
+python -m scripts.02_build_features
 ```
 
-**What it does:**  
-Grabs the latest synthetic data, handles missing value imputation, 
-calculates time-windowed features (e.g., 24-hour max heart rate), 
-and computes clinical scores based on `config/feature_config.yaml`.
-
-**Outputs to:**  
-`data/processed/<timestamp>/features_engineered.csv`
+  - **Reads:** `config/feature_config.yaml`
+  - **Outputs:** `data/processed/<timestamp>/features_engineered.csv`
 
 ---
 
-### 3️⃣ Evaluate Model Performance
+### 3️⃣ Validate Scores (Audit Report)
+
+Runs specific edge-case patients through the scoring algorithms to generate 
+a point-by-point clinical audit trail, ensuring mathematical accuracy.
+
+```bash
+python -m scripts.05_validate_scores
+```
+
+  - **Reads:** `tests/cases.csv`
+  - **Outputs:**  `reports/score_validation.log` (Check this file to see exactly how points were awarded for each patient).
+
+
+### 3️⃣ Evaluate Model Performance (PENDING)
 
 ```bash
 python scripts/03_evaluate_scores.py
@@ -224,23 +249,20 @@ the others in your `outputs/` folder!
 
 ---
 
-## 🧪 Testing and Validation
+## Testing and Validation
 
-We use `pytest` to ensure clinical scores (Charlson, Pitt, INCREMENT-ESBL) match the literature exactly and remain stable as the codebase evolves.
+We use `pytest` to ensure clinical scores (Charlson, Pitt, INCREMENT-ESBL) 
+match the literature exactly and remain stable as the codebase evolves.
 
 ---
 
-## ▶️ Running Tests
+## Running Tests
 
 Run all tests from the project root directory:
 
 ```bash
-py -m pytest tests                                                          # All
-py -m pytest tests/test_scores.py -k "test_all_scores_from_csv"             # That function
-py -m pytest tests/test_scores.py -k "test_all_scores_from_csv and index2"  # That patient
+py -m pytest tests
 ```
-
-
 
 `pytest` will automatically:
 
@@ -249,186 +271,19 @@ py -m pytest tests/test_scores.py -k "test_all_scores_from_csv and index2"  # Th
 - Provide a clean summary of passed/failed tests  
 - Show detailed tracebacks if failures occur  
 
----
+### 🎯 Running Specific Tests (Advanced)
 
-## ✅ Why We Test
-
-### Hierarchy Verification
-Ensures weighted conditions correctly override each other.
-Example:
-- Moderate/Severe Liver Disease (3 pts) correctly overrides Mild Liver Disease (1 pt).
-
-### Edge Case Handling
-Validates extreme physiological and clinical inputs:
-- Cardiac arrest
-- Mechanical ventilation
-- Comatose Glasgow Coma Scale (GCS)
-- Severe hypotension
-
-### Scenario Matching
-Confirms outputs match published validation scenarios from:
-- Charlson Comorbidity Index (Quan ICD-10 update)
-- Pitt Bacteremia Score
-- INCREMENT-ESBL Score
-
-### Regression Protection
-Prevents silent scoring changes when:
-- Updating ICD-10 mappings
-- Refactoring score logic
-- Adjusting condition hierarchies
-
----
-
-## 📍 How and Where to Run
-
-### 1️⃣ Where
-Always run tests from the **project root directory**:
-
-```
-project-root/
-├── src/
-├── scripts/
-├── tests/
-└── README.md
-```
-
-### 2️⃣ How
-
-In your terminal:
+If you are debugging a specific score or a single patient case, 
+you don't need to run the entire test suite. You can use the `-k` (keyword)
+flag to isolate exactly what you want to test:
 
 ```bash
-pytest
+# Run ONLY the CSV-based scoring tests (all patients)
+python -m pytest tests/test_scores.py -k "test_all_scores_from_csv"             
+
+# Run ONLY the CSV test for a SPECIFIC patient (e.g., Row index 2)
+python -m pytest tests/test_scores.py -k "test_all_scores_from_csv and index2"
 ```
 
----
 
-## 🧩 Adding ICD-10 Mapping Tests
 
-To ensure ICD-10 codes correctly map to Charlson conditions, create:
-
-```
-tests/test_icd10_mapping.py
-```
-
-Example test:
-
-```python
-import pytest
-from src.charlson import calculate_charlson_score
-
-def test_mild_vs_moderate_liver_hierarchy():
-    """
-    Moderate liver disease should override mild liver disease.
-    """
-    icd_codes = ["K73.9", "K72.90"]  # Example mild + moderate
-    score = calculate_charlson_score(icd_codes)
-    assert score == 3  # Only moderate counted
-
-def test_metastatic_cancer_weight():
-    icd_codes = ["C78.7"]  # Secondary malignant neoplasm
-    score = calculate_charlson_score(icd_codes)
-    assert score == 6
-```
-
----
-
-## 📊 Test Coverage (Optional but Recommended)
-
-Install coverage support:
-
-```bash
-pip install pytest-cov
-```
-
-Run tests with coverage:
-
-```bash
-pytest --cov=src --cov-report=term-missing
-```
-
-Generate HTML coverage report:
-
-```bash
-pytest --cov=src --cov-report=html
-```
-
-Then open:
-
-```
-htmlcov/index.html
-```
-
----
-
-## 🚀 Continuous Integration (CI) with GitHub Actions
-
-Create:
-
-```
-.github/workflows/tests.yml
-```
-
-Example CI configuration:
-
-```yaml
-name: Run Tests
-
-on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-        pip install pytest pytest-cov
-
-    - name: Run tests
-      run: |
-        pytest --cov=src --cov-report=term
-```
-
-This ensures:
-
-- All pull requests are automatically tested  
-- Score calculations cannot silently change  
-- Coverage is continuously monitored  
-
----
-
-## 🛡️ Best Practices
-
-- Every scoring function must have:
-  - At least one normal case test
-  - One edge case test
-  - One hierarchy/override test
-- Any change to ICD-10 mappings requires:
-  - Updating mapping tests
-  - Running full regression suite
-- CI must pass before merging to `main`
-
----
-
-## 🎯 Summary
-
-Our testing framework ensures:
-
-- Literature-faithful score calculations  
-- Correct ICD-10 condition mapping  
-- Proper hierarchy enforcement  
-- Safe refactoring  
-- Reproducible validation  
-
-Reliable clinical scoring requires deterministic, validated logic — and automated testing guarantees it.
