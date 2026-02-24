@@ -8,33 +8,38 @@ data, engineer clinical features, and audit predictive scoring systems
 ## 📁 Key Directories
 
 ```
-config/        → YAML configuration files controlling:
-                   • Data generation probabilities
-                   • Feature engineering rules
-                 (No Python changes required)
+config/                    → YAML configuration files controlling:
+   ├── data_config.yaml      → Data generation probabilities
+   ├── feature_config.yaml   → Feature engineering rules
+   └── icd_config.yaml       → ICD coding mappings
 
-src/           → Core logic modules
-   ├── scores.py      → Pure mathematical clinical scoring functions
-   ├── features.py    → Pipeline transformation logic
-   └── generators.py  → Synthetic data creation utilities
+src/                       → Core logic modules
+   ├── scores.py             → Pure mathematical clinical scoring functions
+   ├── features.py           → Pipeline transformation logic
+   ├── generators.py         → Synthetic data creation utilities
+   ├── metrics.py            → Metrics to evaluate performance
+   ├── phenotypes.py         → Special features, phenotypes from findings
+   └── utils.py              → Helper functions
 
-scripts/       → Executable pipeline orchestration scripts
-                   • Step 1
-                   • Step 2
-                   • Step 3
+scripts/                   → Executable pipeline orchestration scripts
+   ├── 01_generate_data.py   → Step 1
+   ├── 02_build_features.py  → Step 2
+   ├── 03_evaluate_scores.py → Step 3
+   └── 05_validate_scores.py → Tool to validate/debug scores
 
-tests/         → Validation and regression testing
-   ├── cases.csv      → "Ground Truth" patient profiles
-   └── test_scores.py → Unit tests validating scoring accuracy
+tests/                     → Validation and regression testing
+   ├── cases.csv             → "Ground Truth" patient profiles
+   └── test_scores.py        → Unit tests validating scoring accuracy
 ```
 
-## 🚀 Quick Start: The pipeline
+
+
+
+## 1. Quick Start: The pipeline
 
 Run all commands from the root of the project directory using the -m (module) flag.
 
----
-
-### 1️⃣ Generate Synthetic Data
+#### 1.1 Generate Synthetic Data
 
 Generates a synthetic patient cohort with demographics, comorbidities, 
 and time-series vitals/labs based on your YAML configurations.
@@ -46,9 +51,7 @@ python -m scripts.01_generate_data
   - **Reads:** `config/data_config.yaml` and `config/icd_config.yaml` 
   - **Outputs:** `data/synthetic/<timestamp>/`
 
----
-
-### 2️⃣ Build Features & Compute Scores
+#### 1.2. Build Features & Compute Scores
 
 Merges raw data, handles missing value imputation, calculates time-windowed 
 features, and runs the clinical scoring algorithms across the generated cohort.
@@ -60,152 +63,142 @@ python -m scripts.02_build_features
   - **Reads:** `config/feature_config.yaml`
   - **Outputs:** `data/processed/<timestamp>/features_engineered.csv`
 
----
 
-### 3️⃣ Validate Scores (Audit Report)
+#### 1.3. Validate Scores (Audit Report)
 
 Runs specific edge-case patients through the scoring algorithms to generate 
-a point-by-point clinical audit trail, ensuring mathematical accuracy.
+a point-by-point clinical audit trail, ensuring mathematical accuracy. Remember
+to Check the `reports/score_validation.log` file to see exactly how points were
+awarded for each patient.
 
 ```bash
 python -m scripts.05_validate_scores
 ```
 
   - **Reads:** `tests/cases.csv`
-  - **Outputs:**  `reports/score_validation.log` (Check this file to see exactly how points were awarded for each patient).
+  - **Outputs:**  `reports/score_validation.log`
 
+#### 1.4. Evaluate Model Performance (PENDING)
 
-### 3️⃣ Evaluate Model Performance (PENDING)
+Evaluates how well the computed scores predict the target label (e.g., `sepsis_case`).
+It calculates AUROC, AUPRC, Sensitivity, and Specificity at the mathematically optimal
+threshold.
 
 ```bash
-python scripts/03_evaluate_scores.py
+python -m scripts/03_evaluate_scores.py
 ```
 
-**What it does:**  
-Evaluates how well your computed scores predict the target label 
-(e.g., `sepsis_case`). It calculates AUROC, AUPRC, Sensitivity, 
-and Specificity at the mathematically optimal threshold.
+  - **Outputs:** `outputs/metrics/` (CSVs) and `outputs/plots/` (ROC/PR curves)
 
-**Outputs to:**  
-- `outputs/metrics/` (CSVs)  
-- `outputs/plots/` (ROC/PR curves)
 
----
 
-# ⚙️ How to Configure the Pipeline
 
-You rarely need to touch the Python code! Almost everything is 
-controlled via two simple YAML files in the `config/` directory.
+## 2. How to Configure the Pipeline
 
----
-
-## A. Configuring Data Generation (`config/data_config.yaml`)
+#### 2.1 Configuring Data Generation (`config/data_config.yaml`)
 
 Want to add a new lab test or demographic feature? Just add it to 
 this file. The pipeline will automatically generate it, bound it 
 within realistic human ranges, and apply missing data masks.
 
-### Example: Adding a new lab test (e.g., Creatinine)
+##### Example: Adding a lab test (e.g., Creatinine)
 
 ```yaml
 ts_config:
-  Creatinine:
+  creatinine:
     type: 'float'
     unit: 'mg/dL'
     prob: 0.20          # 80% chance this value is missing (only drawn 20% of the time)
     range: [0.3, 15.0]  # Impossible to generate values outside this range
 ```
 
-### Example: Adding a new demographic or binary condition
+##### Example: Adding a demographic
 
-### 🔧 Tuning the Population Prevalence
-You can now control the "sickness" or "resistance" level of your synthetic population by editing the `conditions` in `config/data_config.yaml`.
+```yaml
+demographics_schema:
+  age:
+    type: 'int'
+    range: [18, 95]
+  sex:
+    type: 'enumerated'
+    values: ['M', 'F']
+```
+
+##### Example: Adding a condition
+
+You can now control the "sickness" or "resistance" level of your synthetic
+population by editing the `conditions` in `config/data_config.yaml`.
 
 * **To simulate a high-resistance setting:** Increase the probability of `prev_3gcr_culture`.
 * **To simulate an elderly cohort:** Increase the probability of `CKD` and `malignancy`.
 
 ```bash
 conditions:
-  hosp_abroad_12m: 0.15  # Increased from 0.05 for a high-travel cohort
+  hosp_abroad_12m: 0.15  # Adds a binary 1/0 column for hospital abroad.
+  mech_vent: 0.3         # Adds a binary 1/0 column for mechanical ventilation
+  cardiac_arrest: 0.2    # Adds a binary 1/0 column for cardiac arrest
+  prev_3gcr_culture: 0.1
 ```
 
-```yaml
-conditions:
-  - mech_vent         # Adds a binary 1/0 column for mechanical ventilation
-  - cardiac_arrest    # Adds a binary 1/0 column for cardiac arrest
-```
 
----
+#### 2.2 Configuring Features & Scores (`config/feature_config.yaml`)
 
-## B. Configuring Features & Scores (`config/feature_config.yaml`)
+This file tells the pipeline exactly how to handle the data generated in Step 1.
 
-This file tells the pipeline exactly how to handle the data 
-generated in Step 1.
-
----
-
-### 1️⃣ Base Features (Imputation & Rolling Windows)
+##### 2.2.1 Base Features (Imputation & Rolling Windows)
 
 Define how to handle missing data and what statistical windows to compute.
 
 ```yaml
 base_features:
-  HR:
+  hr:
     impute: 'ffill'           # Forward-fill missing heart rates
     rolling:
       windows: ['24h', '7D']  # Calculate 24-hour and 7-day stats
       aggs: ['mean', 'max']   # Specifically, the mean and max
 ```
 
----
+##### 2.2.2 Computed Features (Simple Math)
 
-### 2️⃣ Computed Features (Simple Math)
-
-You can write simple math directly as strings. The pipeline will 
-compile and calculate it instantly.
+You can write simple math directly as strings. The pipeline will compile and calculate it instantly.
 
 ```yaml
 computed_features:
-  Shock_Index: "HR / SBP"
-  derived_diabetes: "(med_insulin_given == 1) or (Glucose_24h_max > 200)"
+  shock_index: "hr / sbp"
+  derived_diabetes: "(med_insulin_given == 1) or (glucose_24h_max > 200)"
 ```
 
----
+##### 2.2.3 Custom Scores (Complex Clinical Logic)
 
-### 3️⃣ Custom Scores (Complex Clinical Logic)
-
-For heavy clinical scoring (like MEWS or INCREMENT-ESBL), write a 
-Python function in `src/scores.py`, then map the columns to it here.
+For heavy clinical scoring (like MEWS or INCREMENT-ESBL), write a Python function in
+`src/scores.py`, then map the columns to it here.
 
 ```yaml
 custom_scores:
-  INCREMENT_ESBL_Score:
+  increment_esbl_core:
     module: 'scores'                     # Looks in src/scores.py
     function: 'calculate_increment_esbl' # Calls this specific function
     kwargs:                              # Passes these dataset columns as arguments
       age_col: 'age'
-      charlson_col: 'Charlson_Score'
-      pitt_col: 'Pitt_Score'
+      charlson_col: 'charlson_score'
+      pitt_col: 'pitt_score'
       inapprop_abx_col: 'inappropriate_abx'
 ```
 
----
 
-# 🛠️ Adding a Brand New Clinical Score (A Guide for Juniors)
+## 3. Adding a Brand New Clinical Score
 
-Let’s say your attending physician asks you to test the qSOFA score  
-(Respiratory Rate ≥ 22, Systolic BP ≤ 100, Altered Mental Status).
+Let’s say your attending physician asks you to test the qSOFA score which is calculated as
+follows: Respiratory Rate ≥ 22, Systolic BP ≤ 100, Altered Mental Status.
 
----
-
-## Step 1: Write the logic in `src/scores.py`
+##### Step 1: Write the logic in `src/scores.py`
 
 ```python
 # src/scores.py
 import pandas as pd
 import numpy as np
 
-def calculate_qsofa(df, rr_col='RR', sbp_col='SBP', ams_col='altered_mental_status'):
+def calculate_qsofa(df, rr_col='rr', sbp_col='sbp', ams_col='altered_mental_status'):
     score = pd.Series(0, index=df.index)
     
     if rr_col in df.columns:
@@ -218,45 +211,43 @@ def calculate_qsofa(df, rr_col='RR', sbp_col='SBP', ams_col='altered_mental_stat
     return score
 ```
 
----
 
-## Step 2: Tell the YAML to use it in `config/feature_config.yaml`
+#### Step 2: Tell the YAML to use it in `config/feature_config.yaml`
 
 ```yaml
 custom_scores:
-  qSOFA_Score:
-    module: 'scores'
+  qsofa_score:
+    module: 'src.scores'
     function: 'calculate_qsofa'
     kwargs:
-      rr_col: 'RR'
-      sbp_col: 'SBP'
-      ams_col: 'GCS_less_than_15'  # Assuming you engineered a GCS flag!
+      rr_col: 'rr'
+      sbp_col: 'sbp'
+      ams_col: 'gcs_less_than_15'  # Assuming you engineered a GCS flag!
 ```
 
----
+Note that if you do not want to engineer the `gcs_less_than_15`, you could compute just
+the `gcs_score` and then inside the calculate_qsofa function check whether the value is
+less than 15.
 
-## Step 3: Run Steps 02 and 03
+
+#### Step 3: Run Steps 02 and 03
 
 ```bash
-python scripts/02_build_features.py
-python scripts/03_evaluate_scores.py
-
-py -m scripts.05_validate_scores.py  
+python -m scripts.05_validate_scores
+python -m scripts.02_build_features
+python -m scripts.03_evaluate_scores
 ```
 
-You will instantly see your new `qSOFA_Score` evaluated against all 
-the others in your `outputs/` folder!
+You will instantly see your new `qsofa_Score` evaluated against all the existing
+scores in your `outputs/` folder!
 
----
 
-## Testing and Validation
+## 4. Testing and Validation
 
-We use `pytest` to ensure clinical scores (Charlson, Pitt, INCREMENT-ESBL) 
+We use `pytest` to ensure clinical scores (Charlson, Pitt, INCREMENT-ESBL)
 match the literature exactly and remain stable as the codebase evolves.
 
----
-
-## Running Tests
+##### 4.1 Running Tests
 
 Run all tests from the project root directory:
 
@@ -271,11 +262,10 @@ py -m pytest tests
 - Provide a clean summary of passed/failed tests  
 - Show detailed tracebacks if failures occur  
 
-### 🎯 Running Specific Tests (Advanced)
+##### 4.2 Running Specific Tests (Advanced)
 
-If you are debugging a specific score or a single patient case, 
-you don't need to run the entire test suite. You can use the `-k` (keyword)
-flag to isolate exactly what you want to test:
+If you are debugging a specific score or a single patient case, you don't need to run the
+entire test suite. You can use the `-k` (keyword) flag to isolate exactly what you want to test:
 
 ```bash
 # Run ONLY the CSV-based scoring tests (all patients)
