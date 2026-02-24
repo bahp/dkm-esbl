@@ -212,7 +212,7 @@ def calculate_qsofa(df, rr_col='rr', sbp_col='sbp', ams_col='altered_mental_stat
 ```
 
 
-#### Step 2: Tell the YAML to use it in `config/feature_config.yaml`
+##### Step 2: Tell the YAML to use it in `config/feature_config.yaml`
 
 ```yaml
 custom_scores:
@@ -230,7 +230,7 @@ the `gcs_score` and then inside the calculate_qsofa function check whether the v
 less than 15.
 
 
-#### Step 3: Run Steps 02 and 03
+##### Step 3: Run validation, build features and evaluate
 
 ```bash
 python -m scripts.05_validate_scores
