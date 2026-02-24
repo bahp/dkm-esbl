@@ -215,6 +215,8 @@ custom_scores:
 ```bash
 python scripts/02_build_features.py
 python scripts/03_evaluate_scores.py
+
+py -m scripts.05_validate_scores.py  
 ```
 
 You will instantly see your new `qSOFA_Score` evaluated against all 

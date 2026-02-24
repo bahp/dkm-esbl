@@ -1,0 +1,5 @@
+icd_codes:
+  diabetes: ["E11.9", "E10.9", "E11.65"]
+  hypertension: ["I10", "I15.9"]
+  CKD: ["N18.3", "N18.4", "N18.9"]
+  malignancy: ["C81.9", "C91.0"]

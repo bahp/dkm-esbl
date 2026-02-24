@@ -1,0 +1,197 @@
+# config/feature_config.yaml
+
+base_features:
+  hr:
+    impute: 'ffill'
+    missing_indicator: false
+    delta: true
+    rolling:
+      windows: ['24h', '7D']
+      aggs: ['mean', 'max']
+
+  sbp:
+    impute: 'ffill'
+    missing_indicator: false
+    delta: true
+    rolling:
+      windows: ['24h']
+      aggs: ['min'] # For SBP, we usually care about the lowest drops
+
+  rr:
+    impute: 'ffill'
+
+  crp:
+    impute: 'constant'
+    fill_value: 5.0
+    missing_indicator: true
+
+# ---------------------------------------------------------
+# Dynamic Feature & Score Computation (Evaluated by Pandas)
+# ---------------------------------------------------------
+# USES df.eval() - EXPLAIN
+computed_features:
+  # Clinical Ratios
+  shock_index: "hr / sbp"
+
+  # Clinical Scores (e.g., simplified qSOFA: RR >= 22 and SBP <= 100)
+  # In pandas eval, boolean evaluations return True/False (1/0), allowing easy addition.
+  qsofaA_score: "(rr >= 22) + (sbp <= 100)"
+
+  # Hypothetical composite feature
+  vitals_stress_factor: "(hr_24h_mean / 80) + (temp - 37)"
+
+  # This does the exact same thing as the Python function, but in one line!
+  # It evaluates to True (1) or False (0).
+  #derived_diabetes_simple: "(med_insulin_given == 1) or (Glucose_24h_max > 200)"
+
+
+custom_features:
+
+  derived_diabetes:
+    module: 'phenotypes'
+    function: 'derive_diabetes_status'
+    kwargs:
+      insulin_col: 'med_insulin_given'
+      glucose_col: 'Glucose_24h_max'
+
+  derived_liver_disease:
+    module: 'phenotypes'
+    function: 'derive_liver_disease'
+    kwargs:
+      ast_col: 'ast'
+      alt_col: 'alt'
+      cirrhosis_med_col: 'med_lactulose'
+
+  # Map Myocardial Infarction
+  mi:
+    module: 'src.phenotypes'
+    function: 'map_medical_codes'
+    kwargs:
+      code_col: 'icd_codes'
+      target_codes: ['I21', 'I22', 'I25.2']
+
+  # Map Diabetes with Complications
+  diabetes_comp:
+    module: 'src.phenotypes'
+    function: 'map_medical_codes'
+    kwargs:
+      code_col: 'icd_codes'
+      target_codes: ['E10.2', 'E10.7', 'E11.2', 'E11.7']
+
+  # Map Metastatic Tumor
+  cancer_met:
+    module: 'src.phenotypes'
+    function: 'map_medical_codes'
+    kwargs:
+      code_col: 'icd_codes'
+      target_codes: ['C77', 'C78', 'C79', 'C80']
+
+# ---------------------------------------------------------
+# Custom Python Score Functions
+# ---------------------------------------------------------
+custom_scores:
+
+  charlson_score:
+    module: 'src.scores'
+    function: 'calculate_charlson'
+    kwargs:
+      comorbidities:
+        # Map your dataset columns to their respective Charlson weights
+        diabetes: 1
+        hypertension: 1 # Often omitted, but here as example
+        ckd: 2          # Renal disease
+        malignancy: 2
+        copd: 1         # Chronic pulmonary disease
+
+  charlson_quan:
+    module: 'src.scores'
+    function: 'calculate_charlson_quan'
+    kwargs:
+      age_col: 'age'
+
+
+  pitt_score:
+    module: 'src.scores'
+    function: 'calculate_pitt_score'
+    kwargs:
+      temp_col: 'temp_24h_max' # Using the engineered rolling max
+      hypotens_col: 'hypotension_flag'
+      vent_col: 'mech_vent_flag'
+      arrest_col: 'cardiac_arrest_flag'
+      mental_col: 'mental_status_score'
+
+  sirs_count:
+    module: 'src.scores'
+    function: 'calculate_sirs'
+    kwargs:
+      temp_col: 'temp_24h_max'
+      hr_col: 'hr_24h_max'
+      rr_col: 'rr_24h_max'
+      wbc_col: 'wbc'
+
+  mews_score:
+    module: 'src.scores'         # The python file (src/scores.py)
+    function: 'calculate_mews'   # The specific function to call
+    kwargs:                      # The column mappings to pass to the function
+      rr_col: 'rr'
+      hr_col: 'hr'
+      sbp_col: 'sbp'
+      temp_col: 'temp'
+
+  increment_esbl_score:
+    module: 'src.scores'
+    function: 'calculate_increment_esbl'
+    kwargs:
+      age_col: 'age'
+      charlson_col: 'charlson_score'  # References the score computed above
+      pitt_col: 'pitt_score'          # References the score computed above
+      sirs_col: 'sirs_count'          # References the score computed above
+      bsi_not_urinary_col: 'bsi_not_urinary'
+      is_non_ecoli_col: 'is_non_ecoli'
+      inapprop_abx_col: 'abx_inappropriate_flag'
+
+  holmgren_score:
+    module: 'src.scores'
+    function: 'calculate_holmgren_score'
+    kwargs:
+      hosp_abroad_col: 'hosp_abroad_12m'
+      prev_culture_col: 'prev_3gcr_culture'
+      prev_swab_col: 'prev_3gcr_rectal_swab'
+
+  gavaghan_score:
+    module: 'src.scores'
+    function: 'calculate_gavaghan_score'
+    kwargs:
+      age_col: 'age'
+      prior_esbl_col: 'prior_esbl_365d'
+      nursing_home_col: 'nursing_home_resident'
+      urinary_catheter_col: 'urinary_catheter_present'
+      prior_abx_col: 'prior_f_c_abx_90d'
+
+  jones_score:
+    module: 'src.scores'
+    function: 'calculate_jones_score'
+    kwargs:
+      prior_esbl_col: 'prior_esbl_180d'
+      prior_abx_col: 'prior_abx_30d'
+      chronic_dialysis_col: 'chronic_dialysis'
+      transfer_hosp_col: 'transfer_from_hosp'
+
+  tumbarello_score:
+    module: 'src.scores'
+    function: 'calculate_tumbarello_score'
+    kwargs:
+      prior_esbl_col: 'prior_esbl_history'
+      hosp_90d_col: 'hosp_last_90d'
+      abx_90d_col: 'abx_last_90d'
+      urinary_catheter_col: 'urinary_catheter_present'
+
+  kim_score:
+    module: 'src.scores'
+    function: 'calculate_kim_score'
+    kwargs:
+      prior_esbl_col: 'prior_esbl_history'
+      hosp_1y_col: 'hosp_last_1y'
+      nursing_home_col: 'nursing_home_resident'
+      urinary_catheter_col: 'urinary_catheter_present'
+      prior_abx_90d_col: 'prior_abx_90d'

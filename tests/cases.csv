@@ -1,0 +1,6 @@
+patient_id,description,age,charlson_score,pitt_score,sirs_count,bsi_source,microorganism,inappropriate_abx,prior_esbl_365d,prior_esbl_180d,prior_esbl_history,hosp_abroad_12m,prev_3gcr_culture,prev_3gcr_rectal_swab,nursing_home_resident,urinary_catheter_present,prior_f_c_abx_90d,prior_abx_30d,chronic_dialysis,transfer_from_hosp,hosp_last_90d,abx_last_90d,hosp_last_1y,prior_abx_90d,exp_increment,exp_holmgren,exp_gavaghan,exp_jones,exp_tumbarello,exp_kim,is_non_ecoli,bsi_not_urinary
+1,High-Risk Tertiary,60,5,7,3,Respiratory,Klebsiella spp.,1,1,1,1,0,0,0,1,1,1,1,0,1,1,1,1,1,21,0,8,8,9,11,1,1
+2,Low-Risk Community,25,0,0,0,Urinary,E. coli,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+3,International Travel,35,1,1,1,Urinary,E. coli,0,1,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,3,1,1,0,1,1,0,0
+4,Dialysis/Transfer,70,4,2,1,Bloodstream,Klebsiella spp.,0,0,1,1,0,1,0,0,0,0,1,1,1,1,0,1,0,12,1,5,10,6,9,1,1
+5,Nursing Home/Catheter,85,6,1,2,Urinary,E. coli,1,1,0,1,0,0,0,1,1,1,0,0,0,0,1,1,1,13,0,10,2,7,11,0,0
