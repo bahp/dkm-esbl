@@ -2,19 +2,19 @@
 # Environment: Python 3.11
 
 # Data Manipulation
-pandas>=2.0.0
-numpy>=1.24.0,<2.0.0
+pandas
+numpy
 
 # Configuration
-PyYAML>=6.0
+PyYAML
 
 # Machine Learning & Metrics
-scikit-learn>=1.2.0
-scipy>=1.10.0
+scikit-learn
+scipy
 
 # Visualization
-matplotlib>=3.7.0
-seaborn>=0.12.0
+matplotlib
+seaborn
 
 # Testing
-pytest>=7.0.0
+pytest

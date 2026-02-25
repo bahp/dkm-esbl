@@ -7,14 +7,68 @@ from src.utils import validate_required_columns
 
 def audit_log(condition, points, description, verbose=False, logger=None):
     """
-    Observer helper: Evaluates a condition to log a message.
-    Does NOT calculate, modify, or return any scores.
+    Updated observer helper: Logs the status of every clinical element.
     """
     if verbose and logger:
-        # Check if the condition is True for the audited patient
+        # Evaluate if the condition is met (handles pandas Series and numpy arrays)
         is_met = condition.iloc[0] if hasattr(condition, 'iloc') else bool(np.array(condition)[0])
-        if is_met:
-            logger.info(f"    [+] {description:<30} +{points}")
+        status_icon = "[+]" if is_met else "[ ]"
+        added_points = points if is_met else 0              +0
+        logger.info(f"    {status_icon} {description:<35} +{added_points}")
+
+
+
+def evaluate_score(df, rules, score_name, verbose=False, logger=None):
+    """
+    A rule engine that calculates the total score and automatically
+    generates a clean debugging trace if requested.
+    """
+    total_score = pd.Series(0, index=df.index)
+
+    # --- DEBUG HEADER & WARNING ---
+    if verbose and logger:
+        logger.info(f"  [{score_name} Breakdown]")
+
+        # Check if the user passed a batch instead of a single patient
+        if len(df) > 1:
+            logger.warning(f"    ⚠️ WARNING: DataFrame contains {len(df)} rows.")
+            logger.warning(
+                f"    ⚠️ The calculated score applies to all rows, but this trace only shows Patient #1 (Index 0).")
+
+    # --- RULE EVALUATION ---
+    for rule in rules:
+        col = rule['col']
+        points = rule['points']
+        desc = rule['desc']
+
+        # Safety check: skip if column is missing
+        if col not in df.columns:
+            if verbose and logger:
+                logger.info(f"    [?] {desc:<28} (Missing Col) +0")
+            continue
+
+        # 1. Math/Logic: Calculate and add points
+        condition = rule['condition']
+        pts_awarded = np.where(condition, points, 0)
+        total_score += pts_awarded
+
+        # 2. Debugging: Log the evaluation
+        if verbose and logger:
+            # Extract single values for the log (assuming case-by-case processing)
+            is_met = bool(np.array(condition)[0])
+            raw_val = df[col].iloc[0]
+            pts_added = points if is_met else 0
+            icon = "[+]" if is_met else "[ ]"
+
+            # Format: [+] Age > 50 (Value: 72) +3
+            logger.info(f"    {icon} {desc:<28} (Value: {raw_val:<5}) +{pts_added}")
+
+    if verbose and logger:
+        logger.info(f"    {'-' * 45}")
+        logger.info(f"    [=] TOTAL COMPUTED:            {total_score.iloc[0]}\n")
+
+    return total_score
+
 
 def calculate_mews(df, rr_col='RR', hr_col='HR', sbp_col='SBP', temp_col='Temp'):
     """
@@ -314,46 +368,19 @@ def calculate_increment_esbl(df, age_col='age',
         score_name="Palacios-Baena 2019"
     )
 
-    # For audit purposes
-    if verbose and logger:
-        logger.info("  [Palacios-Baena 2019 Score Breakdown]")
+    # Pure Logic Definition
+    rules = [
+        {'desc': 'Age > 50', 'col': age_col, 'condition': df[age_col] > 50, 'points': 3},
+        {'desc': 'Charlson > 3', 'col': charlson_col, 'condition': df[charlson_col] > 3, 'points': 4},
+        {'desc': 'Pitt Score >= 6', 'col': pitt_col, 'condition': df[pitt_col] >= 6, 'points': 3},
+        {'desc': 'SIRS >= 2', 'col': sirs_col, 'condition': df[sirs_col] >= 2, 'points': 4},
+        {'desc': 'Non-Urinary Source', 'col': bsi_not_urinary_col, 'condition': df[bsi_not_urinary_col] == 1, 'points': 3},
+        {'desc': 'Non-E. coli', 'col': is_non_ecoli_col, 'condition': df[is_non_ecoli_col] == 1, 'points': 2},
+        {'desc': 'Inappropriate Abx', 'col': inapprop_abx_col, 'condition': df[inapprop_abx_col] == 1, 'points': 2}
+    ]
 
-    score = pd.Series(0, index=df.index)
-
-    # 2. Calculation logic with safety checks
-    if age_col in df.columns:
-        score += np.where(df[age_col] > 50, 3, 0)
-        audit_log(df[age_col]>50, 1, "Age >= 50", verbose, logger)
-
-    if charlson_col in df.columns:
-        score += np.where(df[charlson_col] > 3, 4, 0)
-        audit_log(df[charlson_col] > 3, 4, "Charlson > 3", verbose, logger)
-
-    if pitt_col in df.columns:
-        score += np.where(df[pitt_col] >= 6, 3, 0)
-        audit_log(df[pitt_col] >= 6, 3, "Pitt Score >= 6", verbose, logger)
-
-    if sirs_col in df.columns:
-        score += np.where(df[sirs_col] >= 2, 4, 0)
-        audit_log(df[sirs_col] >= 2, 4, "SIRS >= 2", verbose, logger)
-
-    if bsi_not_urinary_col in df.columns:
-        score += np.where(df[bsi_not_urinary_col] == 1, 3, 0)
-        audit_log(df[bsi_not_urinary_col] == 1, 3, "Source NOT Urinary", verbose, logger)
-
-    if is_non_ecoli_col in df.columns:
-        score += np.where(df[is_non_ecoli_col] == 1, 2, 0)
-        audit_log(df[is_non_ecoli_col] == 1, 2, "Non-E. coli (e.g., Klebsiella)", verbose, logger)
-
-    if inapprop_abx_col in df.columns:
-        score += np.where(df[inapprop_abx_col] == 1, 2, 0)
-        audit_log(df[inapprop_abx_col] == 1, 2, "Inappropriate Abx", verbose, logger)
-
-    if verbose and logger:
-        logger.info(f"    {'-' * 38}")
-        logger.info(f"    [=] TOTAL COMPUTED:            {score.iloc[0]}\n")
-
-    return score
+    # Execution & Debugging
+    return evaluate_score(df, rules, "Palacios-Baena 2019", verbose, logger)
 
 def calculate_holmgren_score(df,
                              hosp_abroad_col='hosp_abroad_12m',
@@ -379,31 +406,13 @@ def calculate_holmgren_score(df,
         score_name="Holmgren 2020"
     )
 
-    score = pd.Series(0, index=df.index)
-    if verbose and logger: logger.info("  [Holmgren 2020 Score Breakdown]")
+    rules = [
+        {'desc': 'Hosp abroad (12m)', 'col': hosp_abroad_col, 'condition': df[hosp_abroad_col] == 1, 'points': 1},
+        {'desc': 'Prev 3GCR Culture', 'col': prev_culture_col, 'condition': df[prev_culture_col] == 1, 'points': 1},
+        {'desc': 'Prev 3GCR Swab', 'col': prev_swab_col, 'condition': df[prev_swab_col] == 1, 'points': 1}
+    ]
 
-    # 1. Previous hospital care abroad (12 months)
-    if hosp_abroad_col in df.columns:
-        cond = df[hosp_abroad_col] == 1
-        score += np.where(cond, 1, 0)
-        audit_log(cond, 1, "Hospital care abroad (12m)", verbose, logger)
-
-    # 2. 3GCR in a previous blood or urine culture
-    if prev_culture_col in df.columns:
-        cond = df[prev_culture_col] == 1
-        score += np.where(cond, 1, 0)
-        audit_log(cond, 1, "Previous 3GCR Culture", verbose, logger)
-
-    # 3. 3GCR in a previous rectal swab culture
-    if prev_swab_col in df.columns:
-        cond = df[prev_swab_col] == 1
-        score += np.where(cond, 1, 0)
-        audit_log(cond, 1, "Previous 3GCR Rectal Swab", verbose, logger)
-
-    if verbose and logger:
-        logger.info(f"    {'-' * 38}\n    [=] TOTAL COMPUTED:            {score.iloc[0]}\n")
-
-    return score
+    return evaluate_score(df, rules, "Holmgren 2020", verbose, logger)
 
 # src/scores.py
 
@@ -437,45 +446,18 @@ def calculate_gavaghan_score(df,
         score_name="Holmgren 2020"
     )
 
-    if verbose and logger:
-        logger.info("  [Gavaghan 2025 Score Breakdown]")
+    # Pure Logic Definition
+    rules = [
+        {'desc': 'Prior ESBL (365 days)', 'col': prior_esbl_col, 'condition': df[prior_esbl_col] == 1, 'points': 4},
+        {'desc': 'Age >= 65', 'col': age_col, 'condition': df[age_col] >= 65, 'points': 1},
+        {'desc': 'Nursing Home Resident', 'col': nursing_home_col, 'condition': df[nursing_home_col] == 1, 'points': 2},
+        {'desc': 'Urinary Catheter Present', 'col': urinary_catheter_col, 'condition': df[urinary_catheter_col] == 1,
+         'points': 1},
+        {'desc': 'Prior Antibiotics (90d)', 'col': prior_abx_col, 'condition': df[prior_abx_col] == 1, 'points': 2}
+    ]
 
-    score = pd.Series(0, index=df.index)
-
-    # 1. Prior ESBL (365 days)
-    if prior_esbl_col in df.columns:
-        cond = df[prior_esbl_col] == 1
-        score += np.where(cond, 4, 0)
-        audit_log(cond, 4, "Prior ESBL (365 days)", verbose, logger)
-
-    # 2. Age >= 65
-    if age_col in df.columns:
-        cond = df[age_col] >= 65
-        score += np.where(cond, 1, 0)
-        audit_log(cond, 1, "Age >= 65", verbose, logger)
-
-    # 3. Nursing Home Residency
-    if nursing_home_col in df.columns:
-        cond = df[nursing_home_col] == 1
-        score += np.where(cond, 2, 0)
-        audit_log(cond, 2, "Nursing Home Resident", verbose, logger)
-
-    # 4. Urinary Catheter
-    if urinary_catheter_col in df.columns:
-        cond = df[urinary_catheter_col] == 1
-        score += np.where(cond, 1, 0)
-        audit_log(cond, 1, "Urinary Catheter Present", verbose, logger)
-
-    # 5. Prior Antibiotics (FQs or 3G-Cephalosporins within 90 days)
-    if prior_abx_col in df.columns:
-        cond = df[prior_abx_col] == 1
-        score += np.where(cond, 2, 0)
-        audit_log(cond, 2, "Prior Antibiotics (90d)", verbose, logger)
-
-    if (verbose and
-        logger): logger.info(f"    {'-' * 38}\n    [=] TOTAL COMPUTED:            {score.iloc[0]}\n")
-
-    return score
+    # Execution & Debugging
+    return evaluate_score(df, rules, "Gavaghan 2025", verbose, logger)
 
 
 # src/scores.py
@@ -510,41 +492,19 @@ def calculate_jones_score(df,
         score_name="Jones 2025"
     )
 
-    score = pd.Series(0, index=df.index)
+    # Pure Logic Definition
+    rules = [
+        {'desc': 'Prior ESBL (180 days)', 'col': prior_esbl_col, 'condition': df[prior_esbl_col] == 1, 'points': 5},
+        {'desc': 'Prior Antibiotics (30 days)', 'col': prior_abx_col, 'condition': df[prior_abx_col] == 1, 'points': 2},
+        {'desc': 'Chronic Dialysis', 'col': chronic_dialysis_col, 'condition': df[chronic_dialysis_col] == 1,
+         'points': 2},
+        {'desc': 'Transfer from Hospital', 'col': transfer_hosp_col, 'condition': df[transfer_hosp_col] == 1,
+         'points': 1}
+    ]
 
-    if verbose and logger:
-        logger.info("  [Jones 2025 Score Breakdown]")
+    # Execution & Debugging
+    return evaluate_score(df, rules, "Jones 2025", verbose, logger)
 
-    # 1. Prior ESBL (180 days) - Heaviest weight
-    if prior_esbl_col in df.columns:
-        cond = df[prior_esbl_col] == 1
-        score += np.where(cond, 5, 0)
-        audit_log(cond, 5, "Prior ESBL (180 days)", verbose, logger)
-
-    # 2. Prior Antibiotics (30 days)
-    if prior_abx_col in df.columns:
-        cond = df[prior_abx_col] == 1
-        score += np.where(cond, 2, 0)
-        audit_log(cond, 2, "Prior Antibiotics (30 days)", verbose, logger)
-
-    # 3. Chronic Dialysis
-    if chronic_dialysis_col in df.columns:
-        cond = df[chronic_dialysis_col] == 1
-        score += np.where(cond, 2, 0)
-        audit_log(cond, 2, "Chronic Dialysis", verbose, logger)
-
-    # 4. Transfer from Hospital
-    if transfer_hosp_col in df.columns:
-        cond = df[transfer_hosp_col] == 1
-        score += np.where(cond, 1, 0)
-        audit_log(cond, 1, "Transfer from Hospital", verbose, logger)
-
-    if verbose and logger:
-        logger.info(f"    {'-' * 38}\n    [=] TOTAL COMPUTED:            {score.iloc[0]}\n")
-
-    return score
-
-# src/scores.py
 
 def calculate_tumbarello_score(df,
                                prior_esbl_col='prior_esbl_history',
@@ -574,42 +534,20 @@ def calculate_tumbarello_score(df,
     validate_required_columns(df,
         required_cols=[prior_esbl_col, hosp_90d_col,
             abx_90d_col, urinary_catheter_col],
-        score_name="Jones 2025"
+        score_name="Tumbarello 2019"
     )
 
-    score = pd.Series(0, index=df.index)
+    # Pure Logic Definition
+    rules = [
+        {'desc': 'Prior ESBL History', 'col': prior_esbl_col, 'condition': df[prior_esbl_col] == 1, 'points': 4},
+        {'desc': 'Recent Hospitalization (90d)', 'col': hosp_90d_col, 'condition': df[hosp_90d_col] == 1, 'points': 2},
+        {'desc': 'Recent Antibiotics (90d)', 'col': abx_90d_col, 'condition': df[abx_90d_col] == 1, 'points': 2},
+        {'desc': 'Urinary Catheter', 'col': urinary_catheter_col, 'condition': df[urinary_catheter_col] == 1,
+         'points': 1}
+    ]
 
-    if verbose and logger:
-        logger.info("  [Tumbarello Score Breakdown]")
-
-    # 1. Prior ESBL History
-    if prior_esbl_col in df.columns:
-        cond = df[prior_esbl_col] == 1
-        score += np.where(cond, 4, 0)
-        audit_log(cond, 4, "Prior ESBL History", verbose, logger)
-
-    # 2. Recent Hospitalization (90 days)
-    if hosp_90d_col in df.columns:
-        cond = df[hosp_90d_col] == 1
-        score += np.where(cond, 2, 0)
-        audit_log(cond, 2, "Recent Hospitalization (90d)", verbose, logger)
-
-    # 3. Recent Antibiotics (90 days)
-    if abx_90d_col in df.columns:
-        cond = df[abx_90d_col] == 1
-        score += np.where(cond, 2, 0)
-        audit_log(cond, 2, "Recent Antibiotics (90d)", verbose, logger)
-
-    # 4. Urinary Catheter
-    if urinary_catheter_col in df.columns:
-        cond = df[urinary_catheter_col] == 1
-        score += np.where(cond, 1, 0)
-        audit_log(cond, 1, "Urinary Catheter", verbose, logger)
-
-    if verbose and logger:
-        logger.info(f"    {'-' * 38}\n    [=] TOTAL COMPUTED:            {score.iloc[0]}\n")
-    return score
-
+    # Execution & Debugging
+    return evaluate_score(df, rules, "Tumbarello", verbose, logger)
 
 # src/scores.py
 
@@ -641,49 +579,24 @@ def calculate_kim_score(df,
     validate_required_columns(df,
         required_cols=[prior_esbl_col, hosp_1y_col,
              nursing_home_col, urinary_catheter_col, prior_abx_90d_col],
-        score_name="Jones 2025"
+        score_name="Kim 2019"
     )
 
-    score = pd.Series(0, index=df.index)
+    # Pure Logic Definition
+    rules = [
+        {'desc': 'Prior ESBL History', 'col': prior_esbl_col, 'condition': df[prior_esbl_col] == 1, 'points': 5},
+        {'desc': 'Recent Hospitalization (1y)', 'col': hosp_1y_col, 'condition': df[hosp_1y_col] == 1, 'points': 2},
+        {'desc': 'Nursing Home Resident', 'col': nursing_home_col, 'condition': df[nursing_home_col] == 1, 'points': 2},
+        {'desc': 'Urinary Catheter', 'col': urinary_catheter_col, 'condition': df[urinary_catheter_col] == 1,
+         'points': 1},
+        {'desc': 'Prior Antibiotic Use (90d)', 'col': prior_abx_90d_col, 'condition': df[prior_abx_90d_col] == 1,
+         'points': 1}
+    ]
 
-    if verbose and logger:
-        logger.info("  [Kim 2019 Score Breakdown]")
+    # Execution & Debugging
+    return evaluate_score(df, rules, "Kim 2019", verbose, logger)
 
-    # 1. Prior ESBL History
-    if prior_esbl_col in df.columns:
-        cond = df[prior_esbl_col] == 1
-        score += np.where(cond, 5, 0)
-        audit_log(cond, 5, "Prior ESBL History", verbose, logger)
 
-    # 2. Recent Hospitalization (1 year)
-    if hosp_1y_col in df.columns:
-        cond = df[hosp_1y_col] == 1
-        score += np.where(cond, 2, 0)
-        audit_log(cond, 2, "Recent Hospitalization (1y)", verbose, logger)
-
-    # 3. Nursing Home Resident
-    if nursing_home_col in df.columns:
-        cond = df[nursing_home_col] == 1
-        score += np.where(cond, 2, 0)
-        audit_log(cond, 2, "Nursing Home Resident", verbose, logger)
-
-    # 4. Urinary Catheter
-    if urinary_catheter_col in df.columns:
-        cond = df[urinary_catheter_col] == 1
-        score += np.where(cond, 1, 0)
-        audit_log(cond, 1, "Urinary Catheter", verbose, logger)
-
-    # 5. Prior Antibiotic Use (90 days)
-    if prior_abx_90d_col in df.columns:
-        cond = df[prior_abx_90d_col] == 1
-        score += np.where(cond, 1, 0)
-        audit_log(cond, 1, "Prior Antibiotic Use (90d)", verbose, logger)
-
-    if verbose and logger:
-        logger.info(f"    {'-' * 38}\n    [=] TOTAL COMPUTED:            {score.iloc[0]}\n")
-    return score
-
-# src/scores.py
 
 def calculate_consensus_2023_meta(df,
                                   prior_esbl_col='prior_esbl_history',
@@ -696,35 +609,19 @@ def calculate_consensus_2023_meta(df,
     Weighted Consensus Score based on the Timbrook & Fowler (2023) Meta-Analysis.
     Weights are derived from the most common aORs reported in the review.
     """
-    score = pd.Series(0, index=df.index)
+    # Added validation for consistency with the other scoring functions
+    validate_required_columns(df,
+        required_cols=[prior_esbl_col, prior_abx_col, hosp_col, invasive_proc_col],
+        score_name="Consensus 2023 Meta"
+    )
 
-    if verbose and logger:
-        logger.info("  [Consensus 2023 Meta Score Breakdown]")
+    # Pure Logic Definition
+    rules = [
+        {'desc': 'Prior ESBL',                'col': prior_esbl_col,    'condition': df[prior_esbl_col] == 1,    'points': 4},
+        {'desc': 'Recent Hospitalization',    'col': hosp_col,          'condition': df[hosp_col] == 1,          'points': 2},
+        {'desc': 'Antibiotic Exposure',       'col': prior_abx_col,     'condition': df[prior_abx_col] == 1,     'points': 2},
+        {'desc': 'Recent Invasive Procedure', 'col': invasive_proc_col, 'condition': df[invasive_proc_col] == 1, 'points': 1}
+    ]
 
-    # 1. Prior ESBL (Heaviest weighted across all 10 studies)
-    if prior_esbl_col in df.columns:
-        cond = df[prior_esbl_col] == 1
-        score += np.where(cond, 4, 0)
-        audit_log(cond, 4, "Prior ESBL", verbose, logger)
-
-    # 2. Recent Hospitalization
-    if hosp_col in df.columns:
-        cond = df[hosp_col] == 1
-        score += np.where(cond, 2, 0)
-        audit_log(cond, 2, "Recent Hospitalization", verbose, logger)
-
-    # 3. Antibiotic Exposure (30-90 days)
-    if prior_abx_col in df.columns:
-        cond = df[prior_abx_col] == 1
-        score += np.where(cond, 2, 0)
-        audit_log(cond, 2, "Antibiotic Exposure", verbose, logger)
-
-    # 4. Recent Invasive Procedure (GI/GU)
-    if invasive_proc_col in df.columns:
-        cond = df[invasive_proc_col] == 1
-        score += np.where(cond, 1, 0)
-        audit_log(cond, 1, "Recent Invasive Procedure", verbose, logger)
-
-    if verbose and logger:
-        logger.info(f"    {'-' * 38}\n    [=] TOTAL COMPUTED:            {score.iloc[0]}\n")
-    return score
+    # Execution & Debugging
+    return evaluate_score(df, rules, "Consensus 2023 Meta", verbose, logger)
