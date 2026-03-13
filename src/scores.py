@@ -1,10 +1,51 @@
+"""
+Author:
+Date:
+
+This module contains the pure mathematical logic for calculating clinical risk
+scores based on the clean, standardized phenotypes extracted in `phenotypes.py`.
+
+SCORE CLASSIFICATIONS
+=====================
+To understand the data pipeline, you must distinguish between the two distinct
+tiers of clinical scores calculated in this file:
+
+1. INTERMEDIATE (PARTIAL) SCORES
+   These scores summarize a patient's baseline health or acute illness severity
+   into a single number, acting as "super-features" that reduce noise.
+   - Purpose: To serve as building blocks for more complex final models.
+   - Examples: `calculate_charlson_score()`, `calculate_pitt_bacteremia_score()`
+
+2. FINAL (PREDICTIVE) SCORES
+   These are specialized, extensively validated algorithms designed to answer
+   one specific clinical question or predict a specific outcome (e.g., mortality).
+   - Purpose: To act as the ultimate decision-support endpoint, often consuming
+     intermediate scores as inputs.
+   - Examples: `calculate_increment_esbl()`, `calculate_gavaghan_score()`
+
+DESIGN RULES
+============
+To maintain a clean and testable architecture, adhere strictly to these rules:
+
+1. NO DATA EXTRACTION: Functions in this file should ONLY contain mathematical
+   logic (e.g., `np.where`, addition, conditionals). Do not search for ICD-10
+   codes, clinical keywords, or evaluate messy string lab reports here. All
+   messy data translation MUST happen upstream in `phenotypes.py`.
+
+2. AUDIT LOGGING: Use the provided `evaluate_score` rule engine or `audit_log`
+   helpers to ensure every calculated point can be traced back and verified
+   by a clinician debugging the score.
+"""
+
 # src/scores.py
 import pandas as pd
 import numpy as np
 
 from src.utils import validate_required_columns
 
-
+# ------------------------------------------------------------------------
+# Helper methods
+# ------------------------------------------------------------------------
 def audit_log(condition, points, description, verbose=False, logger=None):
     """
     Updated observer helper: Logs the status of every clinical element.
@@ -70,6 +111,21 @@ def evaluate_score(df, rules, score_name, verbose=False, logger=None):
     return total_score
 
 
+
+# --------------------------------------------------------------------------------
+#                   Intermediate clinical scores
+# --------------------------------------------------------------------------------
+# Intermediate clinical scores act as a bridge between raw, messy patient data and
+# the final predictive model. Instead of evaluating dozens of individual, noisy
+# variables (like a specific ICD-10 code, a scattered lab value, or a fluctuating
+# heart rate) in isolation, we aggregate them into validated, standardized metrics.
+#
+# Scores such as the Charlson Comorbidity Index (CCI), the Pitt Bacteremia Score, or
+# SIRS criteria summarize a patient's chronic health baseline or acute illness severity
+# into a single number. In a data science pipeline, these intermediate metrics act as
+# clinically interpretable "super-features" that reduce noise and provide a stable
+# foundation for computing the final risk scores.
+
 def calculate_mews(df, rr_col='RR', hr_col='HR', sbp_col='SBP', temp_col='Temp'):
     """
     Computes a simplified Modified Early Warning Score (MEWS).
@@ -101,6 +157,15 @@ def calculate_mews(df, rr_col='RR', hr_col='HR', sbp_col='SBP', temp_col='Temp')
 import pandas as pd
 import numpy as np
 
+
+def calculate_charlson_comorbidity_index():
+    pass
+
+def calculate_pitt_bacteremia_score():
+    pass
+
+def calculate_sirs_score():
+    pass
 
 def calculate_charlson(df, comorbidities):
     """
@@ -214,6 +279,23 @@ def calculate_sirs(df, temp_col='Temp', hr_col='HR', rr_col='RR', wbc_col='WBC')
         sirs_count += np.where((df[wbc_col] > 12.0) | (df[wbc_col] < 4.0), 1, 0)
 
     return sirs_count
+
+
+
+# --------------------------------------------------------------------------------
+#                            Main clinical scores
+# --------------------------------------------------------------------------------
+# Main clinical scores represent the ultimate endpoint of the phenotyping and feature
+# engineering pipeline. These are specialized, extensively validated algorithms designed
+# to answer a specific clinical question or predict a precise outcome—such as 30-day
+# mortality or the likelihood of an ESBL-producing infection.
+#
+# By synthesizing direct clinical variables (e.g., patient age, source of infection)
+# with intermediate clinical scores (e.g., Pitt Bacteremia Score, CCI), the final score
+# stratifies patients into actionable risk categories. In this pipeline, tools like the
+# INCREMENT-ESBL, Gavaghan, or Jones scores serve as decision-support endpoints, directly
+# guiding clinical interventions like escalating or de-escalating empirical antibiotic
+# therapy.
 
 
 def calculate_increment_esbl_v2(df, age_col='age',
@@ -451,8 +533,7 @@ def calculate_gavaghan_score(df,
         {'desc': 'Prior ESBL (365 days)', 'col': prior_esbl_col, 'condition': df[prior_esbl_col] == 1, 'points': 4},
         {'desc': 'Age >= 65', 'col': age_col, 'condition': df[age_col] >= 65, 'points': 1},
         {'desc': 'Nursing Home Resident', 'col': nursing_home_col, 'condition': df[nursing_home_col] == 1, 'points': 2},
-        {'desc': 'Urinary Catheter Present', 'col': urinary_catheter_col, 'condition': df[urinary_catheter_col] == 1,
-         'points': 1},
+        {'desc': 'Urinary Catheter Present', 'col': urinary_catheter_col, 'condition': df[urinary_catheter_col] == 1,'points': 1},
         {'desc': 'Prior Antibiotics (90d)', 'col': prior_abx_col, 'condition': df[prior_abx_col] == 1, 'points': 2}
     ]
 
@@ -496,10 +577,8 @@ def calculate_jones_score(df,
     rules = [
         {'desc': 'Prior ESBL (180 days)', 'col': prior_esbl_col, 'condition': df[prior_esbl_col] == 1, 'points': 5},
         {'desc': 'Prior Antibiotics (30 days)', 'col': prior_abx_col, 'condition': df[prior_abx_col] == 1, 'points': 2},
-        {'desc': 'Chronic Dialysis', 'col': chronic_dialysis_col, 'condition': df[chronic_dialysis_col] == 1,
-         'points': 2},
-        {'desc': 'Transfer from Hospital', 'col': transfer_hosp_col, 'condition': df[transfer_hosp_col] == 1,
-         'points': 1}
+        {'desc': 'Chronic Dialysis', 'col': chronic_dialysis_col, 'condition': df[chronic_dialysis_col] == 1, 'points': 2},
+        {'desc': 'Transfer from Hospital', 'col': transfer_hosp_col, 'condition': df[transfer_hosp_col] == 1, 'points': 1}
     ]
 
     # Execution & Debugging
@@ -542,8 +621,7 @@ def calculate_tumbarello_score(df,
         {'desc': 'Prior ESBL History', 'col': prior_esbl_col, 'condition': df[prior_esbl_col] == 1, 'points': 4},
         {'desc': 'Recent Hospitalization (90d)', 'col': hosp_90d_col, 'condition': df[hosp_90d_col] == 1, 'points': 2},
         {'desc': 'Recent Antibiotics (90d)', 'col': abx_90d_col, 'condition': df[abx_90d_col] == 1, 'points': 2},
-        {'desc': 'Urinary Catheter', 'col': urinary_catheter_col, 'condition': df[urinary_catheter_col] == 1,
-         'points': 1}
+        {'desc': 'Urinary Catheter', 'col': urinary_catheter_col, 'condition': df[urinary_catheter_col] == 1, 'points': 1}
     ]
 
     # Execution & Debugging
@@ -587,10 +665,8 @@ def calculate_kim_score(df,
         {'desc': 'Prior ESBL History', 'col': prior_esbl_col, 'condition': df[prior_esbl_col] == 1, 'points': 5},
         {'desc': 'Recent Hospitalization (1y)', 'col': hosp_1y_col, 'condition': df[hosp_1y_col] == 1, 'points': 2},
         {'desc': 'Nursing Home Resident', 'col': nursing_home_col, 'condition': df[nursing_home_col] == 1, 'points': 2},
-        {'desc': 'Urinary Catheter', 'col': urinary_catheter_col, 'condition': df[urinary_catheter_col] == 1,
-         'points': 1},
-        {'desc': 'Prior Antibiotic Use (90d)', 'col': prior_abx_90d_col, 'condition': df[prior_abx_90d_col] == 1,
-         'points': 1}
+        {'desc': 'Urinary Catheter', 'col': urinary_catheter_col, 'condition': df[urinary_catheter_col] == 1, 'points': 1},
+        {'desc': 'Prior Antibiotic Use (90d)', 'col': prior_abx_90d_col, 'condition': df[prior_abx_90d_col] == 1, 'points': 1}
     ]
 
     # Execution & Debugging

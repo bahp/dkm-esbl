@@ -41,9 +41,6 @@ def get_latest_processed_file():
 
 import logging
 
-import logging
-
-
 def validate_required_columns(df,
                               required_cols,
                               score_name="Clinical Score",
@@ -90,3 +87,48 @@ def validate_required_columns(df,
         return False
 
     return True
+
+
+def check_col_bool(df, col_name):
+    """Returns a boolean Series checking if a binary column is 1/True."""
+    if col_name not in df.columns:
+        return pd.Series(False, index=df.index)
+    return df[col_name].fillna(0).astype(int) == 1
+
+
+def check_col_contains(df, col_name, keywords):
+    """Returns a boolean Series checking if text in a column contains certain keywords."""
+    if col_name not in df.columns:
+        return pd.Series(False, index=df.index)
+
+    # Create a regex pattern: 'keyword1|keyword2|keyword3'
+    pattern = '|'.join(keywords)
+    return df[col_name].astype(str).str.lower().str.contains(pattern, na=False)
+
+
+def check_col_threshold(df, col_name, threshold, operator='>'):
+    """Returns a boolean Series checking if a numerical column meets a threshold."""
+    if col_name not in df.columns:
+        return pd.Series(False, index=df.index)
+
+    # Temporarily fill NaNs with a safe value that won't trigger the threshold
+    temp_col = df[col_name].fillna(-9999 if operator == '>' else 9999)
+
+    if operator == '>': return temp_col > threshold
+    if operator == '>=': return temp_col >= threshold
+    if operator == '<': return temp_col < threshold
+    if operator == '<=': return temp_col <= threshold
+    return pd.Series(False, index=df.index)
+
+
+def check_col_icd10(df, col_name, target_codes):
+    """Returns a boolean Series checking if any ICD codes match the target list."""
+    if col_name not in df.columns:
+        return pd.Series(False, index=df.index)
+
+    def match_codes(patient_codes):
+        if pd.isna(patient_codes): return False
+        patient_codes = [c.strip() for c in str(patient_codes).split(',')]
+        return any(any(str(pc).startswith(str(tc)) for tc in target_codes) for pc in patient_codes)
+
+    return df[col_name].apply(match_codes)

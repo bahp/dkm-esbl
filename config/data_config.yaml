@@ -1,6 +1,28 @@
 # config/data_config.yaml
+
+# =============================================================================
+# SYNTHETIC DATA GENERATOR CONFIGURATION
+# =============================================================================
+# This file acts as the "DNA" for the synthetic patient cohort. The
+# 01_generate_data.py script reads these rules to build realistic, messy
+# Electronic Health Record (EHR) data without requiring manual Python loops.
+
+# -----------------------------------------------------------------------------
+# 1. PRIMARY KEY
+# The unique identifier used to link the static demographics table with the
+# time-series vitals/labs table.
+# -----------------------------------------------------------------------------
 primary_key: "patient_id"
 
+# -----------------------------------------------------------------------------
+# 2. GENERATION PARAMETERS
+# Controls the overall size, length, and "messiness" of the generated dataset.
+# - n_patients: Total number of unique patient profiles to create.
+# - days: How many days of hospital stay to simulate per patient.
+# - freq: How often time-series measurements (vitals/labs) are taken.
+# - default_missing_rate: The baseline probability that a time-series reading
+#   is skipped/missing (simulating real-world EHR dropouts).
+# -----------------------------------------------------------------------------
 generation_params:
   n_patients: 100
   days: 10
@@ -8,7 +30,12 @@ generation_params:
   output_format: 'tidy'
   default_missing_rate: 0.5
 
-# Static Demographic Schema
+# -----------------------------------------------------------------------------
+# 3. DEMOGRAPHICS SCHEMA (STATIC DATA)
+# Defines the static, non-time-varying characteristics of the patients.
+# The generator will randomly sample from these ranges and lists to create
+# the `df_static` table.
+# -----------------------------------------------------------------------------
 demographics_schema:
   patient_id:
     type: "string"
@@ -35,6 +62,12 @@ demographics_schema:
     type: 'enumerated'
     values: [ 'E. coli', 'Klebsiella spp.', 'Enterobacter spp.', 'Other ESBL' ]
 
+# -----------------------------------------------------------------------------
+# 4. CONDITIONS (COMORBIDITIES)
+# Defines binary (1/0) medical history flags. The generator will use these to
+# populate prior history or assign specific ICD-10 codes (defined in
+# icd_config.yaml) to the patient's record.
+# -----------------------------------------------------------------------------
 # Binary Conditions (Boolean/Int)
 conditions:
   # General comorbidities
@@ -85,6 +118,14 @@ conditions:
   #urinary_catheter_present: 0.15 # !!! Previously defined, here for completeness.
   prior_abx_90d: 0.25
 
+# -----------------------------------------------------------------------------
+# 5. TIME-SERIES CONFIGURATION (DYNAMIC DATA)
+# Defines the clinical vitals and lab results that change over time.
+# The generator creates the `df_ts` table based on these rules.
+# - range: The realistic physiological boundaries for the generated numbers.
+# - prob: The likelihood that this specific test is ordered/measured at any
+#   given time interval. (e.g., hr is checked 95% of the time, temp only 33%).
+# -----------------------------------------------------------------------------
 # Time-series Vitals & Labs Schema
 ts_config:
   hr:

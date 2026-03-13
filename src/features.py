@@ -1,9 +1,8 @@
 # src/features.py
-
-import pandas as pd
-import numpy as np
 import yaml
 import importlib
+import pandas as pd
+import numpy as np
 from pathlib import Path
 
 
@@ -18,6 +17,7 @@ class FeaturePipeline:
             .set_index(['patient_id', 'date'])
         print("Processing base features...")
         df = self._process_base_features(df)
+        df = df.reset_index()
         df = pd.merge(df, df_static, on='patient_id', how='left')
         print("Computing pandas eval expressions...")
         df = self._compute_expressions(df)

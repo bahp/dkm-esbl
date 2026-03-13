@@ -1,6 +1,37 @@
+"""
+Author:
+Date:
+
+This module acts as the "translation layer" between raw, messy Electronic
+Health Record (EHR) data and clean, standardized clinical variables.
+
+NAMING CONVENTIONS
+==================
+To keep the pipeline predictable and easy to read, all functions in this file
+follow strict naming prefixes based on the exact type of data they return:
+
+1. `has_` (Returns Integer 1 or 0)
+   Used for past medical history, chronic conditions, or comorbidities.
+   Example: `has_diabetes()`, `has_congestive_heart_failure()`
+
+2. `is_` (Returns Integer 1 or 0)
+   Used for acute, current patient states occurring during this specific encounter.
+   Example: `is_mechanically_ventilated()`, `is_urinary_source()`
+
+3. `derive_` (Returns Continuous, Categorical, or Multi-level Data)
+   Used when the output is not a simple boolean flag. This includes extracting
+   numbers, categorizing statuses, or performing date math.
+   Example: `derive_age_at_admission()`, `derive_fever_status()`git
+"""
+
 # src/phenotypes.py
 import pandas as pd
 import numpy as np
+
+from src.utils import (check_col_bool,
+                       check_col_contains,
+                       check_col_threshold,
+                       check_col_icd10)
 
 
 def map_medical_codes(df, code_col, target_codes):
@@ -73,3 +104,323 @@ def derive_liver_disease(df, ast_col='AST', alt_col='ALT', cirrhosis_med_col='me
         status = np.where((df[ast_col] > 120) | (df[alt_col] > 150), 1, status)
 
     return status
+
+# -----------------------------------------------------------------------------------
+#                 CHARLSON COMORBIDITY INDEX (CCI) EXTRACTORS
+# -----------------------------------------------------------------------------------
+# These methods extract the 17 chronic conditions required to compute the Charlson
+# Comorbidity Index, a validated method of categorizing comorbidities of patients
+# based on the International Classification of Diseases (ICD) diagnosis codes.
+#
+# Reference:
+# Charlson ME, et al. "A new method of classifying prognostic comorbidity in
+# longitudinal studies: development and validation." J Chronic Dis. 1987;40(5):373-83.
+
+def has_myocardial_infarction(df, **kwargs):
+    """"""
+    pass
+
+def has_congestive_heart_failure(df, **kwargs):
+    """
+    @Example:
+
+    Determines if a patient has a history of Congestive Heart Failure (CHF).
+
+    Clinical Logic:
+    A patient is flagged with CHF if ANY of the following criteria are met:
+    1. ICD-10 Codes: Patient record contains 'I50' (Heart failure) or
+       'I11.0' (Hypertensive heart disease with heart failure).
+    2. Explicit Flag: The `hx_chf` boolean column is exactly 1.
+    3. Medication Proxy: The patient is actively prescribed specific heart failure
+       medications like 'entresto', 'milrinone', or 'dobutamine' in the `home_meds` column.
+
+    Required Columns in df:
+    - `diagnosis_codes` (String/List of codes)
+    - `hx_chf` (Int/Float 1.0 or 0.0)
+    - `home_meds` (String)
+
+    Returns:
+    pd.Series of integers (1 for has CHF, 0 for no CHF).
+    """
+    pass
+
+def has_peripheral_vascular_disease(df, **kwargs):
+    """"""
+    pass
+
+def has_cerebrovascular_disease(df, **kwargs):
+    """"""
+    pass
+
+def has_dementia(df, **kwargs):
+    """"""
+    pass
+
+def has_chronic_pulmonary_disease(df, **kwargs):
+    """"""
+    pass
+
+def has_connective_tissue_disease(df, **kwargs):
+    """"""
+    pass
+
+def has_peptic_ulcer_disease(df, **kwargs):
+    """"""
+    pass
+
+def has_mild_liver_disease(df, **kwargs):
+    """
+
+    Clinical Logic:
+    1. Explicit History: (Fill this out)
+    2. ICD-10 Codes: (Fill this out - e.g., K70, K74)
+    3. Medications: (Fill this out - e.g., lactulose)
+    4. Lab Values: (Fill this out - e.g., AST > 3x normal, Bilirubin > 2.0)
+    """
+
+    # c1_history = check_col_bool(...)
+    # c2_icd10 = check_col_icd10(...)
+    # c3_meds = check_col_contains(...)
+    # c4_labs = check_col_threshold(...)
+
+    # combined_signal = c1_history | c2_icd10 | c3_meds | c4_labs
+    # return combined_signal.astype(int)
+    pass
+
+
+def has_diabetes(df, config=None):
+    """
+    @Example:
+
+    Determines if a patient has diabetes using a multi-modal data approach.
+
+    Clinical Logic defined by the student:
+    We consider a patient to have diabetes if ANY of the following are true:
+    1. Explicit History: The `diabetes_history` boolean column is exactly 1.
+    2. ICD-10 Codes: The `diagnosis_codes` column contains E10, E11, or E14.
+    3. Medications: The `medications_given` column contains 'insulin' or 'metformin'.
+    4. Lab Values: The rolling maximum glucose (`glucose_max_24h`) is > 200 mg/dL.
+
+    Returns:
+    pd.Series of integers (1 for has_diabetes, 0 for no diabetes).
+    """
+    # 1. Extract signals using helpers
+    c1_history = check_col_bool(df, 'diabetes_history')
+    c2_icd10 = check_col_icd10(df, 'diagnosis_codes', target_codes=['E10', 'E11', 'E14'])
+    c3_meds = check_col_contains(df, 'medications_given', keywords=['insulin', 'metformin'])
+    c4_labs = check_col_threshold(df, 'glucose_max_24h', threshold=200, operator='>')
+
+    # 2. Combine signals (Logical OR: if any signal is True, the condition is met)
+    combined_signal = c1_history | c2_icd10 | c3_meds | c4_labs
+
+    # 3. Return as 1s and 0s
+    return combined_signal.astype(int)
+
+def has_diabetes_without_complications(df, **kwargs):
+    """"""
+    pass
+
+def has_diabetes_with_complications(df, **kwargs):
+    """"""
+    pass
+
+def has_hemiplegia_or_paraplegia(df, **kwargs):
+    """"""
+    pass
+
+def has_moderate_to_severe_renal_disease(df, **kwargs):
+    """"""
+    pass
+
+def has_malignancy(df, **kwargs):
+    """"""
+    pass
+
+def has_moderate_to_severe_liver_disease(df, **kwargs):
+    """"""
+    pass
+
+def has_metastatic_solid_tumor(df, **kwargs):
+    """"""
+    pass
+
+def has_aids(df, **kwargs):
+    """"""
+    pass
+
+
+# ----------------------------------------------------------------------------------------
+#                          PITT BACTEREMIA SCORE EXTRACTORS
+# ----------------------------------------------------------------------------------------
+# These methods derive the 5 acute severity variables required to compute the Pitt
+# Bacteremia Score, a validated measure of acute illness severity in patients with
+# bloodstream infections (BSIs) assessed either at the day of positive culture or
+# admission.
+#
+# Reference:
+# Korvick JA, et al. "Prospective observational study of Klebsiella bacteremia..."
+# Clin Infect Dis. 1992;15(5):795-801.
+# (Also widely validated for ESBL by Paterson et al., 2004).
+
+def derive_mental_status_score(df, **kwargs):
+    """Checks GCS or nursing notes."""
+    pass
+
+def derive_fever_status(df, **kwargs):
+    """Checks rolling temperature vitals."""
+    pass
+
+def derive_hypotension_status(df, **kwargs):
+    """Checks rolling blood pressure and vasopressor administration."""
+    pass
+
+def is_mechanically_ventilated(df, **kwargs):
+    """Checks respiratory support flowsheets."""
+    pass
+
+def has_recent_cardiac_arrest(df, **kwargs):
+    """Checks resuscitation codes/events."""
+    pass
+
+
+# ----------------------------------------------------------------------------------------
+#                               SIRS CRITERIA EXTRACTORS                               ---
+# ----------------------------------------------------------------------------------------
+# These methods evaluate the 4 physiological parameters required to determine if a
+# patient meets the criteria for Systemic Inflammatory Response Syndrome (SIRS),
+# indicating a severe, systemic immune response to infection.
+
+# Reference:
+# Bone RC, et al. "Definitions for sepsis and organ failure and guidelines for the
+# use of innovative therapies in sepsis." Chest. 1992;101(6):1644-55.
+def derive_tachycardia(df, **kwargs):
+    """Checks HR > 90"""
+    pass
+
+def derive_tachypnea(df, **kwargs):
+    """Checks RR > 20 or PaCO2 < 32"""
+    pass
+
+def derive_abnormal_temp(df, **kwargs):
+    """Checks Temp > 38°C or < 36°C"""
+    pass
+
+def derive_abnormal_wbc(df, **kwargs):
+    """Checks WBC > 12k, < 4k, or > 10% bands"""
+    pass
+
+# ----------------------------------------------------------------------------------------
+#                        INCREMENT-ESBL DIRECT CLINICAL EXTRACTORS
+# ----------------------------------------------------------------------------------------
+# These methods extract the specific standalone clinical variables (source of infection,
+# microorganism type, and antibiotic appropriateness) required to compute the final
+# INCREMENT-ESBL risk score for 30-day mortality.
+
+# Reference:
+# Palacios-Baena Z, et al. "Development and validation of the INCREMENT-ESBL predictive
+# score for mortality in patients with bloodstream infections..." J Antimicrob Chemother.
+# 2017;72(3):906-913.
+def derive_age_at_admission(df, **kwargs):
+    """
+    @Example:
+
+    Calculates the patient's age in years at the time of hospital admission.
+
+    Clinical Logic:
+    1. Direct Extraction: If an `age` column already exists from the demographics table,
+       extract it directly.
+    2. Date Math: If `age` is missing, calculate it by subtracting the `date_of_birth`
+       from the `admission_date` and extracting the years.
+
+    Required Columns in df:
+    - `age` (Int/Float, optional)
+    - `date_of_birth` (Datetime, optional)
+    - `admission_date` (Datetime, optional)
+
+    Returns:
+    pd.Series of floats/integers representing patient age in years.
+    """
+    pass
+
+def determine_bsi_source(df, **kwargs):
+    """
+    @Example:
+
+    Determines if the source of the Bloodstream Infection (BSI) is NON-urinary.
+    In the INCREMENT-ESBL score, non-urinary sources (respiratory, abdominal, etc.)
+    are associated with higher mortality and receive +3 points.
+
+    Clinical Logic:
+    A patient is flagged as having a NON-urinary source (returns 1) UNLESS we can
+    prove the source was urinary. We assume urinary if:
+    1. Explicit Flag: The `bsi_source` column explicitly equals 'Urinary'.
+    2. Concurrent Cultures: A urine culture (`urine_culture_result`) drawn within 48h
+       grew the same organism.
+    3. ICD-10 Proxy: The patient was billed for a UTI (e.g., 'N39.0') on admission.
+
+    If none of the urinary criteria are met, we default to NON-urinary (1).
+
+    Required Columns in df:
+    - `bsi_source` (String)
+    - `urine_culture_result` (String)
+    - `diagnosis_codes` (String/List)
+
+    Returns:
+    pd.Series of integers (1 for NON-urinary source, 0 for Urinary source).
+    """
+    pass
+
+def identify_microorganism_type(df, **kwargs):
+    """
+    @Example:
+
+    Identifies if the ESBL-producing organism is a non-E. coli species
+    (e.g., Klebsiella, Enterobacter, Serratia, Proteus).
+
+    Clinical Logic:
+    E. coli bacteremia generally has a better prognosis in this specific cohort.
+    We flag the patient as 'Non-E. coli' if:
+    1. Blood Culture Result: The `microorganism` or `blood_culture_org` column
+       contains keywords like 'klebsiella', 'enterobacter', 'serratia', or 'other'.
+    2. Exclusion: Ensure we do NOT flag it if the string strictly says
+       'escherichia coli' or 'e. coli'.
+
+    Required Columns in df:
+    - `microorganism` or `blood_culture_org` (String from microbiology LIS system)
+
+    Returns:
+    pd.Series of integers (1 for Non-E. coli, 0 for E. coli).
+    """
+    pass
+
+def evaluate_antibiotic_appropriateness(df, **kwargs):
+    """
+    @Example:
+
+    Determines if the empirical antibiotic therapy administered was INAPPROPRIATE.
+
+    Clinical Logic:
+    Empirical therapy is the drug given *before* the final lab results come back.
+    Therapy is considered INAPPROPRIATE (returns 1) if:
+    1. Resistance: The `empiric_abx_given` (medication given in the first 24h)
+       matches a drug listed in the `abx_resistant_to` column (from the lab report).
+    2. No Coverage: The patient received no active anti-ESBL antibiotics
+       (like carbapenems) within the first 24 hours of blood culture collection.
+    3. Explicit Flag: If an `inappropriate_abx_flag` already exists from a
+       clinical pharmacist's manual review, use it.
+
+    Required Columns in df:
+    - `empiric_abx_given` (String/List of medications)
+    - `abx_resistant_to` (String/List from susceptibility report)
+    - `inappropriate_abx_flag` (Int 1 or 0, optional)
+
+    .. note: Notice how evaluate_antibiotic_appropriateness requires us to look at Pharmacy
+             data (empiric_abx_given) and Laboratory data (abx_resistant_to) at the same time.
+             This is why we write the logic out first! If we don't have the Pharmacy data in
+             our dataset, we immediately know we cannot compute this score, and we need to
+             ask the data engineers for a new table.
+
+    Returns:
+    pd.Series of integers (1 for Inappropriate therapy, 0 for Appropriate therapy).
+    """
+    pass
