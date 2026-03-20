@@ -46,6 +46,17 @@ def map_medical_codes(df, code_col, target_codes):
         The column containing patient codes (can be a list or a string).
     target_codes : list
         The list of codes that define the clinical category (e.g., ['I50', 'I11.0']).
+
+    Data Mapping for iCARE:
+    -----------------------
+    - Episodes: Table `icare_episodes_diagnosis_anon` 
+      Cols: `diagnosis_code_icd`, `diagnosis_code_snomed`, `diagnosis_desc_icd`, 
+            `diagnosis_desc_snomed`, `diagnosis_date`.
+    - Problems: Table `icare_problem_anon`
+      Cols: `problem_code` (SNOMED), `problem_desc`, `problem_dt_tm`.
+
+    Required Logic:
+    Must search BOTH the diagnosis episodes and the problem list for matches.
     """
 
     def check_match(patient_codes):
@@ -115,10 +126,18 @@ def derive_liver_disease(df, ast_col='AST', alt_col='ALT', cirrhosis_med_col='me
 # Reference:
 # Charlson ME, et al. "A new method of classifying prognostic comorbidity in
 # longitudinal studies: development and validation." J Chronic Dis. 1987;40(5):373-83.
+# Mapping Logic:
+# - SNOMED codes are found in `icare_problem_anon.problem_code`.
+# - ICD-10/SNOMED codes are found in `icare_episodes_diagnosis_anon`.
+# - A list of all the snomed codes for all the comorbidities from publication (https://clinicalcodes.rss.mhs.man.ac.uk/medcodes/article/196/) can be based on 'res195-comorbidity-cci-gold.csv' but need to check with Damien on these.
 
 def has_myocardial_infarction(df, **kwargs):
-    """"""
+    """""
+    Identifies history of MI.
+    Codes: Use 'MI' category from CCI Gold CSV (e.g., 323..00, G30..00).
+    Search: `icare_problem_anon` and `icare_episodes_diagnosis_anon`.
     pass
+    """
 
 def has_congestive_heart_failure(df, **kwargs):
     """
@@ -128,8 +147,7 @@ def has_congestive_heart_failure(df, **kwargs):
 
     Clinical Logic:
     A patient is flagged with CHF if ANY of the following criteria are met:
-    1. ICD-10 Codes: Patient record contains 'I50' (Heart failure) or
-       'I11.0' (Hypertensive heart disease with heart failure).
+    1. SNOMED Codes: Take from es195-comorbidity-cci-gold.csv (Hypertensive heart disease with heart failure).
     2. Explicit Flag: The `hx_chf` boolean column is exactly 1.
     3. Medication Proxy: The patient is actively prescribed specific heart failure
        medications like 'entresto', 'milrinone', or 'dobutamine' in the `home_meds` column.
@@ -261,25 +279,63 @@ def has_aids(df, **kwargs):
 # Korvick JA, et al. "Prospective observational study of Klebsiella bacteremia..."
 # Clin Infect Dis. 1992;15(5):795-801.
 # (Also widely validated for ESBL by Paterson et al., 2004).
+# Score Range: 0 to 14 points from https://onlinelibrary.wiley.com/doi/10.1155/2024/6996399?af=R#bib-0017
 
 def derive_mental_status_score(df, **kwargs):
-    """Checks GCS or nursing notes."""
+    """
+    Clinical Logic:
+    - Alertness: 0 pts
+    - Disorientation: 1 pt
+    - Stupor: 2 pts
+    - Coma: 4 pts
+
+    iCARE Mapping:
+    - Table: `icare_vital_signs_anon`
+    - Check Columns: `news_conscious_level_score`, `new_score_consciousness`, or 
+      `glasgow_coma_score`.
+    """
     pass
 
 def derive_fever_status(df, **kwargs):
-    """Checks rolling temperature vitals."""
-    pass
+    """
+    Clinical Logic:
+    - 36.1°C – 38.9°C: 0 pts
+    - 35.1°C – 36.0°C or 39.0°C – 39.9°C: 1 pt
+    - <= 35°C or >= 40°C: 2 pts
+
+    iCARE Mapping:
+    - Table: `icare_vital_signs_anon`
+    - Filter: `observation_code` IN (10933766, 486347689)
+    - Value: `observation_result_clean`
+    """
 
 def derive_hypotension_status(df, **kwargs):
-    """Checks rolling blood pressure and vasopressor administration."""
+    """
+    Clinical Logic:
+    - Presence of hypotension: +2 pts
+    - Systolic BP < 90 mmHg or requires vasopressors from icare_antitbiotic_prescribing whiuch contains vast range of drugs.
+    iCARE Mapping:
+    - Table: `icare_vital_signs_anon`
+    - Filter: `observation_code` IN (13389125)
+    - Value: `observation_result_clean`
+
+    """
     pass
 
 def is_mechanically_ventilated(df, **kwargs):
-    """Checks respiratory support flowsheets."""
+    """
+    Clinical Logic:
+    - Receiving mechanical ventilation: +2 pts
+    - Search respiratory support flowsheets.
+    """
     pass
 
 def has_recent_cardiac_arrest(df, **kwargs):
-    """Checks resuscitation codes/events."""
+    """
+    Clinical Logic:
+    - Cardiac arrest within window: +4 pts
+    - Check resuscitation event codes.
+    """
     pass
 
 
@@ -295,18 +351,46 @@ def has_recent_cardiac_arrest(df, **kwargs):
 # use of innovative therapies in sepsis." Chest. 1992;101(6):1644-55.
 def derive_tachycardia(df, **kwargs):
     """Checks HR > 90"""
+    """
+    Clinical Logic: HR > 90
+    iCARE Mapping:
+    - Table: `icare_vital_signs_anon`
+    - Filter: `observation_code` == 13472364
+    - Value: `observation_result_clean`
+    """
     pass
 
 def derive_tachypnea(df, **kwargs):
     """Checks RR > 20 or PaCO2 < 32"""
+    """
+    Clinical Logic: RR > 20
+    iCARE Mapping:
+    - Table: `icare_vital_signs_anon`
+    - Filter: `observation_code` == 9096705
+    - Value: `observation_result_clean`
+    """
     pass
 
 def derive_abnormal_temp(df, **kwargs):
     """Checks Temp > 38°C or < 36°C"""
+    """
+    Clinical Logic: Temp > 38°C or < 36°C
+    iCARE Mapping:
+    - Table: `icare_vital_signs_anon`
+    - Filter: `observation_code` IN (10933766, 486347689)
+    - Value: `observation_result_clean`
+    """
     pass
 
 def derive_abnormal_wbc(df, **kwargs):
     """Checks WBC > 12k, < 4k, or > 10% bands"""
+    """
+    Clinical Logic: WBC > 12k or < 4k
+    iCARE Mapping:
+    - Table: `icare_pathology_blood_anon`
+    - Filter: `test_code` contains 'wbc'
+    - Value: `result_cleaned`
+    """
     pass
 
 # ----------------------------------------------------------------------------------------
@@ -340,6 +424,12 @@ def derive_age_at_admission(df, **kwargs):
     Returns:
     pd.Series of floats/integers representing patient age in years.
     """
+    """
+    Requirement: INCREMENT score adds +2 points if age > 50.
+    iCARE Mapping:
+    - Table: `icare_episodes_anon`
+    - Column: `age_at_admission` (Direct extraction, no date math needed).
+    """
     pass
 
 def determine_bsi_source(df, **kwargs):
@@ -360,13 +450,16 @@ def determine_bsi_source(df, **kwargs):
 
     If none of the urinary criteria are met, we default to NON-urinary (1).
 
-    Required Columns in df:
-    - `bsi_source` (String)
-    - `urine_culture_result` (String)
-    - `diagnosis_codes` (String/List)
-
     Returns:
     pd.Series of integers (1 for NON-urinary source, 0 for Urinary source).
+    """
+    """
+    Requirement: Non-urinary sources receive +3 points.
+    iCARE Mapping:
+    - Table: `icare_episodes_diagnosis_anon`
+    - Column: `diagnosis_code_snomed`
+    - Logic: use the diagnosis icd-10 codes 
+    - J15.8, J15.9, J18.0, J18.1, J18.9, J85.1, N39.0, N10, N13.6, N30.0, N30.9 (to cover sputum and urine, for example).
     """
     pass
 
@@ -380,13 +473,13 @@ def identify_microorganism_type(df, **kwargs):
     Clinical Logic:
     E. coli bacteremia generally has a better prognosis in this specific cohort.
     We flag the patient as 'Non-E. coli' if:
-    1. Blood Culture Result: The `microorganism` or `blood_culture_org` column
+    1. Blood Culture Result: The `organism_bug`column
        contains keywords like 'klebsiella', 'enterobacter', 'serratia', or 'other'.
     2. Exclusion: Ensure we do NOT flag it if the string strictly says
        'escherichia coli' or 'e. coli'.
 
     Required Columns in df:
-    - `microorganism` or `blood_culture_org` (String from microbiology LIS system)
+    - `organism_bug` or `sensitivity (String from microbiology LIS system)
 
     Returns:
     pd.Series of integers (1 for Non-E. coli, 0 for E. coli).
@@ -423,4 +516,14 @@ def evaluate_antibiotic_appropriateness(df, **kwargs):
     Returns:
     pd.Series of integers (1 for Inappropriate therapy, 0 for Appropriate therapy).
     """
+    """
+    Requirement: Inappropriate therapy receives +2 points.
+    iCARE_mapping:
+    - Merge `icare_microbiology_anon` with `icare_pharmacy_prescribing_anon`.
+    - Compare `sample_collected_dt` (`icare_pathology_blood_anon`) with 
+      `order_dt_tm` (`icare_pharmacy_prescribing_anon`).
+    - Inappropriate if administration > 1 day from blood cultures or 
+      > 4 days without targeted anti-ESBL therapy (e.g. Carbapenems).
+    """
+
     pass
