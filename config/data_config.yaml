@@ -206,3 +206,44 @@ ts_config:
     unit: 'points'
     prob: 0.40
     range: [ 3, 15 ]
+
+
+# Add this to your existing data_config.yaml
+
+tables:
+  ICARE_EPISODES_ANON:
+    # How many episodes/rows a single patient might have
+    rows_per_patient_range: [1, 4]
+    schema:
+      SUBJECT:
+        type: "foreign_key"      # Links back to the static demographics ID
+      SPELL_IDENTIFIER:
+        type: "unique_id"        # Generates a random integer ID
+      ENCNTR_ID:
+        type: "unique_id"
+      EPISODE_IDENTIFIER:
+        type: "unique_id"
+      ADMISSION_DATE:
+        type: "date"
+        start: "2020-01-01"
+        end: "2024-01-01"
+      ADMISSION_TIME:
+        type: "time"
+      AGE_AT_ADMISSION:
+        type: "int"
+        range: [18, 95]          # Could also be derived from demographics later
+      DISCHARGE_DATE:
+        type: "date_offset"      # Ensures discharge is after admission
+        base_col: "ADMISSION_DATE"
+        days_range: [1, 30]
+      MAIN_SPECIALTY:
+        type: "categorical_tuple" # Ensures the code and desc match
+        columns: ["MAIN_SPECIALTY_CODE", "MAIN_SPECIALTY_CODE_DESC"]
+        values:
+          - [140, "oral surgery"]
+          - [300, "general medicine"]
+          - [301, "gastroenterology"]
+          - [320, "cardiology"]
+      INDEX_OF_MULTIPLE_DEPRIVATION_DECILE:
+        type: "enumerated"
+        values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "unknown", "none"]

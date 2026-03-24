@@ -7,23 +7,34 @@ from pathlib import Path
 
 
 class FeaturePipeline:
-    def __init__(self, config_path='../config/feature_config.yaml'):
+    def __init__(self, config_path='../config/feature_config.yaml',
+                 context_dfs=None):
         with open(config_path, 'r') as f:
             self.config = yaml.safe_load(f)
+        self.context_dfs = context_dfs or {}  # Holds micro, pharmacy, etc.
 
     def process(self, df_static, df_ts):
-        """Main orchestration method."""
-        df = df_ts.sort_values(['patient_id', 'date']) \
+        """Main orchestration method.
+        # df_static is your episodes table
+        # df_ts is your pivoted vitals/labs
+        """
+        # Order time series
+        df = df_ts \
+            .sort_values(['patient_id', 'date']) \
             .set_index(['patient_id', 'date'])
+
         print("Processing base features...")
+
+        # Processing
         df = self._process_base_features(df)
+        df = self._compute_custom_features(df)
         df = df.reset_index()
-        df = pd.merge(df, df_static, on='patient_id', how='left')
-        print("Computing pandas eval expressions...")
+        df = pd.merge(df, df_static, on=['patient_id'], how='left')
         df = self._compute_expressions(df)
-        print("Executing custom Python scores...")
         df = self._compute_custom_scores(df)
         df = df.reset_index()
+
+        # Return
         return df
 
     def _process_base_features(self, df):
@@ -69,6 +80,28 @@ class FeaturePipeline:
 
         return df
 
+    def _compute_custom_features(self, df):
+        """Executes the custom_features block from YAML (Phenotypes)."""
+        custom_feats = self.config.get('custom_features', {})
+        for feat_name, meta in custom_feats.items():
+            module_name = meta.get('module', 'src.phenotypes')
+            func_name = meta.get('function')
+            kwargs = meta.get('kwargs', {})
+
+            # Pass context_dfs if you are using the 'Lazy Lookup' approach
+            kwargs['context_dfs'] = getattr(self, 'context_dfs', {})
+
+            try:
+                module = importlib.import_module(module_name)
+                func = getattr(module, func_name)
+                print(f"  🔍 Computing phenotype: {feat_name}...")
+                result = func(df, **kwargs)
+                df[feat_name] = pd.Series(result, index=df.index)
+                print(f"     ✅ {feat_name} added. Unique values: {df[feat_name].unique()}")
+            except Exception as e:
+                print(f"⚠️ Warning: Failed to compute phenotype '{feat_name}'. Error: {e}")
+        return df
+
     def _compute_expressions(self, df):
         """Dynamically evaluates string expressions to create new features/scores.
 
@@ -89,7 +122,7 @@ class FeaturePipeline:
 
     def _compute_custom_scores(self, df):
         """Dynamically imports and executes external Python scoring functions."""
-        import importlib  # Ensure this is at the top of your file or method
+        import importlib
 
         custom_scores = self.config.get('custom_scores', {})
 
@@ -103,12 +136,25 @@ class FeaturePipeline:
                 module = importlib.import_module(module_name)
                 custom_func = getattr(module, func_name)
 
-                # Execute the function, passing the dataframe and the kwargs from YAML
+                # --- 1. PRE-COMPUTATION LOG ---
+                print(f"  🔍 Computing score: {score_name}...")
+
+                # Execute the function
+                kwargs['context_dfs'] = getattr(self, 'context_dfs', {})
                 df[score_name] = custom_func(df, **kwargs)
+
+                # --- 2. SUCCESS LOG WITH UNIQUE VALUES ---
+                # To keep the terminal clean, we format the array slightly if there are many unique values
+                unique_vals = df[score_name].unique()
+                if len(unique_vals) > 10:
+                    val_str = f"[{len(unique_vals)} unique values]"
+                else:
+                    val_str = f"{unique_vals}"
+
+                print(f"     ✅ {score_name} added. Unique values: {val_str}")
 
             except ModuleNotFoundError:
                 print(f"❌ Error computing '{score_name}': Cannot find module '{module_name}'.")
-                # Add the custom hint for the most common mistake
                 if not module_name.startswith('src.'):
                     print(
                         f"   💡 Hint: If your file is in the 'src' folder, update your YAML to use `module: 'src.{module_name}'`")

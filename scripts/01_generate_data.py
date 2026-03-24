@@ -57,6 +57,22 @@ def main():
         id_col_name=data_config.get('primary_key', 'patient_id')
     )
 
+    # 3b. Generate Custom Relational Tables
+    print("Generating custom relational tables...")
+    custom_tables = {}
+    unique_ids = df_static[data_config.get('primary_key', 'patient_id')].values
+
+    if 'tables' in data_config:
+        from src.generators import generate_custom_table  # ensure this is imported
+
+        for table_name, table_config in data_config['tables'].items():
+            print(f" -> Building {table_name}...")
+            df_custom = generate_custom_table(unique_ids, table_config)
+            custom_tables[table_name] = df_custom
+
+            # Save it alongside the others
+            df_custom.to_csv(data_dir / f'{table_name.lower()}.csv', index=False)
+
     # 4. Apply Missingness
     print("Applying missing data masks...")
     df_ts_ms = apply_missingness(df_ts, ts_config=data_config.get('ts_config', {}))

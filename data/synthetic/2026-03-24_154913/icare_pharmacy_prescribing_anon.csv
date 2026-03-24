@@ -1,0 +1,717 @@
+SUBJECT,ENCNTR_ID,ORDER_ID,ADMISSION_MEDICINE_Y_N,GP_TO_CONTINUE,MEDICATION_NAME,MEDICATION_NAME_SHORT,ORDERED_DRUG_FORM,ORDERED_ROUTE,ORDERED_UNIT,THERAPEUTICAL_CLASS,ORDERED_DOSE,ORDERED_FREQUENCY,ORDER_DT_TM,ORDER_TYPE,PRESCRIPTION_TYPE
+10001,10001,4885762,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,518.68,twice only,2022-07-23,Inpatient,Standard
+10001,10001,3098486,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,349.23,twice only,2021-12-01,Outpatient,Stat
+10001,10001,2307586,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,191.98,three times a day,2021-12-27,Outpatient,PRN
+10001,10001,3635133,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,233.33,twice only,2020-09-15,Discharge,Standard
+10001,10001,6279515,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,803.99,twice only,2021-05-14,Inpatient,Standard
+10001,10001,5968745,none,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,110.97,twice daily,2021-09-28,Inpatient,Stat
+10002,10002,1370234,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,121.56,four times a day,2020-09-10,Outpatient,Stat
+10002,10002,2180879,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,66.86,four times a day,2023-02-08,Outpatient,Standard
+10002,10002,1836726,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,600.22,four times a day,2020-07-27,Inpatient,Continuous
+10002,10002,1045720,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,470.0,once daily,2021-06-08,Inpatient,PRN
+10002,10002,9183492,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,617.92,four times a day,2020-03-26,Discharge,Stat
+10003,10003,6086905,none,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,747.56,once daily,2022-02-05,Outpatient,PRN
+10003,10003,9082919,yes,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,191.07,twice daily,2020-07-19,Outpatient,Continuous
+10003,10003,2359806,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,331.61,prn,2021-10-17,Discharge,Stat
+10003,10003,4067689,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,476.26,three times a day,2021-03-16,Discharge,Continuous
+10003,10003,6816765,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,768.1,four times a day,2023-12-13,Outpatient,PRN
+10003,10003,2018936,yes,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,473.87,prn,2022-11-27,Outpatient,Standard
+10003,10003,7602166,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,109.67,four times a day,2021-02-05,Outpatient,Continuous
+10003,10003,4624443,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,704.25,once daily,2023-05-07,Outpatient,Standard
+10003,10003,3277910,no,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,168.42,once daily,2021-03-01,Inpatient,Stat
+10004,10004,7719270,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,911.49,twice daily,2020-01-20,Outpatient,PRN
+10004,10004,6831035,yes,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,122.5,twice only,2023-01-11,Discharge,PRN
+10004,10004,3028314,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,244.19,three times a day,2021-05-15,Discharge,Stat
+10004,10004,1156844,none,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,641.0,twice daily,2022-06-15,Outpatient,Continuous
+10004,10004,6807407,yes,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,987.65,once daily,2023-08-05,Inpatient,PRN
+10004,10004,5583736,no,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,430.87,four times a day,2021-10-14,Outpatient,PRN
+10005,10005,7840461,none,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,299.97,prn,2022-09-30,Outpatient,PRN
+10005,10005,4554300,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,170.3,four times a day,2023-03-26,Outpatient,Continuous
+10005,10005,7268746,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,636.41,three times a day,2021-01-10,Inpatient,Continuous
+10005,10005,4039845,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,572.72,twice only,2020-12-30,Discharge,Stat
+10005,10005,8312561,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,293.52,twice only,2021-05-14,Outpatient,Stat
+10005,10005,7487508,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,242.93,twice daily,2023-12-24,Outpatient,Standard
+10005,10005,5361082,yes,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,918.91,prn,2021-04-24,Discharge,Stat
+10005,10005,7569643,yes,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,331.14,prn,2020-01-04,Discharge,Continuous
+10005,10005,8493528,yes,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,1.54,twice only,2023-02-14,Outpatient,PRN
+10005,10005,2492910,none,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,89.84,prn,2021-02-03,Outpatient,Stat
+10005,10005,9323524,yes,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,279.22,three times a day,2022-04-29,Outpatient,PRN
+10006,10006,9955871,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,745.77,twice daily,2021-01-26,Discharge,Stat
+10006,10006,6162901,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,348.87,twice daily,2022-10-31,Discharge,Continuous
+10006,10006,7386330,none,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,333.74,twice only,2022-07-06,Inpatient,Stat
+10006,10006,7108456,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,517.66,twice only,2022-02-02,Outpatient,Standard
+10006,10006,4823639,none,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,690.78,prn,2023-05-19,Discharge,PRN
+10006,10006,8238630,no,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,668.57,four times a day,2020-04-03,Inpatient,Standard
+10006,10006,9673939,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,956.86,once daily,2020-10-19,Discharge,Continuous
+10006,10006,9664485,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,152.58,twice daily,2020-10-29,Discharge,Continuous
+10006,10006,4457561,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,271.92,three times a day,2023-04-18,Inpatient,Stat
+10006,10006,3458114,none,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,137.6,twice daily,2021-12-09,Outpatient,Stat
+10006,10006,3052262,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,22.77,twice daily,2020-09-08,Inpatient,Stat
+10007,10007,9582237,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,700.11,twice daily,2021-11-21,Discharge,PRN
+10007,10007,2857978,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,411.36,twice only,2021-08-27,Outpatient,PRN
+10007,10007,2077771,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,848.91,once daily,2023-07-05,Outpatient,Stat
+10007,10007,5582580,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,944.31,four times a day,2020-12-27,Discharge,Stat
+10007,10007,7486063,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,998.92,twice daily,2023-11-28,Discharge,Continuous
+10007,10007,5719888,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,294.9,three times a day,2021-02-03,Inpatient,Continuous
+10007,10007,5159659,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,343.46,three times a day,2021-01-31,Inpatient,Stat
+10007,10007,6560578,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,360.16,twice daily,2021-06-20,Outpatient,Standard
+10007,10007,9645156,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,350.52,three times a day,2020-05-19,Discharge,PRN
+10007,10007,2182146,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,985.99,twice only,2021-09-30,Inpatient,Stat
+10008,10008,3467765,no,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,227.72,twice daily,2020-10-13,Outpatient,Standard
+10008,10008,3217245,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,429.07,four times a day,2020-02-20,Inpatient,Stat
+10008,10008,6456231,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,867.79,twice daily,2023-09-10,Discharge,Standard
+10008,10008,3734512,no,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,495.03,three times a day,2020-01-08,Discharge,Standard
+10008,10008,9428604,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,416.61,three times a day,2023-02-08,Inpatient,Continuous
+10008,10008,8167241,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,134.24,prn,2023-09-27,Discharge,PRN
+10008,10008,7143239,no,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,602.56,three times a day,2020-08-12,Outpatient,Standard
+10008,10008,2465455,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,952.06,once daily,2021-12-04,Inpatient,Stat
+10008,10008,1689482,yes,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,278.53,once daily,2023-11-12,Discharge,Continuous
+10008,10008,3015889,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,155.72,twice only,2023-03-24,Inpatient,Stat
+10008,10008,6596762,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,411.78,twice only,2022-05-11,Outpatient,PRN
+10008,10008,1600115,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,827.5,prn,2022-02-07,Inpatient,Stat
+10009,10009,1720569,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,498.52,twice daily,2022-04-21,Discharge,Continuous
+10009,10009,9222526,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,661.28,three times a day,2023-05-03,Outpatient,Continuous
+10010,10010,3539350,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,584.76,prn,2023-10-04,Outpatient,Continuous
+10010,10010,7244208,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,484.97,four times a day,2023-09-03,Discharge,Continuous
+10010,10010,7969037,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,677.88,once daily,2020-02-26,Discharge,Continuous
+10010,10010,6479422,none,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,49.64,four times a day,2021-02-11,Inpatient,Continuous
+10010,10010,9723083,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,302.78,twice daily,2020-10-31,Discharge,Stat
+10010,10010,7196972,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,990.0,once daily,2020-06-14,Inpatient,Continuous
+10011,10011,3689214,no,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,17.22,four times a day,2021-04-04,Discharge,PRN
+10011,10011,6276357,no,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,863.33,twice daily,2021-07-09,Inpatient,Continuous
+10011,10011,6060493,yes,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,301.72,once daily,2021-08-02,Outpatient,PRN
+10011,10011,5064462,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,787.81,twice only,2021-10-19,Inpatient,Stat
+10011,10011,4126664,none,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,791.71,twice only,2021-02-13,Discharge,PRN
+10011,10011,4048477,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,489.87,four times a day,2022-07-19,Discharge,PRN
+10011,10011,4600796,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,699.56,twice daily,2020-11-26,Discharge,Continuous
+10012,10012,2762862,no,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,607.57,prn,2022-02-14,Discharge,Continuous
+10012,10012,6731976,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,118.91,four times a day,2022-04-05,Discharge,Stat
+10012,10012,1691196,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,277.01,once daily,2020-01-15,Inpatient,Continuous
+10012,10012,7158045,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,380.24,three times a day,2023-07-31,Inpatient,Continuous
+10013,10013,2688096,no,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,248.13,twice daily,2021-12-20,Discharge,Stat
+10013,10013,7416025,none,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,815.55,three times a day,2023-01-23,Inpatient,Standard
+10013,10013,2810210,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,384.26,twice daily,2020-02-19,Discharge,Standard
+10013,10013,9606721,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,651.5,twice only,2023-07-06,Outpatient,Stat
+10013,10013,2855894,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,402.94,four times a day,2023-04-22,Inpatient,Continuous
+10013,10013,5105994,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,279.22,once daily,2022-10-20,Inpatient,Standard
+10014,10014,8797784,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,554.64,three times a day,2020-04-11,Inpatient,Continuous
+10014,10014,4753385,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,84.28,four times a day,2023-01-20,Discharge,Continuous
+10014,10014,2393098,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,777.62,three times a day,2023-09-20,Outpatient,Stat
+10014,10014,1433494,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,975.43,four times a day,2021-01-09,Discharge,PRN
+10014,10014,6991231,none,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,547.5,once daily,2023-04-07,Inpatient,Continuous
+10014,10014,5539306,none,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,760.99,prn,2022-05-11,Inpatient,Standard
+10014,10014,5544029,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,587.41,twice daily,2023-10-10,Discharge,Continuous
+10015,10015,5183754,no,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,959.85,four times a day,2020-06-27,Inpatient,Continuous
+10015,10015,8859667,no,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,632.2,prn,2021-07-31,Outpatient,Standard
+10015,10015,9939843,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,438.49,four times a day,2023-04-21,Discharge,Stat
+10015,10015,2670053,no,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,7.38,twice daily,2021-06-15,Inpatient,PRN
+10016,10016,9112111,none,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,232.08,once daily,2022-10-09,Outpatient,Stat
+10016,10016,9344403,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,110.32,twice daily,2021-02-27,Inpatient,PRN
+10016,10016,6152419,none,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,215.59,prn,2023-04-10,Inpatient,Standard
+10016,10016,3601735,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,633.93,twice only,2021-03-29,Discharge,PRN
+10016,10016,6652509,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,527.48,prn,2022-04-12,Discharge,Standard
+10016,10016,8161853,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,332.29,once daily,2021-10-19,Inpatient,PRN
+10016,10016,8128378,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,19.4,prn,2022-02-26,Inpatient,PRN
+10016,10016,8704455,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,565.29,twice only,2023-12-30,Discharge,Stat
+10017,10017,1201711,none,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,22.61,three times a day,2021-04-18,Discharge,Continuous
+10017,10017,6321905,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,741.95,prn,2022-02-10,Inpatient,Standard
+10017,10017,5588430,no,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,515.91,prn,2022-01-23,Discharge,Standard
+10018,10018,3183989,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,294.57,twice only,2020-12-11,Inpatient,Continuous
+10018,10018,6730007,none,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,877.83,four times a day,2021-06-07,Outpatient,Continuous
+10018,10018,1042787,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,654.39,once daily,2022-09-19,Discharge,Stat
+10018,10018,2384995,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,450.62,twice only,2022-12-14,Discharge,Continuous
+10018,10018,4881592,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,569.76,twice daily,2020-08-03,Outpatient,Standard
+10018,10018,7201635,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,815.71,twice daily,2020-03-12,Inpatient,Continuous
+10018,10018,9881508,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,827.3,prn,2020-06-30,Inpatient,Stat
+10018,10018,3520970,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,40.54,three times a day,2020-12-21,Discharge,Standard
+10018,10018,4884945,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,67.28,once daily,2020-12-19,Discharge,Standard
+10019,10019,7162384,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,98.43,twice only,2023-05-28,Outpatient,PRN
+10019,10019,8639054,yes,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,474.39,prn,2020-12-17,Outpatient,PRN
+10020,10020,4384167,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,645.38,twice daily,2022-08-16,Discharge,PRN
+10020,10020,2660653,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,573.01,prn,2020-10-19,Discharge,Stat
+10020,10020,1313134,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,822.02,twice daily,2022-05-29,Discharge,PRN
+10020,10020,8108582,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,674.95,once daily,2021-07-28,Outpatient,Standard
+10020,10020,2805263,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,490.14,four times a day,2022-01-11,Outpatient,Stat
+10020,10020,6433320,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,223.35,twice daily,2022-03-06,Outpatient,Continuous
+10021,10021,7392893,yes,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,269.95,three times a day,2022-06-07,Discharge,Stat
+10021,10021,4199490,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,753.94,twice only,2020-11-09,Outpatient,Standard
+10021,10021,4199354,yes,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,447.02,twice daily,2022-11-13,Outpatient,Standard
+10021,10021,6676733,yes,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,859.38,twice only,2022-03-21,Discharge,Continuous
+10021,10021,1663285,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,140.24,four times a day,2022-06-20,Inpatient,PRN
+10021,10021,7521414,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,960.44,twice daily,2020-11-04,Outpatient,Continuous
+10021,10021,1518561,no,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,5.66,three times a day,2023-08-08,Outpatient,PRN
+10021,10021,9252572,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,653.81,three times a day,2022-03-21,Inpatient,PRN
+10022,10022,4395652,none,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,301.38,four times a day,2023-05-15,Inpatient,Continuous
+10022,10022,7629264,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,399.53,twice daily,2023-09-17,Outpatient,PRN
+10022,10022,2323799,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,191.48,once daily,2020-10-17,Outpatient,Standard
+10022,10022,9526555,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,835.05,three times a day,2021-07-09,Outpatient,PRN
+10022,10022,2035212,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,89.84,four times a day,2023-05-09,Discharge,PRN
+10022,10022,9813845,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,881.17,prn,2021-04-22,Inpatient,Stat
+10023,10023,5548852,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,972.85,once daily,2022-05-22,Inpatient,Standard
+10023,10023,5060019,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,779.99,twice daily,2022-12-31,Inpatient,Continuous
+10023,10023,9257140,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,183.36,three times a day,2021-01-09,Inpatient,Stat
+10024,10024,5229529,none,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,211.52,prn,2022-07-28,Outpatient,PRN
+10024,10024,2225765,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,32.57,prn,2021-03-24,Outpatient,Stat
+10024,10024,6981100,yes,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,871.03,prn,2021-01-12,Discharge,Stat
+10024,10024,1955647,none,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,264.94,twice daily,2022-07-29,Discharge,PRN
+10024,10024,6487868,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,553.97,twice only,2023-08-20,Outpatient,Stat
+10024,10024,2588737,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,168.38,prn,2021-05-19,Inpatient,Standard
+10024,10024,5309376,no,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,489.19,twice daily,2022-10-04,Outpatient,PRN
+10024,10024,5936199,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,967.96,prn,2020-02-10,Inpatient,Standard
+10024,10024,3163046,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,603.72,twice daily,2021-01-11,Inpatient,PRN
+10025,10025,8183279,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,904.11,twice daily,2023-12-18,Discharge,Stat
+10025,10025,9915878,no,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,751.8,four times a day,2021-08-09,Inpatient,PRN
+10025,10025,1442151,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,851.69,twice daily,2022-10-17,Inpatient,PRN
+10025,10025,1773324,none,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,475.44,once daily,2022-03-26,Outpatient,PRN
+10025,10025,4013116,none,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,987.49,twice daily,2023-11-04,Outpatient,Continuous
+10025,10025,8149990,yes,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,388.16,once daily,2023-03-16,Discharge,Stat
+10025,10025,7860772,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,401.02,three times a day,2020-07-18,Inpatient,Continuous
+10025,10025,7001756,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,261.94,twice only,2021-03-08,Outpatient,Continuous
+10025,10025,5561119,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,846.67,twice daily,2020-11-01,Inpatient,Stat
+10025,10025,8025776,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,344.8,prn,2023-04-03,Discharge,Continuous
+10025,10025,8969079,none,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,741.16,twice only,2023-08-06,Inpatient,Continuous
+10025,10025,5507596,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,698.74,three times a day,2020-05-26,Inpatient,PRN
+10026,10026,9455969,yes,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,636.96,twice only,2020-01-16,Discharge,PRN
+10026,10026,7703168,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,808.64,prn,2020-06-17,Discharge,Stat
+10026,10026,4656353,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,692.71,once daily,2021-07-12,Discharge,Stat
+10026,10026,8124143,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,630.4,three times a day,2020-05-24,Inpatient,Standard
+10026,10026,4262174,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,270.61,twice daily,2020-05-09,Outpatient,Standard
+10026,10026,8589497,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,296.45,twice only,2020-06-12,Inpatient,Standard
+10026,10026,9137163,none,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,979.96,three times a day,2021-09-27,Discharge,PRN
+10026,10026,3924988,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,499.0,once daily,2021-08-01,Discharge,Continuous
+10026,10026,5039247,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,241.46,twice daily,2021-05-09,Inpatient,Standard
+10026,10026,8857062,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,35.49,twice daily,2022-02-27,Inpatient,Continuous
+10027,10027,6007358,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,807.39,twice only,2022-04-19,Discharge,PRN
+10027,10027,9907831,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,336.4,three times a day,2023-06-17,Outpatient,Stat
+10027,10027,4932035,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,752.92,prn,2022-04-15,Inpatient,PRN
+10028,10028,9885958,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,520.65,prn,2021-03-09,Discharge,Stat
+10028,10028,8547713,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,948.25,twice daily,2022-09-13,Discharge,Continuous
+10028,10028,5831001,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,442.22,four times a day,2021-11-19,Outpatient,PRN
+10028,10028,6545733,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,177.72,twice daily,2020-06-08,Inpatient,Standard
+10029,10029,4873199,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,643.67,once daily,2023-05-14,Discharge,PRN
+10029,10029,8475823,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,947.04,twice only,2023-07-04,Outpatient,Standard
+10029,10029,2940626,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,269.57,prn,2022-09-12,Outpatient,PRN
+10029,10029,8320620,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,775.89,three times a day,2021-05-08,Discharge,Standard
+10029,10029,3597597,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,59.8,twice daily,2020-10-13,Outpatient,Standard
+10029,10029,4153086,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,800.68,twice only,2021-01-14,Outpatient,Stat
+10029,10029,1203710,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,531.9,twice only,2022-09-04,Inpatient,PRN
+10029,10029,3825171,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,26.41,four times a day,2020-08-14,Inpatient,Stat
+10030,10030,2581476,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,535.18,three times a day,2023-06-06,Discharge,PRN
+10030,10030,9447210,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,217.64,four times a day,2022-01-23,Discharge,Standard
+10030,10030,3115804,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,792.71,three times a day,2021-04-12,Outpatient,Standard
+10030,10030,3748804,yes,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,396.84,twice only,2022-08-21,Outpatient,Standard
+10030,10030,5282725,yes,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,436.2,four times a day,2022-11-02,Discharge,PRN
+10030,10030,7629789,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,772.17,three times a day,2022-06-20,Discharge,Stat
+10030,10030,8454069,no,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,442.12,once daily,2020-06-20,Inpatient,PRN
+10030,10030,4111096,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,849.26,four times a day,2021-09-01,Outpatient,Continuous
+10030,10030,7754804,yes,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,22.25,prn,2023-09-20,Discharge,Stat
+10030,10030,2006029,none,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,526.93,four times a day,2021-07-30,Discharge,Continuous
+10030,10030,5101411,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,355.27,twice only,2023-10-09,Inpatient,PRN
+10030,10030,2148999,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,268.76,three times a day,2023-03-24,Discharge,Standard
+10031,10031,6400219,none,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,314.93,four times a day,2023-09-01,Discharge,Continuous
+10031,10031,2800090,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,150.47,twice daily,2023-10-01,Discharge,PRN
+10031,10031,1498455,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,633.34,three times a day,2021-09-27,Discharge,Continuous
+10031,10031,6350729,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,983.06,once daily,2023-11-22,Inpatient,Standard
+10031,10031,8619168,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,189.79,prn,2020-08-25,Discharge,PRN
+10031,10031,4995302,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,653.26,twice daily,2020-06-03,Discharge,Standard
+10031,10031,8137391,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,896.52,twice only,2022-07-20,Inpatient,PRN
+10032,10032,7568678,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,547.27,twice daily,2023-07-14,Inpatient,Standard
+10032,10032,7466715,no,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,843.3,twice daily,2023-08-16,Outpatient,Continuous
+10032,10032,5666502,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,40.97,four times a day,2023-04-27,Outpatient,Continuous
+10032,10032,1384460,none,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,505.76,three times a day,2020-09-24,Discharge,PRN
+10033,10033,5944751,no,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,113.55,four times a day,2020-09-06,Inpatient,PRN
+10033,10033,3072090,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,294.42,three times a day,2020-03-24,Outpatient,Continuous
+10034,10034,1212625,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,780.33,three times a day,2021-08-24,Inpatient,PRN
+10034,10034,7173169,none,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,408.68,twice daily,2021-11-23,Inpatient,Continuous
+10034,10034,3329241,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,696.82,twice only,2020-11-21,Discharge,Continuous
+10034,10034,4964999,none,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,542.86,once daily,2020-05-07,Discharge,PRN
+10034,10034,9845201,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,151.96,twice only,2022-02-04,Outpatient,PRN
+10034,10034,4885705,yes,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,917.98,once daily,2021-03-06,Inpatient,Stat
+10034,10034,3605746,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,939.31,prn,2020-06-04,Outpatient,Stat
+10034,10034,7706594,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,573.18,twice only,2022-11-08,Discharge,Standard
+10034,10034,2200492,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,264.5,prn,2023-04-23,Inpatient,Continuous
+10034,10034,1662858,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,50.35,once daily,2023-04-23,Outpatient,PRN
+10034,10034,5048550,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,409.62,four times a day,2021-08-16,Discharge,Continuous
+10035,10035,2242045,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,381.41,three times a day,2021-01-28,Outpatient,PRN
+10035,10035,3835423,no,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,461.77,once daily,2021-03-03,Inpatient,Continuous
+10035,10035,5009656,none,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,961.81,twice only,2022-08-14,Outpatient,Continuous
+10036,10036,1125678,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,511.95,four times a day,2021-03-09,Inpatient,Continuous
+10036,10036,3105442,no,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,953.17,three times a day,2021-11-13,Outpatient,PRN
+10036,10036,1076188,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,792.54,prn,2020-10-30,Outpatient,Continuous
+10036,10036,7529842,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,684.93,twice only,2022-07-02,Inpatient,Standard
+10037,10037,7165409,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,659.53,once daily,2021-11-12,Inpatient,Standard
+10037,10037,5132610,none,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,130.43,twice daily,2023-01-21,Outpatient,Continuous
+10037,10037,2944110,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,56.47,twice daily,2022-07-30,Outpatient,PRN
+10037,10037,7736539,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,909.74,three times a day,2023-03-22,Inpatient,Stat
+10037,10037,9386353,no,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,629.6,four times a day,2023-10-26,Discharge,Continuous
+10037,10037,6499207,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,946.52,twice daily,2021-10-29,Inpatient,PRN
+10037,10037,5225415,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,667.92,twice daily,2023-02-25,Discharge,PRN
+10038,10038,5570843,no,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,516.76,twice only,2021-07-13,Inpatient,Stat
+10038,10038,2754707,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,116.98,twice daily,2020-08-14,Discharge,Standard
+10039,10039,9693912,yes,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,332.36,prn,2023-03-21,Inpatient,Stat
+10039,10039,6193853,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,886.46,twice daily,2023-04-23,Discharge,PRN
+10039,10039,9948545,none,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,472.84,four times a day,2022-09-15,Discharge,Stat
+10039,10039,2457766,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,755.81,prn,2022-08-29,Inpatient,Stat
+10039,10039,6737470,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,859.26,twice daily,2022-09-10,Outpatient,Stat
+10039,10039,1582668,no,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,800.5,four times a day,2021-10-15,Outpatient,Continuous
+10039,10039,7620423,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,905.51,twice only,2022-11-11,Outpatient,Stat
+10039,10039,6227485,yes,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,757.93,once daily,2023-10-16,Inpatient,Continuous
+10040,10040,8001029,none,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,110.28,once daily,2023-08-12,Outpatient,Standard
+10040,10040,9714875,yes,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,534.82,prn,2023-07-12,Discharge,Stat
+10040,10040,7174173,no,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,195.47,four times a day,2021-02-28,Inpatient,Stat
+10040,10040,1172896,none,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,230.99,four times a day,2022-03-12,Discharge,Continuous
+10040,10040,3296420,none,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,955.48,three times a day,2021-10-16,Discharge,Standard
+10041,10041,5785569,none,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,988.55,once daily,2022-06-19,Discharge,Standard
+10041,10041,1608557,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,349.65,once daily,2022-04-09,Discharge,PRN
+10042,10042,3029664,yes,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,26.85,once daily,2020-12-18,Outpatient,PRN
+10042,10042,8569116,yes,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,473.01,three times a day,2022-10-08,Discharge,PRN
+10042,10042,2054603,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,286.39,three times a day,2021-12-31,Discharge,Stat
+10042,10042,2077203,no,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,596.41,twice daily,2020-08-20,Discharge,Stat
+10042,10042,4851385,none,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,318.9,once daily,2022-05-23,Discharge,PRN
+10042,10042,2488614,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,63.69,twice daily,2022-09-15,Discharge,Continuous
+10042,10042,9692480,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,344.58,twice only,2023-12-02,Outpatient,Continuous
+10043,10043,7491966,none,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,351.02,twice daily,2023-04-16,Outpatient,Stat
+10043,10043,5617293,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,931.15,once daily,2021-06-12,Outpatient,Standard
+10043,10043,6131750,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,131.57,three times a day,2021-04-08,Inpatient,PRN
+10043,10043,4888286,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,907.44,three times a day,2021-11-16,Inpatient,Standard
+10043,10043,7524533,none,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,674.78,once daily,2022-01-31,Outpatient,Stat
+10043,10043,7745306,yes,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,975.67,twice only,2023-06-28,Outpatient,Standard
+10043,10043,9114389,no,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,789.88,once daily,2023-06-24,Inpatient,Stat
+10044,10044,8274317,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,962.29,once daily,2021-09-21,Discharge,Standard
+10044,10044,7173769,no,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,303.93,four times a day,2020-08-20,Discharge,Stat
+10044,10044,2873223,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,198.28,twice daily,2022-07-16,Outpatient,Continuous
+10044,10044,6267230,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,981.88,once daily,2022-05-21,Discharge,Continuous
+10044,10044,1763804,none,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,571.47,three times a day,2020-10-02,Discharge,Standard
+10044,10044,1394613,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,583.72,prn,2021-12-18,Discharge,Stat
+10044,10044,2933747,yes,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,569.03,once daily,2020-03-25,Inpatient,Standard
+10045,10045,1167928,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,572.64,twice only,2022-05-20,Discharge,Continuous
+10045,10045,5785613,yes,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,357.3,once daily,2022-09-04,Discharge,Continuous
+10045,10045,7148858,none,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,693.97,twice daily,2023-02-06,Discharge,Continuous
+10045,10045,3235930,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,687.6,four times a day,2021-05-07,Discharge,PRN
+10045,10045,2796372,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,522.5,three times a day,2020-04-04,Discharge,PRN
+10046,10046,7912660,none,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,286.55,twice only,2022-07-22,Inpatient,PRN
+10046,10046,8351400,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,542.22,twice daily,2022-07-27,Discharge,PRN
+10047,10047,4143500,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,356.59,four times a day,2021-07-31,Inpatient,Continuous
+10047,10047,2154638,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,855.16,once daily,2023-12-20,Inpatient,PRN
+10047,10047,8341451,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,702.8,prn,2021-04-09,Outpatient,Continuous
+10047,10047,2090132,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,311.58,twice only,2023-08-18,Inpatient,Stat
+10047,10047,8254166,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,172.08,four times a day,2020-07-17,Inpatient,Continuous
+10047,10047,6300709,no,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,389.29,twice daily,2023-08-20,Inpatient,Continuous
+10047,10047,3190050,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,773.93,three times a day,2022-10-02,Inpatient,Continuous
+10047,10047,6904619,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,608.91,once daily,2021-12-28,Outpatient,Continuous
+10047,10047,4732721,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,39.41,twice daily,2021-11-08,Discharge,Continuous
+10047,10047,2318617,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,127.39,once daily,2021-09-11,Outpatient,Standard
+10048,10048,9354983,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,74.09,once daily,2023-02-05,Outpatient,PRN
+10048,10048,8550417,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,249.52,twice daily,2020-01-01,Discharge,Stat
+10048,10048,9476740,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,234.86,twice only,2023-05-28,Discharge,PRN
+10048,10048,9719189,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,725.68,twice daily,2021-01-05,Discharge,Standard
+10048,10048,5619084,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,769.37,twice daily,2021-04-17,Discharge,Stat
+10048,10048,4883531,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,314.55,three times a day,2021-06-07,Discharge,Standard
+10048,10048,4568543,yes,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,511.2,twice only,2022-08-22,Discharge,Continuous
+10048,10048,5015603,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,455.8,three times a day,2023-08-11,Inpatient,Stat
+10048,10048,9556853,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,621.25,twice only,2023-10-25,Outpatient,Continuous
+10048,10048,6134438,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,146.61,four times a day,2021-09-10,Inpatient,PRN
+10048,10048,1939036,yes,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,946.94,twice only,2021-06-05,Outpatient,Stat
+10048,10048,5370384,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,132.28,twice daily,2022-03-22,Outpatient,Standard
+10049,10049,4898788,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,455.39,prn,2023-04-01,Outpatient,Stat
+10049,10049,5721967,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,813.47,four times a day,2023-07-21,Outpatient,Standard
+10049,10049,4028290,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,792.09,twice daily,2022-10-31,Discharge,Continuous
+10049,10049,4416941,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,477.92,prn,2023-11-14,Discharge,Standard
+10049,10049,1557104,none,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,683.3,once daily,2022-07-10,Discharge,PRN
+10049,10049,5718962,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,662.1,twice only,2023-06-12,Discharge,Standard
+10049,10049,6632582,none,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,596.56,twice only,2021-11-30,Outpatient,PRN
+10049,10049,2325173,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,240.06,twice only,2023-03-22,Inpatient,Standard
+10050,10050,8291804,no,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,905.39,four times a day,2023-01-12,Outpatient,PRN
+10050,10050,4165253,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,668.26,once daily,2021-06-08,Outpatient,Standard
+10050,10050,3752023,no,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,17.59,twice daily,2020-08-31,Outpatient,Continuous
+10050,10050,6154639,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,3.14,twice only,2020-09-10,Outpatient,Standard
+10050,10050,3175857,no,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,792.76,twice only,2021-04-30,Inpatient,Standard
+10050,10050,3515829,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,640.43,twice daily,2023-11-20,Outpatient,PRN
+10050,10050,2427641,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,659.27,twice only,2021-02-23,Inpatient,PRN
+10050,10050,9998736,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,88.46,three times a day,2023-07-31,Outpatient,Standard
+10050,10050,3098028,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,158.2,twice daily,2022-08-14,Outpatient,PRN
+10050,10050,5410003,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,367.74,three times a day,2021-05-27,Discharge,Stat
+10050,10050,2584589,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,723.97,four times a day,2020-08-13,Inpatient,Continuous
+10051,10051,1787441,no,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,807.17,twice daily,2021-07-01,Inpatient,Stat
+10051,10051,9700993,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,534.07,three times a day,2022-10-30,Discharge,Continuous
+10051,10051,8608244,yes,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,397.95,twice only,2020-06-20,Discharge,Continuous
+10051,10051,3254286,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,279.25,prn,2021-08-05,Discharge,Stat
+10051,10051,4193738,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,519.29,three times a day,2020-02-02,Outpatient,Continuous
+10051,10051,4252885,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,548.07,three times a day,2023-10-12,Outpatient,Continuous
+10051,10051,5318291,none,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,595.75,twice only,2023-11-29,Discharge,Continuous
+10051,10051,6279309,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,257.91,four times a day,2023-09-20,Discharge,PRN
+10052,10052,1874147,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,641.65,twice only,2022-02-11,Outpatient,PRN
+10052,10052,4518880,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,205.09,four times a day,2022-06-26,Discharge,Standard
+10052,10052,9119949,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,25.28,twice only,2020-08-07,Inpatient,PRN
+10052,10052,5337951,yes,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,78.1,twice only,2020-09-01,Discharge,Standard
+10052,10052,8299117,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,557.53,twice daily,2021-09-09,Inpatient,PRN
+10052,10052,5049691,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,81.62,once daily,2020-06-01,Discharge,PRN
+10052,10052,7026366,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,361.09,once daily,2023-12-12,Inpatient,PRN
+10052,10052,5103402,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,597.06,twice only,2022-07-27,Discharge,Continuous
+10053,10053,3308183,yes,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,919.26,four times a day,2021-12-14,Inpatient,Continuous
+10053,10053,7813998,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,884.9,four times a day,2020-01-09,Discharge,Standard
+10054,10054,7294905,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,708.2,twice only,2020-10-27,Discharge,Continuous
+10054,10054,7142053,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,974.25,twice daily,2020-09-30,Discharge,Continuous
+10054,10054,5546014,none,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,69.61,prn,2021-03-20,Inpatient,Standard
+10054,10054,3519879,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,349.71,twice daily,2020-01-14,Inpatient,PRN
+10054,10054,8015197,yes,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,157.7,twice daily,2020-08-05,Inpatient,Standard
+10054,10054,3382466,no,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,131.66,twice daily,2020-01-09,Discharge,Standard
+10054,10054,4373514,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,494.93,three times a day,2021-05-28,Outpatient,Stat
+10054,10054,1814102,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,448.96,prn,2020-09-22,Discharge,Stat
+10054,10054,3735136,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,350.6,three times a day,2020-09-11,Discharge,PRN
+10054,10054,5733118,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,930.64,twice daily,2021-10-10,Outpatient,Stat
+10054,10054,5630128,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,566.67,twice daily,2022-04-19,Discharge,PRN
+10054,10054,5725111,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,802.7,four times a day,2023-09-03,Outpatient,Continuous
+10055,10055,4502242,yes,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,585.93,once daily,2020-08-21,Discharge,PRN
+10055,10055,6977353,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,124.42,prn,2023-01-29,Inpatient,Stat
+10055,10055,2612199,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,670.61,prn,2021-02-28,Inpatient,Stat
+10055,10055,6508569,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,278.85,three times a day,2020-01-22,Outpatient,Continuous
+10055,10055,1905582,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,969.09,prn,2020-07-11,Outpatient,Continuous
+10055,10055,2667104,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,227.33,once daily,2023-01-26,Discharge,Standard
+10055,10055,7400301,no,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,454.46,twice only,2020-10-17,Discharge,Standard
+10056,10056,3612910,none,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,939.42,twice daily,2021-01-10,Outpatient,Standard
+10056,10056,1970041,no,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,257.83,prn,2021-11-01,Inpatient,PRN
+10056,10056,6231694,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,410.5,three times a day,2020-02-13,Outpatient,PRN
+10056,10056,8140956,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,220.34,three times a day,2020-12-27,Outpatient,Standard
+10056,10056,4280550,yes,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,517.32,four times a day,2022-01-16,Inpatient,Continuous
+10057,10057,5868414,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,789.51,once daily,2021-10-15,Outpatient,Stat
+10057,10057,2994304,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,442.35,three times a day,2023-07-19,Inpatient,PRN
+10057,10057,7019660,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,205.08,three times a day,2020-08-23,Inpatient,Continuous
+10057,10057,2834012,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,611.05,prn,2022-08-15,Outpatient,PRN
+10057,10057,9102218,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,358.18,twice only,2023-03-16,Inpatient,Stat
+10057,10057,7421401,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,845.05,twice only,2022-05-11,Discharge,PRN
+10057,10057,2107943,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,369.04,three times a day,2021-07-13,Discharge,PRN
+10057,10057,3973279,no,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,665.88,four times a day,2021-02-16,Discharge,Stat
+10057,10057,4329667,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,259.78,prn,2023-10-05,Discharge,PRN
+10057,10057,9947087,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,93.92,three times a day,2020-08-05,Discharge,PRN
+10057,10057,7560788,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,13.33,three times a day,2022-11-17,Outpatient,Standard
+10058,10058,4294139,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,967.49,once daily,2021-11-19,Outpatient,PRN
+10058,10058,4048021,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,845.45,three times a day,2021-07-27,Outpatient,PRN
+10058,10058,1552103,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,207.13,once daily,2023-02-02,Inpatient,PRN
+10059,10059,8633132,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,579.52,three times a day,2022-03-07,Discharge,Stat
+10059,10059,4851583,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,890.17,twice only,2023-03-23,Outpatient,Stat
+10060,10060,6333964,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,150.51,once daily,2022-11-20,Discharge,Stat
+10060,10060,5494398,no,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,313.18,once daily,2022-09-10,Discharge,Standard
+10060,10060,4493370,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,225.96,twice only,2021-05-06,Outpatient,Stat
+10060,10060,2725276,none,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,390.59,once daily,2022-04-22,Outpatient,PRN
+10060,10060,4761503,no,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,830.45,once daily,2023-09-05,Discharge,PRN
+10060,10060,2104215,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,761.78,prn,2020-05-21,Discharge,Standard
+10060,10060,4552496,no,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,713.34,twice daily,2021-01-01,Discharge,PRN
+10061,10061,1381356,none,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,821.74,twice only,2023-09-23,Inpatient,PRN
+10061,10061,9606723,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,58.8,prn,2020-05-10,Outpatient,Standard
+10061,10061,6941225,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,196.33,three times a day,2022-06-09,Inpatient,Continuous
+10062,10062,5810436,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,993.64,once daily,2022-04-20,Discharge,PRN
+10062,10062,7747118,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,18.08,twice only,2022-01-19,Discharge,Continuous
+10062,10062,4919992,no,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,46.89,three times a day,2021-06-02,Discharge,Continuous
+10062,10062,9667358,no,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,540.87,twice daily,2022-05-08,Discharge,Standard
+10062,10062,5472773,none,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,993.97,four times a day,2021-03-23,Inpatient,PRN
+10063,10063,1257502,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,911.34,prn,2022-11-18,Discharge,Continuous
+10063,10063,9952654,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,760.99,four times a day,2022-06-16,Discharge,PRN
+10063,10063,2025735,none,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,928.82,twice daily,2023-08-06,Discharge,Standard
+10064,10064,8754183,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,369.98,prn,2023-02-22,Outpatient,Standard
+10064,10064,4245656,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,562.01,three times a day,2020-07-23,Inpatient,Standard
+10064,10064,8665060,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,264.85,three times a day,2021-06-14,Inpatient,Stat
+10064,10064,9125785,no,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,424.44,twice only,2022-06-06,Outpatient,PRN
+10064,10064,2784552,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,151.77,four times a day,2021-10-31,Inpatient,Standard
+10064,10064,4389086,no,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,304.88,prn,2020-05-04,Inpatient,Stat
+10064,10064,2300971,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,927.15,four times a day,2020-07-21,Discharge,PRN
+10064,10064,2431996,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,880.33,twice only,2022-10-21,Discharge,Stat
+10064,10064,9605464,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,368.1,once daily,2023-05-06,Outpatient,Stat
+10064,10064,3617589,no,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,792.42,prn,2022-03-04,Inpatient,Standard
+10064,10064,4508091,none,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,34.5,once daily,2022-03-14,Outpatient,Standard
+10064,10064,2734096,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,385.35,once daily,2021-08-19,Outpatient,PRN
+10065,10065,8888677,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,164.89,once daily,2020-11-02,Discharge,PRN
+10065,10065,4979834,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,283.22,twice only,2022-06-12,Discharge,Standard
+10065,10065,1573349,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,923.14,once daily,2023-12-14,Discharge,Standard
+10065,10065,5405108,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,338.17,twice only,2020-02-21,Outpatient,Continuous
+10065,10065,4178130,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,6.78,twice daily,2020-12-14,Discharge,Standard
+10065,10065,1282088,yes,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,518.93,twice daily,2020-08-19,Discharge,PRN
+10065,10065,2838427,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,405.42,three times a day,2020-04-01,Discharge,Continuous
+10065,10065,7953817,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,779.7,twice only,2022-08-20,Outpatient,PRN
+10066,10066,7973702,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,682.71,prn,2022-12-12,Discharge,Continuous
+10066,10066,5135339,yes,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,191.79,twice daily,2022-10-29,Outpatient,PRN
+10066,10066,5376407,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,651.41,once daily,2022-12-27,Inpatient,Standard
+10066,10066,9948673,none,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,343.17,three times a day,2021-04-16,Inpatient,Standard
+10066,10066,5383612,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,415.9,twice daily,2023-06-22,Discharge,PRN
+10066,10066,1088747,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,964.72,twice only,2020-09-30,Outpatient,Standard
+10066,10066,6369375,none,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,479.63,twice daily,2023-09-18,Inpatient,PRN
+10066,10066,1414686,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,246.14,twice daily,2020-08-17,Discharge,Standard
+10066,10066,4782096,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,151.89,once daily,2023-11-11,Inpatient,PRN
+10066,10066,1929240,no,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,757.35,twice only,2023-07-13,Discharge,PRN
+10066,10066,6236315,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,532.89,once daily,2023-01-16,Inpatient,Standard
+10067,10067,3516223,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,39.46,four times a day,2020-06-20,Inpatient,Continuous
+10067,10067,7409819,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,144.25,prn,2022-10-03,Discharge,PRN
+10067,10067,7641184,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,915.37,once daily,2022-03-25,Discharge,Stat
+10067,10067,7110659,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,724.92,once daily,2023-08-21,Inpatient,Standard
+10067,10067,8508803,yes,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,901.62,four times a day,2020-03-09,Outpatient,PRN
+10067,10067,7433208,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,483.83,once daily,2020-09-18,Outpatient,Continuous
+10067,10067,2853368,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,999.0,twice daily,2021-12-06,Inpatient,PRN
+10067,10067,8639612,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,795.12,prn,2020-08-16,Inpatient,Standard
+10067,10067,5213696,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,934.56,three times a day,2021-01-15,Discharge,Continuous
+10067,10067,8377619,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,108.11,twice daily,2022-11-06,Inpatient,Stat
+10067,10067,4073097,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,955.85,twice daily,2020-01-02,Inpatient,PRN
+10067,10067,8656693,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,237.2,once daily,2022-08-30,Discharge,Standard
+10068,10068,8501865,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,655.79,twice only,2020-11-21,Discharge,Continuous
+10068,10068,4341886,no,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,861.72,four times a day,2023-05-23,Inpatient,Stat
+10068,10068,9928764,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,651.97,three times a day,2021-04-22,Outpatient,Standard
+10068,10068,4231027,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,38.38,once daily,2021-07-21,Outpatient,Continuous
+10068,10068,5418424,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,557.92,twice only,2020-11-07,Outpatient,Standard
+10068,10068,8805536,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,908.35,twice daily,2021-12-12,Inpatient,Standard
+10068,10068,5926561,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,517.11,prn,2020-09-14,Discharge,Stat
+10068,10068,7670117,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,738.16,twice daily,2022-11-18,Discharge,Continuous
+10068,10068,2200999,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,162.23,three times a day,2023-07-01,Discharge,Stat
+10069,10069,1460461,none,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,50.77,twice only,2023-01-03,Inpatient,Continuous
+10069,10069,6310849,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,335.4,once daily,2023-01-17,Inpatient,Stat
+10069,10069,8787898,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,357.0,once daily,2020-05-09,Outpatient,Stat
+10069,10069,8969546,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,346.52,four times a day,2021-09-10,Outpatient,Stat
+10069,10069,4102150,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,772.45,once daily,2021-11-13,Outpatient,Stat
+10069,10069,6555352,no,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,120.1,three times a day,2023-01-12,Discharge,Continuous
+10069,10069,8695905,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,755.22,prn,2021-12-19,Discharge,PRN
+10069,10069,6225106,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,927.58,four times a day,2020-08-02,Outpatient,PRN
+10069,10069,2039773,none,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,314.28,twice only,2020-10-27,Discharge,PRN
+10069,10069,6572622,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,402.55,prn,2022-02-22,Discharge,Standard
+10070,10070,9859008,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,953.17,four times a day,2022-04-16,Discharge,Stat
+10070,10070,3768529,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,336.3,twice only,2020-12-22,Discharge,Continuous
+10070,10070,1558452,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,140.69,four times a day,2022-04-08,Discharge,PRN
+10070,10070,6424309,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,229.28,twice only,2020-09-10,Outpatient,PRN
+10070,10070,3308173,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,873.32,once daily,2020-07-24,Outpatient,Continuous
+10070,10070,3991540,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,716.96,twice only,2020-10-21,Inpatient,Continuous
+10071,10071,6072719,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,548.35,twice only,2021-03-27,Discharge,PRN
+10071,10071,9222185,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,465.42,twice only,2022-10-13,Outpatient,PRN
+10071,10071,9448490,no,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,319.22,twice daily,2023-01-04,Discharge,Standard
+10071,10071,9017702,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,16.93,three times a day,2022-06-18,Outpatient,Stat
+10071,10071,2351590,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,805.19,three times a day,2020-05-26,Inpatient,Stat
+10071,10071,1875634,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,952.38,twice only,2021-07-30,Discharge,Standard
+10071,10071,7673116,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,473.48,once daily,2022-08-18,Outpatient,Continuous
+10072,10072,9397362,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,971.97,three times a day,2020-03-03,Outpatient,Continuous
+10072,10072,7217829,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,952.4,twice daily,2020-06-19,Inpatient,Standard
+10072,10072,7197562,none,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,480.94,once daily,2021-10-17,Discharge,Standard
+10072,10072,4060855,no,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,238.29,prn,2022-10-26,Discharge,Standard
+10072,10072,9483974,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,202.26,prn,2023-01-13,Inpatient,Standard
+10072,10072,9193959,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,65.87,twice daily,2022-09-12,Discharge,PRN
+10072,10072,7385051,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,827.56,three times a day,2023-04-04,Inpatient,Standard
+10072,10072,9550061,none,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,894.45,four times a day,2021-02-17,Discharge,Standard
+10072,10072,8812996,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,335.16,prn,2021-02-05,Inpatient,Stat
+10072,10072,1585868,none,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,257.72,twice only,2021-11-16,Discharge,Standard
+10072,10072,4877296,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,329.33,four times a day,2022-06-18,Discharge,PRN
+10073,10073,1846533,yes,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,182.1,once daily,2022-07-07,Inpatient,Standard
+10073,10073,8338974,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,261.37,three times a day,2023-10-08,Discharge,Continuous
+10073,10073,1653197,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,630.22,three times a day,2022-11-03,Discharge,Standard
+10073,10073,4263232,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,673.07,twice daily,2022-09-01,Outpatient,Continuous
+10073,10073,5096463,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,726.2,prn,2020-11-15,Discharge,Continuous
+10073,10073,6727326,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,751.23,four times a day,2020-04-17,Inpatient,Standard
+10073,10073,7766909,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,206.69,twice daily,2020-01-01,Inpatient,Standard
+10073,10073,7679073,no,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,671.16,prn,2023-10-21,Outpatient,Standard
+10073,10073,1675344,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,362.1,four times a day,2023-10-13,Discharge,Standard
+10074,10074,1667866,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,434.18,prn,2021-01-27,Inpatient,Continuous
+10074,10074,4971262,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,986.23,once daily,2023-03-03,Outpatient,Stat
+10074,10074,9241573,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,902.13,three times a day,2023-03-12,Discharge,Continuous
+10074,10074,2546760,yes,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,279.06,four times a day,2023-11-23,Outpatient,Continuous
+10074,10074,3820427,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,435.42,twice daily,2020-08-24,Outpatient,Standard
+10074,10074,6961142,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,38.29,once daily,2022-03-30,Outpatient,Standard
+10074,10074,2036085,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,595.38,prn,2020-06-05,Outpatient,PRN
+10074,10074,7630612,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,817.71,four times a day,2021-09-03,Inpatient,Stat
+10075,10075,8272687,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,775.89,once daily,2022-02-03,Inpatient,Continuous
+10075,10075,1195873,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,172.92,twice only,2020-08-29,Inpatient,PRN
+10075,10075,4106926,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,548.18,four times a day,2020-05-23,Discharge,Stat
+10075,10075,4679127,none,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,950.47,twice only,2022-02-22,Inpatient,Standard
+10075,10075,4721919,no,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,604.42,once daily,2020-08-20,Inpatient,Continuous
+10075,10075,5093962,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,63.98,prn,2022-02-02,Outpatient,Stat
+10075,10075,1254726,yes,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,319.21,twice only,2023-06-26,Outpatient,Continuous
+10075,10075,8107653,none,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,94.21,prn,2023-12-22,Inpatient,Stat
+10075,10075,6872350,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,455.34,twice daily,2021-12-10,Discharge,Standard
+10075,10075,3985289,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,121.46,three times a day,2023-11-17,Outpatient,Standard
+10075,10075,9336720,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,620.75,once daily,2020-05-21,Outpatient,Standard
+10076,10076,9072382,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,677.71,three times a day,2022-11-24,Inpatient,Stat
+10076,10076,1368836,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,943.33,once daily,2022-05-25,Inpatient,PRN
+10076,10076,5166392,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,925.15,prn,2022-09-09,Outpatient,Continuous
+10076,10076,7473319,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,888.16,twice daily,2023-09-07,Outpatient,PRN
+10076,10076,2646727,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,98.35,once daily,2020-04-04,Outpatient,Continuous
+10076,10076,9685829,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,733.73,once daily,2021-04-26,Inpatient,Stat
+10076,10076,7424387,yes,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,423.3,twice only,2021-08-23,Discharge,Stat
+10077,10077,2890124,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,312.37,once daily,2021-12-20,Outpatient,Stat
+10077,10077,7795078,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,460.72,twice only,2020-02-22,Outpatient,PRN
+10077,10077,7254356,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,807.32,twice only,2020-06-04,Inpatient,Standard
+10077,10077,7966058,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,907.75,once daily,2021-02-21,Discharge,PRN
+10077,10077,8204617,none,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,38.37,once daily,2020-04-19,Discharge,Stat
+10077,10077,7816170,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,397.5,once daily,2022-10-05,Inpatient,Continuous
+10077,10077,6788846,none,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,945.81,four times a day,2021-08-24,Outpatient,Standard
+10077,10077,9631739,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,480.96,prn,2021-01-02,Inpatient,Stat
+10077,10077,7062965,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,14.65,twice only,2020-07-17,Inpatient,PRN
+10078,10078,6647806,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,379.38,twice daily,2022-07-28,Inpatient,Standard
+10078,10078,4781830,none,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,346.48,prn,2023-09-14,Discharge,Stat
+10078,10078,5031767,none,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,488.83,twice only,2020-12-26,Outpatient,Continuous
+10078,10078,4333234,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,669.81,once daily,2020-07-03,Inpatient,PRN
+10078,10078,5975666,yes,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,579.4,four times a day,2022-12-23,Discharge,PRN
+10078,10078,6446490,yes,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,136.39,prn,2021-09-25,Outpatient,PRN
+10078,10078,6058243,yes,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,832.55,once daily,2021-06-13,Outpatient,Stat
+10078,10078,2250770,no,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,538.07,three times a day,2021-09-18,Outpatient,Standard
+10078,10078,8202610,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,541.62,four times a day,2020-06-02,Inpatient,PRN
+10079,10079,5598818,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,841.32,three times a day,2021-02-10,Outpatient,PRN
+10079,10079,6769988,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,287.97,prn,2023-01-14,Inpatient,PRN
+10079,10079,4590478,no,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,775.7,twice only,2022-06-02,Inpatient,PRN
+10079,10079,3267106,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,402.86,four times a day,2020-07-04,Discharge,Continuous
+10079,10079,2576125,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,498.12,prn,2023-08-06,Outpatient,PRN
+10079,10079,4278342,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,460.92,prn,2020-11-10,Discharge,Continuous
+10079,10079,4598668,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,629.5,four times a day,2021-06-23,Inpatient,Standard
+10080,10080,7702142,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,553.82,once daily,2021-10-15,Discharge,Stat
+10080,10080,1793318,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,817.54,twice only,2022-06-08,Outpatient,Continuous
+10080,10080,8245743,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,631.85,four times a day,2022-04-27,Discharge,PRN
+10080,10080,4736356,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,6.35,four times a day,2021-05-06,Inpatient,PRN
+10080,10080,8541853,no,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,77.78,four times a day,2020-01-11,Outpatient,PRN
+10080,10080,8129346,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,465.83,once daily,2021-01-12,Discharge,PRN
+10080,10080,3131731,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,304.33,four times a day,2020-03-20,Inpatient,Standard
+10080,10080,6814067,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,945.51,three times a day,2022-11-24,Outpatient,Continuous
+10080,10080,6530167,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,929.94,once daily,2021-02-26,Outpatient,Stat
+10080,10080,9257346,yes,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,878.04,once daily,2023-02-21,Outpatient,Continuous
+10080,10080,6716635,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,676.52,four times a day,2022-01-21,Inpatient,Stat
+10081,10081,6136712,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,681.32,twice only,2023-12-08,Inpatient,Continuous
+10081,10081,9278743,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,597.03,four times a day,2022-02-22,Outpatient,PRN
+10081,10081,5028206,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,318.6,four times a day,2023-03-14,Outpatient,Continuous
+10081,10081,8060549,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,748.02,prn,2022-06-07,Outpatient,Stat
+10081,10081,7778292,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,445.86,four times a day,2022-04-23,Discharge,Standard
+10081,10081,5824387,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,550.87,prn,2020-06-14,Inpatient,Continuous
+10081,10081,5885849,none,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,381.17,twice daily,2020-06-16,Outpatient,Stat
+10081,10081,4171961,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,161.62,twice daily,2021-09-18,Discharge,Standard
+10081,10081,4464201,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,465.46,twice only,2021-02-16,Outpatient,Standard
+10081,10081,9428255,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,492.77,prn,2023-09-21,Outpatient,PRN
+10082,10082,8293760,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,408.44,prn,2023-06-19,Discharge,PRN
+10082,10082,3714527,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,147.72,twice daily,2023-09-02,Discharge,PRN
+10082,10082,4793561,no,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,524.5,four times a day,2021-02-16,Outpatient,Standard
+10082,10082,9438640,none,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,44.22,twice only,2020-01-07,Discharge,Continuous
+10082,10082,9096150,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,500.79,twice daily,2023-07-16,Inpatient,Continuous
+10082,10082,3081743,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,257.99,twice only,2020-05-26,Outpatient,Continuous
+10082,10082,8424486,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,774.34,three times a day,2021-02-11,Inpatient,Standard
+10082,10082,1267645,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,757.33,four times a day,2021-09-13,Inpatient,Standard
+10082,10082,1185109,no,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,316.56,three times a day,2023-10-17,Outpatient,Stat
+10083,10083,4913354,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,540.33,once daily,2022-03-15,Discharge,Stat
+10083,10083,4525110,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,90.0,three times a day,2020-05-22,Inpatient,PRN
+10083,10083,9164497,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,312.21,once daily,2022-02-18,Discharge,Stat
+10083,10083,6246871,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,11.35,once daily,2020-03-11,Inpatient,PRN
+10083,10083,7070934,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,478.62,three times a day,2023-12-28,Inpatient,Continuous
+10083,10083,2778852,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,989.28,twice daily,2023-05-07,Inpatient,PRN
+10083,10083,6898823,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,676.02,three times a day,2023-06-27,Outpatient,Continuous
+10084,10084,5401781,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,296.42,four times a day,2023-06-22,Outpatient,PRN
+10084,10084,9098560,no,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,547.46,prn,2022-12-31,Outpatient,Continuous
+10084,10084,7881084,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,47.07,three times a day,2022-06-10,Discharge,Stat
+10084,10084,5802288,yes,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,300.65,twice only,2021-11-15,Inpatient,Stat
+10084,10084,9142457,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,905.74,prn,2022-04-05,Outpatient,PRN
+10084,10084,5947725,none,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,759.42,twice only,2022-02-25,Outpatient,Stat
+10084,10084,7612135,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,237.81,prn,2021-12-29,Outpatient,Stat
+10084,10084,5450545,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,833.64,four times a day,2023-03-17,Outpatient,Continuous
+10084,10084,8082820,none,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,248.32,once daily,2020-12-24,Discharge,Standard
+10084,10084,2924068,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,562.5,prn,2022-11-13,Outpatient,PRN
+10084,10084,2211695,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,161.21,twice daily,2021-03-15,Inpatient,PRN
+10084,10084,6139942,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,436.03,twice only,2022-04-24,Inpatient,Continuous
+10085,10085,2517121,none,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,233.87,twice only,2023-04-24,Discharge,Standard
+10085,10085,5944404,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,620.49,twice only,2022-10-06,Outpatient,PRN
+10085,10085,4583727,no,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,378.93,once daily,2020-12-24,Discharge,PRN
+10085,10085,9939960,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,520.89,four times a day,2020-09-15,Discharge,Standard
+10085,10085,9346820,none,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,114.21,twice daily,2021-07-29,Outpatient,PRN
+10085,10085,3032081,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,760.73,twice daily,2020-02-19,Outpatient,Stat
+10085,10085,5680814,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,120.63,twice only,2021-10-03,Inpatient,Standard
+10085,10085,2800753,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,566.38,four times a day,2022-04-08,Outpatient,Stat
+10085,10085,9941546,yes,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,59.31,three times a day,2020-08-16,Discharge,Continuous
+10085,10085,7320354,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,57.3,once daily,2023-06-08,Outpatient,PRN
+10086,10086,8333772,yes,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,849.09,three times a day,2020-02-05,Outpatient,Stat
+10086,10086,3691545,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,613.34,three times a day,2023-01-18,Discharge,Standard
+10086,10086,3880028,no,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,184.91,prn,2020-08-19,Outpatient,Stat
+10086,10086,1512833,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,561.4,twice daily,2023-12-08,Inpatient,PRN
+10086,10086,7364889,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,370.6,four times a day,2022-02-08,Outpatient,Stat
+10086,10086,2310330,yes,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,102.25,once daily,2023-02-01,Inpatient,Continuous
+10087,10087,9185124,no,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,504.6,once daily,2020-10-31,Outpatient,PRN
+10087,10087,6590994,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,68.17,three times a day,2022-01-06,Outpatient,Stat
+10087,10087,1276777,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,541.63,twice only,2020-07-07,Inpatient,Stat
+10087,10087,7369910,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,210.07,three times a day,2023-08-16,Inpatient,Standard
+10087,10087,7623403,none,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,723.23,three times a day,2021-05-04,Inpatient,Stat
+10087,10087,8349039,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,395.71,twice only,2022-11-29,Inpatient,Stat
+10087,10087,1939748,no,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,807.76,twice daily,2023-10-11,Inpatient,Standard
+10087,10087,4449434,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,830.39,twice only,2022-09-06,Inpatient,Continuous
+10087,10087,3955259,no,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,678.36,prn,2023-05-07,Inpatient,Continuous
+10087,10087,2127217,none,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,382.62,three times a day,2022-12-10,Outpatient,Continuous
+10087,10087,1672266,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,449.05,four times a day,2021-07-13,Discharge,Standard
+10087,10087,9765791,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,292.6,three times a day,2022-02-11,Outpatient,PRN
+10088,10088,4924185,yes,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,163.92,three times a day,2020-05-15,Discharge,Continuous
+10088,10088,6548827,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,866.36,four times a day,2022-04-21,Inpatient,Stat
+10089,10089,4567152,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,287.49,prn,2021-01-09,Outpatient,PRN
+10089,10089,2711533,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,57.97,four times a day,2020-02-25,Discharge,PRN
+10089,10089,4438985,none,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,416.78,three times a day,2022-09-21,Discharge,PRN
+10089,10089,9631904,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,386.97,prn,2021-08-21,Discharge,Stat
+10089,10089,9458331,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,660.5,twice only,2021-06-13,Outpatient,Continuous
+10089,10089,4065023,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,669.27,four times a day,2022-12-27,Outpatient,Stat
+10089,10089,5793614,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,619.93,four times a day,2023-01-01,Discharge,Standard
+10089,10089,5573871,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,555.17,prn,2020-01-28,Inpatient,Stat
+10089,10089,4211937,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,985.37,three times a day,2022-12-13,Inpatient,Continuous
+10090,10090,6801775,yes,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,559.02,twice only,2021-09-14,Discharge,Stat
+10090,10090,4330814,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,747.19,twice daily,2022-04-27,Discharge,PRN
+10091,10091,7168680,no,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,144.01,prn,2022-06-29,Discharge,Standard
+10091,10091,1544107,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,873.71,three times a day,2023-06-12,Inpatient,PRN
+10091,10091,7381158,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,782.38,twice only,2020-02-11,Discharge,Stat
+10092,10092,6789441,yes,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,950.01,once daily,2022-01-20,Inpatient,Stat
+10092,10092,2150015,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,444.55,four times a day,2023-09-07,Discharge,PRN
+10092,10092,3188097,none,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,142.01,four times a day,2021-09-27,Discharge,Standard
+10093,10093,2253263,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,287.42,prn,2021-08-10,Inpatient,Standard
+10093,10093,3264692,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,92.5,once daily,2023-01-25,Discharge,PRN
+10093,10093,5057742,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,988.91,three times a day,2020-08-22,Inpatient,Standard
+10093,10093,2113999,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,842.73,twice only,2021-11-29,Discharge,Standard
+10093,10093,5716313,none,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,686.98,once daily,2020-02-18,Outpatient,Standard
+10094,10094,4083389,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,277.28,twice daily,2021-04-23,Inpatient,PRN
+10094,10094,8267429,yes,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,78.59,twice daily,2021-04-30,Inpatient,Stat
+10094,10094,6592940,no,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,845.14,twice only,2021-07-02,Outpatient,Standard
+10094,10094,9911657,none,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,285.22,twice daily,2023-05-14,Inpatient,PRN
+10094,10094,9065150,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,873.33,four times a day,2021-09-28,Inpatient,Standard
+10094,10094,4879535,yes,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,701.24,once daily,2021-01-23,Discharge,Continuous
+10094,10094,6344544,no,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,864.54,three times a day,2022-10-24,Inpatient,PRN
+10094,10094,7713988,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,880.67,prn,2020-04-12,Inpatient,Stat
+10094,10094,1338790,no,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,730.32,once daily,2021-07-11,Inpatient,Stat
+10094,10094,4566442,yes,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,82.5,twice daily,2023-04-27,Inpatient,PRN
+10094,10094,7720101,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,68.47,twice daily,2021-08-03,Inpatient,Stat
+10094,10094,4861039,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,442.22,three times a day,2023-07-28,Outpatient,Stat
+10095,10095,2673306,none,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,828.19,three times a day,2022-03-03,Outpatient,Continuous
+10095,10095,9567549,no,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,630.26,prn,2023-02-23,Discharge,Continuous
+10095,10095,3360763,yes,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,859.15,four times a day,2023-09-28,Outpatient,PRN
+10095,10095,6189536,no,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,356.68,twice daily,2022-08-13,Outpatient,PRN
+10096,10096,2476182,no,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,335.9,three times a day,2020-09-27,Discharge,Continuous
+10096,10096,4984900,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,443.11,once daily,2020-12-13,Discharge,Standard
+10096,10096,5886347,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,619.52,once daily,2021-07-20,Discharge,Stat
+10096,10096,9879143,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,380.94,three times a day,2020-07-19,Outpatient,Continuous
+10096,10096,1809224,no,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,255.79,twice only,2023-09-18,Inpatient,PRN
+10096,10096,8843249,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,955.61,twice daily,2021-09-04,Discharge,Standard
+10096,10096,5381849,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,139.79,twice only,2022-09-16,Outpatient,Standard
+10096,10096,6587103,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,11.48,prn,2020-02-15,Discharge,PRN
+10096,10096,8012644,none,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,454.03,four times a day,2021-06-26,Discharge,Stat
+10096,10096,1571731,yes,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,989.53,four times a day,2023-01-07,Outpatient,Stat
+10096,10096,5646271,none,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,274.93,prn,2023-08-17,Outpatient,PRN
+10097,10097,3172046,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,111.99,twice daily,2022-03-25,Inpatient,Continuous
+10097,10097,9923785,no,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,42.23,twice daily,2021-04-19,Discharge,Standard
+10097,10097,5358028,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,427.33,twice only,2021-05-24,Inpatient,Standard
+10097,10097,7420441,no,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,333.69,four times a day,2021-10-16,Inpatient,Standard
+10097,10097,4596425,none,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,699.57,twice only,2023-04-10,Outpatient,Stat
+10097,10097,2292675,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,734.46,three times a day,2022-02-28,Inpatient,PRN
+10097,10097,9645423,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,44.53,once daily,2023-08-18,Inpatient,Continuous
+10097,10097,2064475,none,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,244.96,prn,2021-01-29,Inpatient,Stat
+10097,10097,4850173,yes,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,581.62,twice only,2022-06-30,Discharge,Stat
+10098,10098,9029518,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,876.44,once daily,2020-08-05,Inpatient,PRN
+10098,10098,6577301,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,539.78,once daily,2022-05-08,Inpatient,Stat
+10098,10098,9913252,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,762.29,prn,2023-04-25,Outpatient,Standard
+10098,10098,2639544,yes,0,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,816.78,once daily,2021-11-01,Outpatient,PRN
+10098,10098,5411466,yes,1,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,687.49,prn,2022-06-19,Inpatient,Stat
+10098,10098,3136765,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,816.0,once daily,2022-09-24,Discharge,Standard
+10098,10098,7938359,none,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,473.78,prn,2022-04-09,Outpatient,Standard
+10098,10098,6225562,yes,0,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,211.86,twice daily,2020-04-21,Outpatient,Continuous
+10098,10098,5271243,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,892.13,twice only,2021-09-11,Outpatient,Stat
+10098,10098,5768215,yes,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,16.62,prn,2022-05-17,Outpatient,Standard
+10098,10098,9018498,yes,1,Vancomycin 1g Infusion,Vancomycin,infusion,iv,g,Antibiotics,538.73,three times a day,2022-09-22,Inpatient,Continuous
+10098,10098,9521268,none,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,725.49,prn,2021-03-22,Inpatient,PRN
+10099,10099,4885482,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,547.41,once daily,2022-12-03,Inpatient,Stat
+10099,10099,9038473,no,0,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,448.97,once daily,2020-08-16,Discharge,PRN
+10099,10099,2640376,yes,0,Propofol 10mg/ml Emulsion,Propofol,infusion,iv,ml,Anesthetics,829.18,three times a day,2022-07-04,Outpatient,Stat
+10099,10099,5599031,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,702.68,three times a day,2023-03-18,Inpatient,Continuous
+10100,10100,3815979,no,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,537.87,twice daily,2022-03-16,Inpatient,Stat
+10100,10100,9506889,none,1,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,251.34,twice only,2020-08-24,Discharge,Standard
+10100,10100,3082726,no,1,Lisinopril 10mg Tablet,Lisinopril,tablet,oral,mg,Antihypertensives,871.7,four times a day,2023-01-07,Outpatient,Stat
+10100,10100,9671351,no,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,152.2,twice only,2020-10-11,Discharge,Continuous
+10100,10100,8923273,none,1,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,641.41,three times a day,2023-03-08,Inpatient,Standard
+10100,10100,1719157,none,0,Amoxicillin 500mg Capsule,Amoxicillin,capsule,oral,mg,Antibiotics,276.16,three times a day,2022-01-12,Discharge,Continuous
+10100,10100,1767182,no,1,Ibuprofen 400mg Tablet,Ibuprofen,tablet,oral,mg,Analgesics,818.67,once daily,2020-08-01,Inpatient,Standard
+10100,10100,5823069,no,0,Metformin 500mg Tablet,Metformin,tablet,oral,mg,Metabolic agents,822.67,twice daily,2022-11-25,Outpatient,Continuous
