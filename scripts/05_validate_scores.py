@@ -42,7 +42,7 @@ def main():
     log_path.parent.mkdir(parents=True, exist_ok=True)
 
     logger = setup_validation_logger(log_path)
-    df = pd.read_csv(cases_path)
+    df = pd.read_csv(cases_path, on_bad_lines='skip')
 
     # 1. Define the Score Dictionary
     # Maps a human-readable name to the function and the expected CSV column

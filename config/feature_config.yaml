@@ -83,7 +83,7 @@ custom_features:
   # -------------------------------------
   pitt_fever_status_score:
     module: 'src.phenotypes'
-    function: 'derive_fever_status'
+    function: 'derive_pitt_fever_status'
     kwargs:
       temp_cols:
         - 'temp_24h_max'
@@ -107,7 +107,7 @@ custom_features:
 
   pitt_hypotension_flag:
     module: 'src.phenotypes'
-    function: 'derive_hypotension_status'
+    function: 'derive_pitt_hypotension_status'
     kwargs:
       sbp_col: 'sbp_24h_min'
       vasopressor_col: 'has_vasopressors'
@@ -117,20 +117,20 @@ custom_features:
   # -------------------------------------
   sirs_tachycardia_flag:
     module: 'src.phenotypes'
-    function: 'derive_tachycardia'
+    function: 'derive_sirs_tachycardia'
     kwargs:
       hr_col: 'hr_24h_max'
 
   sirs_tachypnea_flag:
     module: 'src.phenotypes'
-    function: 'derive_tachypnea'
+    function: 'derive_sirs_tachypnea'
     kwargs:
       rr_col: 'rr_24h_max'
       paco2_col: 'paco2'
 
   sirs_abnormal_temp_flag:
     module: 'src.phenotypes'
-    function: 'derive_abnormal_temp'
+    function: 'derive_sirs_abnormal_temp'
     kwargs:
       temp_cols:
         - 'temp_24h_max'
@@ -139,7 +139,7 @@ custom_features:
 
   sirs_abnormal_wbc_flag:
     module: 'src.phenotypes'
-    function: 'derive_abnormal_wbc'
+    function: 'derive_sirs_abnormal_wbc'
     kwargs:
       wbc_col: 'wbc'
       bands_col: 'bands'
@@ -464,11 +464,11 @@ custom_scores:
     module: 'src.scores'
     function: 'calculate_pitt_score'
     kwargs:
-      temp_col: 'temp_24h_max' # Using the engineered rolling max
-      hypotens_col: 'hypotension_flag'
-      vent_col: 'mech_vent_flag'
-      arrest_col: 'cardiac_arrest_flag'
-      mental_col: 'mental_status_score'
+      temp_col: 'pitt_fever_status_score' # temp_24h_max
+      hypotens_col: 'pitt_hypotension_flag'
+      vent_col: 'pitt_mech_vent_flag'
+      arrest_col: 'pitt_cardiac_arrest_flag'
+      mental_col: 'pitt_mental_status_score'
 
   sirs_count:
     module: 'src.scores'

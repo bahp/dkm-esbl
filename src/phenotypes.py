@@ -631,7 +631,7 @@ def derive_mental_status_score(df, **kwargs):
     """
     pass
 
-def derive_fever_status(df, **kwargs):
+def derive_pitt_fever_status(df, **kwargs):
     """
     Clinical Logic:
     - 36.1°C – 38.9°C: 0 pts
@@ -670,10 +670,10 @@ def derive_fever_status(df, **kwargs):
             # 4. Retain the highest score observed across the provided columns
             master_score = master_score.combine(current_score, max)
 
-    return master_score.values
+    return master_score
 
 
-def derive_hypotension_status(df, **kwargs):
+def derive_pitt_hypotension_status(df, **kwargs):
     """
     Derives the hypotension component of the Pitt Bacteremia Score.
     Returns 2 points if SBP < 90 OR if the vasopressor flag is 1.
@@ -702,7 +702,7 @@ def derive_hypotension_status(df, **kwargs):
         vp_flag = pd.to_numeric(df[vp_col], errors='coerce')
         flag.loc[vp_flag == 1] = 1
 
-    return flag.values
+    return flag
 
 def is_mechanically_ventilated(df, **kwargs):
     """Checks respiratory support flowsheets.
@@ -738,7 +738,7 @@ def has_recent_cardiac_arrest(df, **kwargs):
 # Reference:
 # Bone RC, et al. "Definitions for sepsis and organ failure and guidelines for the
 # use of innovative therapies in sepsis." Chest. 1992;101(6):1644-55.
-def derive_tachycardia(df, **kwargs):
+def derive_sirs_tachycardia(df, **kwargs):
     """
     Identifies if a patient meets the heart rate criteria for SIRS.
 
@@ -777,10 +777,10 @@ def derive_tachycardia(df, **kwargs):
         hr = pd.to_numeric(df[hr_col], errors='coerce')
         flag.loc[hr > 90.0] = 1
 
-    return flag.values
+    return flag
 
 
-def derive_tachypnea(df, **kwargs):
+def derive_sirs_tachypnea(df, **kwargs):
     """
     Identifies if a patient meets the respiratory criteria for SIRS.
 
@@ -823,10 +823,10 @@ def derive_tachypnea(df, **kwargs):
         paco2 = pd.to_numeric(df[paco2_col], errors='coerce')
         flag.loc[paco2 < 32.0] = 1
 
-    return flag.values
+    return flag
 
 
-def derive_abnormal_temp(df, **kwargs):
+def derive_sirs_abnormal_temp(df, **kwargs):
     """"
     Identifies if a patient meets the temperature criteria for SIRS.
 
@@ -863,10 +863,13 @@ def derive_abnormal_temp(df, **kwargs):
             temp = pd.to_numeric(df[col], errors='coerce')
             flag.loc[(temp > 38.0) | (temp < 36.0)] = 1
 
-    return flag.values
+    return flag
 
 
-def derive_abnormal_wbc(df, **kwargs):
+
+
+
+def derive_sirs_abnormal_wbc(df, **kwargs):
     """
     Identifies if a patient meets the leukocyte (WBC) criteria for SIRS.
 
@@ -923,7 +926,7 @@ def derive_abnormal_wbc(df, **kwargs):
         bands = pd.to_numeric(df[bands_col], errors='coerce')
         flag.loc[bands > 10.0] = 1
 
-    return flag.values
+    return flag
 
 # ----------------------------------------------------------------------------------------
 #                        INCREMENT-ESBL DIRECT CLINICAL EXTRACTORS

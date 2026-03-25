@@ -130,6 +130,9 @@ def calculate_mews(df, **kwargs):
     """
     Computes the Modified Early Warning Score (MEWS).
     Standardized to use the evaluate_score engine for auditing.
+
+    .. TODO: Revisit the logic, it has to be wrong, not covering the
+             different ranges properly.
     """
     score_name = "MEWS Score"
     verbose = kwargs.get('verbose', False)
@@ -469,12 +472,12 @@ def calculate_increment_esbl_v2(df, age_col='age',
 
 def calculate_increment_esbl(df,
                              age_col='AGE_AT_ADMISSION',
-                             charlson_col='charlson_score',
+                             charlson_col='charlson_quan_score',
                              pitt_col='pitt_score',
                              sirs_col='sirs_count',
                              bsi_not_urinary_col='increment_bsi_not_urinary_flag',
-                             is_non_ecoli_col='increment_non_ecoli_flag',
-                             inapprop_abx_col='increment_inapprop_abx_flag',
+                             is_non_ecoli_col='increment_is_non_ecoli_flag',
+                             inapprop_abx_col='increment_abx_inappropriate_flag',
                              **kwargs):
     """
     Computes the INCREMENT-ESBL predictive score for mortality.
@@ -590,7 +593,7 @@ def calculate_gavaghan_score(df,
                              prior_esbl_col='hx_prior_esbl_365d',
                              nursing_home_col='hx_nursing_home_resident',
                              urinary_catheter_col='hx_urinary_catheter_present',
-                             prior_abx_col='hx_prior_f_c_abx_90d',
+                             prior_abx_col='hx_prior_fc_abx_90d',
                              **kwargs):
     """
     Computes the Gavaghan et al. (2025) ESBL Risk Score.
@@ -681,9 +684,9 @@ def calculate_jones_score(df,
 
 
 def calculate_tumbarello_score(df,
-                               prior_esbl_col='hx_prior_esbl_history',
+                               prior_esbl_col='hx_prior_esbl_any',
                                hosp_90d_col='hx_hosp_last_90d',
-                               abx_90d_col='hx_abx_last_90d',
+                               abx_90d_col='hx_prior_abx_90d',
                                urinary_catheter_col='hx_urinary_catheter_present',
                                **kwargs):
     """
@@ -729,11 +732,11 @@ def calculate_tumbarello_score(df,
 # src/scores.py
 
 def calculate_kim_score(df,
-                        prior_esbl_col='prior_esbl_history',
-                        hosp_1y_col='hosp_last_1y',
-                        nursing_home_col='nursing_home_resident',
-                        urinary_catheter_col='urinary_catheter_present',
-                        prior_abx_90d_col='prior_abx_90d',
+                        prior_esbl_col='hx_prior_esbl_any',
+                        hosp_1y_col='hx_hosp_last_365d',
+                        nursing_home_col='hx_nursing_home_resident',
+                        urinary_catheter_col='hx_urinary_catheter_present',
+                        prior_abx_90d_col='hx_prior_abx_90d',
                         **kwargs):
     """
     Computes the Kim et al. (2019) ESBL Risk Score.
