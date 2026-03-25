@@ -134,15 +134,17 @@
         <a href="#rules">2. The Golden Rule of Execution</a>
         <a href="#step1">3. Step 1: Data Generation</a>
         <a href="#step2">4. Step 2: Feature Building</a>
-        <a href="#outputs">5. Understanding the Outputs</a>
+        <a href="#step3">5. Step 3: Model Evaluation</a>
+        <a href="#outputs">6. Understanding the Outputs</a>
     </div>
 
     <div class="content">
         <h1 id="intro">Pipeline Execution Guide</h1>
-        <p>Now that your YAML configuration files are set up, it is time to run the pipeline. The architecture is split into two distinct steps to ensure modularity:</p>
+        <p>Now that your YAML configuration files are set up, it is time to run the pipeline. The architecture is split into three distinct steps to ensure modularity and reproducibility:</p>
         <ol>
             <li><strong>Data Generation (<code>01_generate_data_v2.py</code>)</strong>: Reads the blueprints and builds the raw, messy hospital database.</li>
             <li><strong>Feature Engineering (<code>02_build_features_icare.py</code>)</strong>: Cleans the messy database, pivots the time-series data, and calculates advanced clinical scores.</li>
+            <li><strong>Model Evaluation (<code>03_evaluate_scores_v2.py</code>)</strong>: Tests the accuracy of those clinical scores across different patient subgroups and timeframes.</li>
         </ol>
 
         <hr>
@@ -218,31 +220,79 @@ Processing base features...
 
         <hr>
 
+        <h2 id="step3">Step 3: Running the Model Evaluator</h2>
+        <p>Finally, we need to test if the scores you generated actually work. This script is driven entirely by <code>eval_config.yaml</code>. It slices your dataset by time (e.g., Admission vs. 48h) and by demographic subgroups (e.g., "Elderly Diabetics") to give you a comprehensive performance report.</p>
+
+        <h3>The Command</h3>
+        <p>From the project root folder, run:</p>
+        <div class="terminal">
+            <span>$</span> python -m scripts.03_evaluate_scores_v2
+        </div>
+
+        <h3>What to Expect</h3>
+        <p>The script acts as a "Dumb Dispatcher," executing whatever experiments you defined in the YAML file. It will print its progress as it loops through your specified cohorts and timeframes.</p>
+        <pre><code>==================================================
+📊 [Step 3] Configuration-Driven Model Evaluation
+==================================================
+
+🎯 Target Label: 'ground_truth'
+🧪 Evaluating Scores: mews_score, pitt_score, increment_esbl_score
+
+🏥 === RUNNING COHORT: ALL PATIENTS (100 Patients) ===
+  -> [Admission] Evaluating first clinical record...
+  -> [Milestone 24h] Evaluating records near hour 24...
+
+🏥 === RUNNING COHORT: ELDERLY DIABETICS (24 Patients) ===
+  -> [Admission] Evaluating first clinical record...
+  -> [Milestone 24h] Evaluating records near hour 24...
+
+  📈 Generating AUROC Over Time (up to 168h)...
+
+==================================================
+🏆 MASTER EXPERIMENT SUMMARY
+==================================================
+Strategy                         Score_Name      AUROC  AUPRC
+All Patients - Admission         mews_score      0.82   0.65
+All Patients - Admission         pitt_score      0.88   0.71
+Elderly Diabetics - Admission    mews_score      0.75   0.55
+
+✅ All metrics and plots saved to: outputs</code></pre>
+
+        <hr>
+
         <h2 id="outputs">Understanding the Folder Architecture</h2>
-        <p>After running both scripts successfully, your project's <code>data/</code> folder will look like this. Notice how the system uses identical timestamps to link the raw data run to its corresponding processed data run.</p>
+        <p>After running all three scripts successfully, your project's root folder will be beautifully organized. Notice how the system uses identical timestamps for data, and generates a dedicated <code>outputs/</code> folder for your final metrics.</p>
 
         <pre><code>📦 project_root/
  ┣ 📂 config/
- ┃ ┣ 📜 data_config_v2.yaml
- ┃ ┗ 📜 feature_config.yaml
+ ┃ ┣ 📜 data_config_v2.yaml                 <-- Recipe for Step 1
+ ┃ ┣ 📜 feature_config.yaml                 <-- Recipe for Step 2
+ ┃ ┗ 📜 eval_config.yaml                    <-- Recipe for Step 3
  ┣ 📂 data/
  ┃ ┣ 📂 synthetic/
- ┃ ┃ ┗ 📂 2026-03-25_103015/                <-- Output of Step 1
+ ┃ ┃ ┗ 📂 2026-03-25_103015/                <-- Output of Step 1 (Raw)
  ┃ ┃   ┣ 📜 icare_episodes_anon.csv
- ┃ ┃   ┣ 📜 icare_microbiology_anon.csv
- ┃ ┃   ┣ 📜 icare_pharmacy_prescribing_anon.csv
  ┃ ┃   ┗ 📜 icare_vital_signs_anon.csv
  ┃ ┗ 📂 processed/
- ┃   ┗ 📂 2026-03-25_103015/                <-- Output of Step 2
- ┃     ┗ 📜 features_engineered_icare.csv   <-- Your final ML-ready dataset!
+ ┃   ┗ 📂 2026-03-25_103015/                <-- Output of Step 2 (Engineered)
+ ┃     ┗ 📜 features_engineered_icare.csv
+ ┣ 📂 outputs/                              <-- Output of Step 3 (Evaluation)
+ ┃ ┣ 📂 metrics/
+ ┃ ┃ ┣ 📜 master_summary.csv                <-- The ultimate performance table!
+ ┃ ┃ ┣ 📜 all_patients_admission_metrics.csv
+ ┃ ┃ ┗ 📜 elderly_diabetics_admission_metrics.csv
+ ┃ ┗ 📂 plots/
+ ┃   ┣ 🖼️ all_patients_admission_roc.png
+ ┃   ┗ 🖼️ temporal_auroc.png               <-- Your longitudinal line graph
  ┣ 📂 scripts/
  ┃ ┣ 📜 01_generate_data_v2.py
- ┃ ┗ 📜 02_build_features_icare.py
+ ┃ ┣ 📜 02_build_features_icare.py
+ ┃ ┗ 📜 03_evaluate_scores_v2.py
  ┗ 📂 src/</code></pre>
 
         <div class="success">
-            <strong>🎉 You're Ready for Machine Learning!</strong><br>
-            The <code>features_engineered_icare.csv</code> file now contains perfectly aligned timestamps, imputed missing values, calculated clinical scores, and 1/0 binary flags for advanced phenotypes. It is ready to be loaded into Pandas, Scikit-Learn, or PyTorch for predictive modeling.
+            <strong>🎉 You're Ready for Publication!</strong><br>
+            The <code>master_summary.csv</code> contains all your stratified metrics, and the <code>plots/</code> directory holds high-resolution curves ready to be dropped straight into a clinical research paper or dashboard.
         </div>
 
     </div>

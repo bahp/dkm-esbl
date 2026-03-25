@@ -182,6 +182,69 @@
 
     ✅ MATCH: Expected 21, got 21</code></pre>
 
+
+
+        <hr>
+
+        <h2 id="creating-tests">5. Creating New Unit Tests</h2>
+        <p>As you add new clinical phenotypes or scoring systems to the pipeline, you must accompany them with unit tests. This prevents "logic drift" where a small change in one function accidentally breaks a clinical threshold elsewhere.</p>
+
+        <h3>The Two Levels of Testing</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Test Type</th>
+                    <th>Target File</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Phenotype Test</strong></td>
+                    <td><code>test_phenotypes.py</code></td>
+                    <td>Verify binary logic (e.g., Is 91 bpm actually > 90?).</td>
+                </tr>
+                <tr>
+                    <td><strong>Score Test</strong></td>
+                    <td><code>test_scores.py</code></td>
+                    <td>Verify point summation and hierarchy (e.g., Does Metastatic Cancer trump Solid Tumor?).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Step-by-Step Example: Testing a New Vital Sign</h3>
+        <p>If you implement a new function <code>is_hypotensive()</code> in <code>phenotypes.py</code>, follow these steps to validate it:</p>
+
+        <h4>Step 1: Define the Mock Scenario</h4>
+        <p>Create a small DataFrame with "Edge Cases" (values exactly at the threshold). For a SBP threshold of 90 mmHg, test 89, 90, and 91.</p>
+
+        <pre><code>def test_is_hypotensive_logic():
+    # Setup data with edge cases
+    data = pd.DataFrame({
+        'sbp': [89, 90, 120]
+    })
+
+    # Run the phenotype function
+    # Expected: 89 is True (1), 90 is False (0), 120 is False (0)
+    result = is_hypotensive(data, sbp_col='sbp')
+
+    assert result.iloc[0] == 1  # 89 mmHg
+    assert result.iloc[1] == 0  # 90 mmHg (Threshold is strictly < 90)
+    assert result.iloc[2] == 0  # 120 mmHg</code></pre>
+
+        <h4>Step 2: Account for Keyword Arguments (kwargs)</h4>
+        <p>Clinical functions often use <code>**kwargs</code> to find column names. Ensure your test explicitly passes the column names used in your mock DataFrame so the function doesn't default to production names (like <code>sbp_24h_min</code>) and fail to find your data.</p>
+
+        <div class="note">
+            <strong>Pro Tip:</strong> When testing scores in <code>test_scores.py</code>, use the <code>score_configs</code> fixture. This ensures your test uses the same clinical weights defined in <code>config/feature_config.yaml</code>.
+        </div>
+
+        <h3>Best Practices for Clinical Validation</h3>
+        <ul>
+            <li><strong>Test the "Min" and "Max":</strong> Always include a test case where a patient has 0 points and one where they have the absolute maximum possible points.</li>
+            <li><strong>Handle Overlaps:</strong> If a patient triggers two rules for the same category (e.g., both high and low temperature), ensure your function uses a logical <code>OR</code> (<code>|</code>) so it returns 1 (True), not 2.</li>
+            <li><strong>Return Series:</strong> Ensure your phenotype functions return a <code>pd.Series</code> rather than a <code>numpy.ndarray</code> so you can use <code>.iloc</code> and <code>.loc</code> in your assertions.</li>
+        </ul>
     </div>
 </body>
 </html>
