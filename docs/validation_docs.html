@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipeline Validation & Quality Assurance</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e67e22;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --code-bg: #282c34;
+            --code-color: #abb2bf;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+        }
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 260px;
+            background: var(--bg-color);
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+            border-right: 1px solid #e1e4e8;
+        }
+        .sidebar h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        .sidebar a {
+            display: block;
+            padding: 8px 10px;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .sidebar a:hover {
+            background: #e1e4e8;
+            color: var(--primary-color);
+        }
+        /* Main Content */
+        .content {
+            margin-left: 300px;
+            padding: 40px;
+            max-width: 950px;
+        }
+        h1, h2, h3, h4 {
+            color: var(--primary-color);
+            margin-top: 40px;
+        }
+        h1 { font-size: 2.5em; margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        h3 { color: var(--secondary-color); border-bottom: 1px dashed #ccc; padding-bottom: 5px; margin-top: 30px; }
+        p, li { font-size: 1.05rem; }
+
+        /* Code Formatting */
+        code {
+            background: #eef1f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", Courier, monospace;
+            color: #d63200;
+            font-size: 0.95em;
+        }
+        pre {
+            background: var(--code-bg);
+            color: var(--code-color);
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: "Courier New", Courier, monospace;
+            border-left: 4px solid var(--secondary-color);
+            margin: 15px 0;
+        }
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        /* Callouts */
+        .danger {
+            background: #fceceb;
+            border-left: 5px solid var(--danger-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .success {
+            background: #eafaf1;
+            border-left: 5px solid var(--success-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .note {
+            background: #e8f4fd;
+            border-left: 5px solid var(--secondary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h3>📚 Table of Contents</h3>
+        <a href="#intro">1. The Importance of Validation</a>
+        <a href="#components">2. The Core Components</a>
+        <a href="#score-validation">3. Validating Clinical Scores</a>
+        <a href="#reading-reports">4. Reading the Audit Report</a>
+    </div>
+
+    <div class="content">
+        <h1 id="intro">Pipeline Validation & Quality Assurance</h1>
+
+        <p>In clinical machine learning, a single logic error can have cascading effects. If a function mistakenly categorizes a patient's temperature or misreads a medication history, the final risk score will be entirely compromised. This is why <strong>checking that each individual step is working fine is the most critical part of your pipeline.</strong></p>
+
+        <div class="danger">
+            <strong>⚠️ The "Garbage In, Garbage Out" Rule:</strong> A predictive model is only as intelligent as the features it is trained on. Before you evaluate a model's AUROC, you must mathematically guarantee that the underlying clinical scores are calculating points correctly.
+        </div>
+
+        <hr>
+
+        <h2 id="components">2. The Core Components to Check</h2>
+        <p>Your data transforms through three major stages. We strongly encourage you to manually review and periodically test the functions within each of these files:</p>
+
+        <ul>
+            <li><strong><code>features.py</code></strong>: Are your rolling windows accurately capturing the "24-hour maximum" heart rate? Are missing values being imputed correctly?</li>
+            <li><strong><code>phenotypes.py</code></strong>: Are the ICD-10 regex searches correctly flagging historical conditions? Is the pipeline accurately converting raw medication strings into clean <code>1</code> (True) or <code>0</code> (False) flags?</li>
+            <li><strong><code>scores.py</code></strong>: Are the clinical scoring algorithms (like INCREMENT-ESBL or MEWS) adding up the points perfectly based on the phenotype flags?</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="score-validation">3. Validating Clinical Scores</h2>
+        <p>To ensure our final scores are mathematically flawless, we use a dedicated Unit Testing approach. We have created two specific files for this purpose: <code>cases.csv</code> and <code>05_validate_scores.py</code>.</p>
+
+        <div class="note">
+            <strong>How it works:</strong> The <code>cases.csv</code> file contains synthetic "Test Patients". For each patient, we have manually calculated what their clinical scores <em>should</em> be (e.g., <code>exp_increment</code>, <code>exp_gavaghan</code>). The validation script then runs these patients through your Python code and checks if the computer's math matches the human's math.
+        </div>
+
+        <h3>Execution</h3>
+        <p>To run the validation test, execute the following command from your project root:</p>
+        <pre><code>python -m scripts.05_validate_scores</code></pre>
+
+        <hr>
+
+        <h2 id="reading-reports">4. Reading the Audit Report</h2>
+        <p>When you run the validation script, it generates a highly detailed audit log located at <code>reports/score_validation.log</code>. This report acts as a clinical receipt, showing you exactly how the script arrived at its final number.</p>
+
+        <div class="success">
+            <strong>What to look for:</strong> Open the report and look for the ✅ MATCH indicators. If you see a ❌ MISMATCH, the report will show you exactly which patient and which score failed, allowing you to debug the specific function in <code>scores.py</code>.
+        </div>
+
+        <pre><code>▶ CASE ID: 1 | High-Risk Tertiary
+============================================================
+  [INCREMENT-ESBL Breakdown]
+    [+] Age > 50                   (Value: 60)   +3
+    [+] Charlson > 3               (Value: 5)    +4
+    [+] Pitt Score >= 6            (Value: 7)    +3
+    [+] SIRS >= 2                  (Value: 3)    +4
+    [+] Non-Urinary Source         (Value: 1)    +3
+    [+] Non-E. coli                (Value: 1)    +2
+    [+] Inappropriate Abx          (Value: 1)    +2
+    ---------------------------------------------
+    [=] TOTAL COMPUTED:            21
+
+    ✅ MATCH: Expected 21, got 21</code></pre>
+
+    </div>
+</body>
+</html>
