@@ -23,7 +23,7 @@ def get_latest_data_dir():
 
 
 def get_latest_processed_file():
-    """Finds the most recently processed dataset."""
+    """Finds the most recently processed dataset (any .csv file in the latest folder)."""
     processed_dir = project_root / 'data' / 'processed'
     if not processed_dir.exists():
         raise FileNotFoundError("No processed data found. Run 02_build_features.py first.")
@@ -32,9 +32,17 @@ def get_latest_processed_file():
     if not dirs:
         raise FileNotFoundError("No processed data directories found.")
 
-    latest_file = dirs[-1] / 'features_engineered.csv'
-    if not latest_file.exists():
-        raise FileNotFoundError(f"features_engineered.csv not found in {dirs[-1]}")
+    latest_dir = dirs[-1]
+    csv_files = list(latest_dir.glob('*.csv'))
+
+    if not csv_files:
+        raise FileNotFoundError(f"No CSV files found in the directory: {latest_dir}")
+
+    # Grab the first CSV file found
+    latest_file = csv_files[0]
+
+    # Log the file we are about to read
+    print(f"📄 Loading processed dataset: '{latest_file.name}' from run '{latest_dir.name}'")
 
     return latest_file
 

@@ -20,7 +20,6 @@ def main():
 
     # 1. Load Data & Config
     processed_file = get_latest_processed_file()
-    print(f"Loading engineered features from: {processed_file.parent.name}...")
     final_features = pd.read_csv(processed_file)
 
     feature_config_path = project_root / 'config' / 'feature_config.yaml'
@@ -31,9 +30,9 @@ def main():
     target_label = 'sepsis_case'  # The true label we are trying to predict
 
     # Dynamically grab the names of the scores we created in the YAML
-    computed_scores = list(feature_config.get('computed_features', {}).keys())
+    #computed_scores = list(feature_config.get('computed_features', {}).keys())
     custom_scores = list(feature_config.get('custom_scores', {}).keys())
-    scores_to_test = computed_scores + custom_scores
+    scores_to_test =  custom_scores
 
     valid_scores = [s for s in scores_to_test if s in final_features.columns]
 

@@ -1,5 +1,5 @@
 # src/metrics.py
-
+import re
 import pandas as pd
 import numpy as np
 from sklearn.metrics import (
@@ -7,8 +7,7 @@ from sklearn.metrics import (
     average_precision_score,
     roc_curve,
     precision_recall_curve,
-    confusion_matrix,
-    brier_score_loss
+    confusion_matrix
 )
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -21,194 +20,179 @@ class ClinicalEvaluator:
         self.output_dir = Path(output_dir)
         self.metrics_dir = self.output_dir / 'metrics'
         self.plots_dir = self.output_dir / 'plots'
-
         self.metrics_dir.mkdir(parents=True, exist_ok=True)
         self.plots_dir.mkdir(parents=True, exist_ok=True)
-
-        # Set visualization style
         sns.set_theme(style="whitegrid")
 
-    def evaluate_at_recommended_threshold(self, df, target_col, score_name, recommended_cutoff):
-        """
-        Calculates diagnostic metrics at a pre-defined clinical threshold.
-        Useful for validating 'Rule-In' or 'Rule-Out' safety.
-        """
-        # Ensure no NaNs in the evaluation
-        valid_data = df[[target_col, score_name]].dropna()
-        y_true = valid_data[target_col]
-        y_score = valid_data[score_name]
+    def evaluate_and_plot(self, df, true_label_col, score_cols, strategy_name, settings, requested_metrics):
+        """Master method to compute tabular metrics and trigger requested plots."""
+        # 1. Compute tabular metrics
+        results_df = self._compute_scores(df, true_label_col, score_cols, requested_metrics)
 
-        # Apply the recommended cutoff
-        y_pred_binary = (y_score >= recommended_cutoff).astype(int)
+        if results_df.empty:
+            return results_df
 
-        # Generate Confusion Matrix
-        #
-        tn, fp, fn, tp = confusion_matrix(y_true, y_pred_binary).ravel()
+        # Add strategy name for the master summary
+        results_df.insert(0, 'Strategy', strategy_name)
 
-        # Calculate Clinical Metrics
-        sensitivity = tp / (tp + fn) if (tp + fn) > 0 else 0
-        specificity = tn / (tn + fp) if (tn + fp) > 0 else 0
-        ppv = tp / (tp + fp) if (tp + fp) > 0 else 0  # Positive Predictive Value (Rule-In)
-        npv = tn / (tn + fn) if (tn + fn) > 0 else 0  # Negative Predictive Value (Rule-Out)
+        # Save specific CSV for this strategy
+        # Keeps only letters and numbers, replacing everything else with an underscore
+        safe_name = re.sub(r'[^a-z0-9]', '_', strategy_name.lower())
+        safe_name = re.sub(r'_+', '_', safe_name).strip('_')  # Cleans up double underscores
+        results_df.to_csv(self.metrics_dir / f'{safe_name}_metrics.csv', index=False)
 
-        # Likelihood Ratios
-        lr_plus = sensitivity / (1 - specificity) if (1 - specificity) > 0 else np.nan
-        lr_minus = (1 - sensitivity) / specificity if specificity > 0 else np.nan
+        # 2. Generate Requested Plots
+        plots = settings.get('plots_to_generate', [])
+        if 'roc_curve' in plots:
+            self._plot_roc_curves(df, true_label_col, score_cols, f'{safe_name}_roc.png', strategy_name)
+        if 'pr_curve' in plots:
+            self._plot_pr_curves(df, true_label_col, score_cols, f'{safe_name}_pr.png', strategy_name)
 
-        return {
-            'Score_Name': score_name,
-            'Recommended_Cutoff': recommended_cutoff,
-            'Sensitivity': round(sensitivity, 3),
-            'Specificity': round(specificity, 3),
-            'PPV': round(ppv, 3),
-            'NPV': round(npv, 3),
-            'LR+': round(lr_plus, 2),
-            'LR-': round(lr_minus, 2)
-        }
+        return results_df
 
-    def evaluate_scores(self, df, true_label_col, score_cols):
-        """
-        Evaluates multiple clinical scores against a true binary label.
-        Returns a DataFrame comparing their performance.
-        """
+    def _compute_scores(self, df, true_label_col, score_cols, requested_metrics):
+        """Evaluates clinical scores and filters output based on requested metrics."""
         results = []
+        all_metrics_flag = (requested_metrics == 'all')
 
         for score in score_cols:
-            # Drop rows where the score or label is missing to ensure fair comparison
             valid_data = df[[true_label_col, score]].dropna()
-            if valid_data.empty:
-                print(f"Skipping {score}: No valid data.")
-                continue
+            if valid_data.empty: continue
 
             y_true = valid_data[true_label_col]
             y_pred_score = valid_data[score]
 
-            # 1. Area Under the Curves
+            # Check if we have at least 1 positive and 1 negative case
+            if len(np.unique(y_true)) < 2:
+                continue
+
+            # Core calculations
             auroc = roc_auc_score(y_true, y_pred_score)
             auprc = average_precision_score(y_true, y_pred_score)
-            #brier = brier_score_loss(y_true, y_pred_score)  # Lower is better (calibration)
-
-            # 2. Find the optimal threshold using Youden's J statistic
             fpr, tpr, thresholds = roc_curve(y_true, y_pred_score)
-            j_scores = tpr - fpr
-            optimal_idx = np.argmax(j_scores)
+            optimal_idx = np.argmax(tpr - fpr)
             optimal_threshold = thresholds[optimal_idx]
 
-            # 3. Calculate discrete metrics at the optimal threshold
             y_pred_binary = (y_pred_score >= optimal_threshold).astype(int)
-            tn, fp, fn, tp = confusion_matrix(y_true, y_pred_binary).ravel()
+            tn, fp, fn, tp = confusion_matrix(y_true, y_pred_binary, labels=[0, 1]).ravel()
 
-            sensitivity = tp / (tp + fn) if (tp + fn) > 0 else 0
-            specificity = tn / (tn + fp) if (tn + fp) > 0 else 0
-            ppv = tp / (tp + fp) if (tp + fp) > 0 else 0  # Precision
+            sens = tp / (tp + fn) if (tp + fn) > 0 else 0
+            spec = tn / (tn + fp) if (tn + fp) > 0 else 0
+            ppv = tp / (tp + fp) if (tp + fp) > 0 else 0
             npv = tn / (tn + fn) if (tn + fn) > 0 else 0
 
-            results.append({
-                'Score_Name': score,
-                'AUROC': round(auroc, 3),
-                'AUPRC': round(auprc, 3),
-                #'Brier_Score': round(brier, 3),
-                'Optimal_Cutoff': round(optimal_threshold, 2),
-                'Sensitivity': round(sensitivity, 3),
-                'Specificity': round(specificity, 3),
-                'PPV': round(ppv, 3),
-                'NPV': round(npv, 3)
-            })
+            # Build row dynamically
+            row = {'Score_Name': score}
+            if all_metrics_flag or 'auroc' in requested_metrics: row['AUROC'] = round(auroc, 3)
+            if all_metrics_flag or 'auprc' in requested_metrics: row['AUPRC'] = round(auprc, 3)
+            if all_metrics_flag or 'optimal_cutoff' in requested_metrics: row['Optimal_Cutoff'] = round(
+                optimal_threshold, 2)
+            if all_metrics_flag or 'sensitivity' in requested_metrics: row['Sensitivity'] = round(sens, 3)
+            if all_metrics_flag or 'specificity' in requested_metrics: row['Specificity'] = round(spec, 3)
+            if all_metrics_flag or 'ppv' in requested_metrics: row['PPV'] = round(ppv, 3)
+            if all_metrics_flag or 'npv' in requested_metrics: row['NPV'] = round(npv, 3)
 
-        results_df = pd.DataFrame(results).sort_values(by='AUROC', ascending=False)
+            results.append(row)
 
-        # Save results to CSV
-        results_df.to_csv(self.metrics_dir / 'score_comparison.csv', index=False)
-        return results_df
+        return pd.DataFrame(results).sort_values(by=list(results[0].keys())[1],
+                                                 ascending=False) if results else pd.DataFrame()
 
-    def plot_roc_curves(self, df, true_label_col, score_cols, filename='roc_curves.png'):
-        """Generates and saves a combined ROC curve for all evaluated scores."""
+    def _plot_roc_curves(self, df, true_label_col, score_cols, filename, title_prefix):
         plt.figure(figsize=(8, 6))
-
         for score in score_cols:
             valid_data = df[[true_label_col, score]].dropna()
-            if valid_data.empty: continue
-
+            if len(np.unique(valid_data[true_label_col])) < 2: continue
             fpr, tpr, _ = roc_curve(valid_data[true_label_col], valid_data[score])
             auc = roc_auc_score(valid_data[true_label_col], valid_data[score])
-
             plt.plot(fpr, tpr, lw=2, label=f'{score} (AUC = {auc:.2f})')
 
-        plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--', label='Random Guess')
+        plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
         plt.xlim([0.0, 1.0])
         plt.ylim([0.0, 1.05])
         plt.xlabel('False Positive Rate (1 - Specificity)')
         plt.ylabel('True Positive Rate (Sensitivity)')
-        plt.title('Receiver Operating Characteristic (ROC)')
+        plt.title(f'[{title_prefix}] ROC Curve')
         plt.legend(loc="lower right")
-
         plt.tight_layout()
         plt.savefig(self.plots_dir / filename, dpi=300)
         plt.close()
 
-    def plot_pr_curves(self, df, true_label_col, score_cols, filename='pr_curves.png'):
-        """Generates and saves a combined Precision-Recall curve."""
+    def _plot_pr_curves(self, df, true_label_col, score_cols, filename, title_prefix):
         plt.figure(figsize=(8, 6))
-
         for score in score_cols:
             valid_data = df[[true_label_col, score]].dropna()
-            if valid_data.empty: continue
-
+            if len(np.unique(valid_data[true_label_col])) < 2: continue
             precision, recall, _ = precision_recall_curve(valid_data[true_label_col], valid_data[score])
             auprc = average_precision_score(valid_data[true_label_col], valid_data[score])
-
             plt.plot(recall, precision, lw=2, label=f'{score} (AUPRC = {auprc:.2f})')
 
-        # Baseline is the prevalence of the positive class
         baseline = df[true_label_col].mean()
         plt.axhline(y=baseline, color='navy', lw=2, linestyle='--', label=f'Baseline ({baseline:.2f})')
-
         plt.xlim([0.0, 1.0])
         plt.ylim([0.0, 1.05])
         plt.xlabel('Recall (Sensitivity)')
         plt.ylabel('Precision (PPV)')
-        plt.title('Precision-Recall Curve')
+        plt.title(f'[{title_prefix}] Precision-Recall Curve')
         plt.legend(loc="upper right")
-
         plt.tight_layout()
         plt.savefig(self.plots_dir / filename, dpi=300)
         plt.close()
 
+    # ----------------------------------------------------------------------
+    # Longitudinal Engine
+    # ----------------------------------------------------------------------
+    def plot_longitudinal(self, df, true_label_col, score_cols, plot_type, settings):
+        """Generates dynamic temporal performance plots."""
+        bin_hours = settings.get('bin_hours', 24)
+        max_hours = settings.get('max_hours', 168)
+        metric_name = "AUROC" if plot_type == 'auroc_over_time' else "AUPRC"
 
-if __name__ == '__main__':
-    # ---------------------------------------------------------
-    # Example Usage / Testing
-    # ---------------------------------------------------------
+        print(f"  📈 Generating {metric_name} Over Time (up to {max_hours}h)...")
+        temporal_results = {score: {} for score in score_cols}
+        bins = range(0, max_hours + bin_hours, bin_hours)
 
-    # 1. Create dummy data to simulate the output of features.py
-    np.random.seed(42)
-    n = 1000
-    dummy_df = pd.DataFrame({
-        'sepsis_case': np.random.choice([0, 1], size=n, p=[0.85, 0.15]),  # 15% prevalence
-        'MEWS_score': np.random.normal(loc=2, scale=1.5, size=n),
-        'qSOFA_score': np.random.normal(loc=1, scale=1.0, size=n),
-        'Shock_Index': np.random.normal(loc=0.7, scale=0.3, size=n)
-    })
+        for i in range(len(bins) - 1):
+            start_h, end_h = bins[i], bins[i + 1]
+            df_bin = df[(df['hours_from_admin'] >= start_h) & (df['hours_from_admin'] < end_h)]
+            if df_bin.empty: continue
 
-    # Artificially make scores slightly predictive for the test
-    dummy_df.loc[dummy_df['sepsis_case'] == 1, 'MEWS_score'] += 2.5
-    dummy_df.loc[dummy_df['sepsis_case'] == 1, 'qSOFA_score'] += 1.0
-    dummy_df.loc[dummy_df['sepsis_case'] == 1, 'Shock_Index'] += 0.4
+            df_bin = df_bin.groupby('patient_id')[score_cols + [true_label_col]].max().reset_index()
+            y_true = df_bin[true_label_col]
 
-    # 2. Run the evaluator
-    print("Evaluating clinical scores...")
-    evaluator = ClinicalEvaluator()
+            if len(np.unique(y_true)) > 1:
+                for score in score_cols:
+                    valid = df_bin[[true_label_col, score]].dropna()
+                    if len(np.unique(valid[true_label_col])) > 1:
+                        if metric_name == "AUROC":
+                            val = roc_auc_score(valid[true_label_col], valid[score])
+                        else:
+                            val = average_precision_score(valid[true_label_col], valid[score])
+                        temporal_results[score][end_h] = val
 
-    scores_to_test = ['MEWS_score', 'qSOFA_score', 'Shock_Index']
-    target_label = 'sepsis_case'
+        # Plotting
+        plt.figure(figsize=(12, 7))
+        lines_plotted = 0
+        for score in score_cols:
+            x = list(temporal_results[score].keys())
+            y = list(temporal_results[score].values())
+            if len(x) > 0:
+                plt.plot(x, y, marker='o', linewidth=2, label=score)
+                lines_plotted += 1
 
-    # Compute tabular metrics
-    results_table = evaluator.evaluate_scores(dummy_df, target_label, scores_to_test)
-    print("\n--- Evaluation Results ---")
-    print(results_table.to_string(index=False))
+        if lines_plotted == 0:
+            print(f"  ❌ FAILED TO PLOT {metric_name}: Insufficient data points across time bins.")
+            plt.close()
+            return
 
-    # Generate plots
-    print(f"\nGenerating plots in {evaluator.plots_dir}...")
-    evaluator.plot_roc_curves(dummy_df, target_label, scores_to_test)
-    evaluator.plot_pr_curves(dummy_df, target_label, scores_to_test)
-    print("Done!")
+        plt.title(f'{metric_name} Over Time ({bin_hours}h Bins)', fontsize=16, fontweight='bold')
+        plt.xlabel('Hours Since Admission', fontsize=12)
+        plt.ylabel(metric_name, fontsize=12)
+        baseline = 0.5 if metric_name == "AUROC" else df[true_label_col].mean()
+        plt.axhline(y=baseline, color='gray', linestyle='--', alpha=0.7)
+        plt.ylim(0.0 if metric_name == "AUPRC" else 0.4, 1.0)
+        plt.xlim(0, max_hours)
+        plt.xticks(bins[1:])
+        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+        plt.tight_layout()
+        plt.savefig(self.plots_dir / f'temporal_{metric_name.lower()}.png', dpi=300)
+        plt.close()

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Evaluation & Stratification - Documentation</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e67e22;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --code-bg: #282c34;
+            --code-color: #abb2bf;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+        }
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 260px;
+            background: var(--bg-color);
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+            border-right: 1px solid #e1e4e8;
+        }
+        .sidebar h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        .sidebar a {
+            display: block;
+            padding: 8px 10px;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .sidebar a:hover {
+            background: #e1e4e8;
+            color: var(--primary-color);
+        }
+        .sidebar .sub-nav {
+            margin-left: 15px;
+            font-size: 0.85rem;
+        }
+        /* Main Content */
+        .content {
+            margin-left: 300px;
+            padding: 40px;
+            max-width: 950px;
+        }
+        h1, h2, h3, h4 {
+            color: var(--primary-color);
+            margin-top: 40px;
+        }
+        h1 { font-size: 2.5em; margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        h3 { color: var(--secondary-color); border-bottom: 1px dashed #ccc; padding-bottom: 5px; margin-top: 30px; }
+        p, li { font-size: 1.05rem; }
+
+        /* Code Formatting */
+        code {
+            background: #eef1f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", Courier, monospace;
+            color: #d63200;
+            font-size: 0.95em;
+        }
+        pre {
+            background: var(--code-bg);
+            color: var(--code-color);
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: "Courier New", Courier, monospace;
+            border-left: 4px solid var(--secondary-color);
+            margin: 15px 0;
+        }
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        /* Callouts */
+        .note {
+            background: #e8f4fd;
+            border-left: 5px solid var(--secondary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .note strong { color: var(--secondary-color); }
+        .advanced {
+            background: #fdf3e8;
+            border-left: 5px solid var(--accent-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .advanced strong { color: var(--accent-color); }
+        .success {
+            background: #eafaf1;
+            border-left: 5px solid var(--success-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .danger {
+            background: #fceceb;
+            border-left: 5px solid var(--danger-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th { background-color: #f2f2f2; color: var(--primary-color); }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h3>📚 Table of Contents</h3>
+        <a href="#intro">1. Pipeline Overview</a>
+        <a href="#global-settings">2. Global Settings</a>
+        <a href="#time-slices">3. Time-Slice Strategies</a>
+        <a href="#longitudinal">4. Longitudinal Analyses</a>
+        <a href="#subgroups">5. Subgroup Stratification</a>
+        <a href="#outputs">6. Understanding Outputs</a>
+    </div>
+
+    <div class="content">
+        <h1 id="intro">Model Evaluation & Stratification</h1>
+        <p>Welcome to Step 3 of the pipeline! You have generated raw hospital data and engineered complex clinical features. Now, we must ask the most important question: <strong>Are these clinical scores actually accurate?</strong></p>
+
+        <div class="note">
+            <strong>💡 The "God Config" Concept:</strong> In the past, changing an experiment required rewriting Python code. Now, this pipeline is 100% configuration-driven. The Python script acts as a "Dumb Dispatcher." It simply reads your instructions from <code>eval_config.yaml</code> and builds the exact experiment you ask for.
+        </div>
+
+        <p>Let's walk through the four sections of your <code>eval_config.yaml</code> Mission Control panel.</p>
+
+        <hr>
+
+        <h2 id="global-settings">1. Global Settings (The Target)</h2>
+        <p>This section defines the core rules of the experiment. What are we trying to predict, and how are we measuring success?</p>
+
+        <pre><code>experiment:
+  target_label: 'ground_truth'
+  scores_to_evaluate: 'all'
+  metrics_to_compute: 'all'</code></pre>
+
+        <ul>
+            <li><code>target_label</code>: The exact name of the column containing the true outcome (e.g., <code>sepsis_case</code> or <code>ground_truth</code>).</li>
+            <li><code>scores_to_evaluate</code>: You can type <code>'all'</code> to automatically evaluate every custom score you built, or pass a specific list to isolate tests: <code>['mews_score', 'pitt_score']</code>.</li>
+            <li><code>metrics_to_compute</code>: The specific math you want printed to your CSV summaries (AUROC, Sensitivity, PPV, etc.).</li>
+        </ul>
+
+        <hr>
+
+        <h2 id="time-slices">2. Time-Slice Strategies</h2>
+        <p>A patient's health changes drastically from Day 1 to Day 5. Therefore, a clinical score's accuracy also changes! We evaluate the scores at specific "snapshots" in time.</p>
+
+        <pre><code>time_slices:
+  admission:
+    run: true
+    plots_to_generate: ['roc_curve', 'pr_curve']
+  milestones:
+    run: true
+    hours: [24, 48, 72]</code></pre>
+
+        <ul>
+            <li><strong>Admission:</strong> Grabs the very first recorded row for the patient. <em>(Best for evaluating Triage tools like MEWS).</em></li>
+            <li><strong>Peak:</strong> Grabs the absolute highest (worst) score recorded during their entire stay. <em>(Best for retrospective severity scales like Pitt Bacteremia).</em></li>
+            <li><strong>Milestones:</strong> Calculates the exact hours since admission and evaluates the score strictly at the 24h, 48h, or 72h mark.</li>
+        </ul>
+
+        <div class="danger">
+            <strong>⚠️ Continuous Mode Warning:</strong> Setting <code>continuous: true</code> evaluates every single 4-hour interval independently. While useful for debugging, it will artificially inflate your accuracy metrics because one sick patient with 30 rows counts as 30 "correct" predictions!
+        </div>
+
+        <hr>
+
+        <h2 id="longitudinal">3. Longitudinal Analyses (Performance Over Time)</h2>
+        <p>Instead of single snapshots, what if we want to see a line graph showing how the AUROC degrades or improves over an entire week?</p>
+
+        <pre><code>longitudinal:
+  auroc_over_time:
+    run: true
+    bin_hours: 24
+    max_hours: 168</code></pre>
+
+        <p>If set to <code>true</code>, the pipeline chops the patient's stay into 24-hour buckets, calculates the AUROC for each day, and draws a beautiful line graph up to 168 hours (7 days).</p>
+
+        <hr>
+
+        <h2 id="subgroups">4. Subgroup Stratification (The Multi-Filter Engine)</h2>
+        <p>A score might look 85% accurate overall, but what if it is only 50% accurate for elderly patients? To ensure algorithmic fairness, we define <strong>Cohorts</strong> using a list of filters.</p>
+
+        <div class="advanced">
+            <strong>⚙️ How it Works:</strong> The Python engine reads your filters and translates string operators (like <code>">="</code>) into actual math (like <code>operator.ge</code>) to slice the dataset before evaluating.
+        </div>
+
+        <pre><code>subgroup_analysis:
+  run: true
+  cohorts:
+    - name: "Elderly Diabetics"
+      filters:
+        # Filter 1: Must be older than 65
+        - column: "AGE_AT_ADMISSION"
+          operator: ">="
+          value: 65
+        # AND Filter 2: Must have diabetes
+        - column: "hx_diabetes_uncomp"
+          operator: "=="
+          value: 1</code></pre>
+
+        <p>When you run the script, it will take the "Elderly Diabetics" sub-population and pass them through every active Time-Slice strategy (Admission, Peak, Milestones) independently!</p>
+
+        <hr>
+
+        <h2 id="outputs">5. Running the Script & Understanding Outputs</h2>
+        <p>Once your YAML is configured, simply run:</p>
+        <pre><code>python -m scripts.03_evaluate_scores_v2</code></pre>
+
+        <h3>Where do the files go?</h3>
+        <p>The <code>src/metrics.py</code> engine automatically sanitizes your cohort names (turning "Elderly (>= 65)" into "elderly_65") and saves everything into an organized <code>outputs/</code> folder.</p>
+
+        <pre><code>📦 project_root/
+ ┗ 📂 outputs/
+   ┣ 📂 metrics/
+   ┃ ┣ 📜 master_summary.csv                  <-- All scores, all cohorts, in one file!
+   ┃ ┣ 📜 all_patients_admission_metrics.csv
+   ┃ ┗ 📜 elderly_diabetics_peak_metrics.csv
+   ┗ 📂 plots/
+     ┣ 🖼️ all_patients_admission_roc.png
+     ┣ 🖼️ elderly_diabetics_peak_pr.png
+     ┗ 🖼️ temporal_auroc.png                  <-- Your longitudinal line graph</code></pre>
+
+        <div class="success">
+            <strong>🎉 Master Summary:</strong> The <code>master_summary.csv</code> is your golden ticket. You can open it in Excel, filter by the "Strategy" column, and instantly compare how the MEWS score performs for Young vs. Elderly patients on Day 1!
+        </div>
+
+    </div>
+</body>
+</html>

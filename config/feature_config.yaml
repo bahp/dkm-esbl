@@ -39,7 +39,7 @@ base_features:
 # simple, one-line mathematical equations or logic as strings.
 # - It is extremely fast.
 # - Boolean logic (like `rr >= 22`) automatically evaluates to 1 (True) or 0 (False),
-#   making it very easy to build simple additive scores without writing a full Python function.
+# - Easy to build simple additive scores without writing a full Python function.
 
 # USES df.eval() - EXPLAIN
 computed_features:
@@ -47,11 +47,13 @@ computed_features:
   shock_index: "hr / sbp"
 
   # Clinical Scores (e.g., simplified qSOFA: RR >= 22 and SBP <= 100)
-  # In pandas eval, boolean evaluations return True/False (1/0), allowing easy addition.
   qsofa_score: "(rr >= 22) + (sbp <= 100)"
 
   # Hypothetical composite feature
   vitals_stress_factor: "(hr_24h_mean / 80) + (temp - 37)"
+
+  # Hypothetical ground truth.
+  sepsis_case: "(qsofa_score >= 1) + 0"
 
   # This does the exact same thing as the Python function, but in one line!
   # It evaluates to True (1) or False (0).
@@ -66,6 +68,9 @@ computed_features:
 # from the dataset to pass into it as arguments (kwargs).
 custom_features:
 
+  # --------------------------------------
+  # Ground truth labels
+  # --------------------------------------
   ground_truth:
     module: 'src.phenotypes'
     function: 'derive_ground_truth'

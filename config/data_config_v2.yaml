@@ -25,7 +25,7 @@ clinical_concepts:
       type: 'float'
       unit: 'br/min'
       prob: 0.90
-      range: [6.0, 60.0]
+      range: [6.0, 200.0]
     o2sat:
       code: "LOINC-2708-6"
       name: "Oxygen Saturation"
