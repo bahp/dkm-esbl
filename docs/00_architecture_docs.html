@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pipeline Architecture - DM ESBL</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="nav-sidebar">
+        <h3>Pipeline Docs</h3>
+        <ul>
+            <li><a href="00_architecture_docs.html" class="active">Architecture & Make</a></li>
+            <li><a href="01_data_generation_docs.html">Data Generation</a></li>
+            <li><a href="02_feature_building_docs.html">Feature Building</a></li>
+            <li><a href="03_pipeline_execution_docs.html">Pipeline Execution</a></li>
+            <li><a href="04_pipeline_evaluation_docs.html">Pipeline Evaluation</a></li>
+            <li><a href="05_validation_docs.html">Validation & Testing</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h1>Pipeline Architecture & Orchestration</h1>
+        <p>This document outlines the folder structure of the DM-ESBL clinical pipeline and explains how to use the <code>make.bat</code> manager to execute the workflow.</p>
+
+        <h2 id="folder-structure">1. Folder Structure</h2>
+        <p>The project strictly separates configuration, core clinical logic, execution scripts, and generated reports to ensure reproducibility and easy auditing.</p>
+
+<pre>
+<span class="folder">dm-esbl/</span>
+├── <span class="folder">assets/</span>                 # Static clinical knowledge bases
+│   └── <span class="file">res195-comorbidity-cci-gold.csv</span>
+├── <span class="folder">config/</span>                 # YAML files defining how logic is applied
+│   ├── <span class="file">feature_config.yaml</span>   # Weights for MEWS, SIRS, Pitt, etc.
+│   └── <span class="file">code_search.yaml</span>      # Keyword rules for clinical code discovery
+├── <span class="folder">data/</span>                   # Patient data (Ignored by Git)
+│   ├── <span class="folder">raw/</span>                  # Unprocessed synthetic iCARE data
+│   └── <span class="folder">processed/</span>            # Final engineered dataframes ready for modeling
+├── <span class="folder">reports/</span>                # Logs and outputs for clinical review
+│   ├── <span class="file">score_validation.log</span>
+│   └── <span class="file">code_search_results.txt</span>
+├── <span class="folder">scripts/</span>                # Executable steps in the pipeline (01 to 06)
+├── <span class="folder">src/</span>                    # Core clinical Python logic (No execution here)
+│   ├── <span class="file">phenotypes.py</span>         # Functions to evaluate raw patient conditions
+│   └── <span class="file">scores.py</span>             # Functions to calculate complex medical scores
+├── <span class="folder">tests/</span>                  # Pytest suite protecting the clinical logic
+│   ├── <span class="file">cases.csv</span>             # The "Gold Standard" test patients
+│   ├── <span class="file">test_phenotypes.py</span>
+│   └── <span class="file">test_scores.py</span>
+├── <span class="file">make.bat</span>                # Windows Pipeline Manager
+└── <span class="file">Makefile</span>                # Linux/macOS Pipeline Manager
+</pre>
+
+        <h2 id="using-make">2. Using the <code>make.bat</code> Pipeline Manager</h2>
+        <p>Because Windows does not natively support the <code>make</code> utility, we use a custom batch script (<code>make.bat</code>) to orchestrate the pipeline. It automatically activates the correct Python module paths (using <code>python -m</code>) so your scripts can safely access the <code>src/</code> folder.</p>
+
+        <h3>Interactive Menu Mode</h3>
+        <p>If you simply run the script without any arguments, it will present an interactive menu:</p>
+        <pre>.\make.bat</pre>
+        <p>You can then type a number (e.g., <code>1</code> for all, <code>5</code> for validation) to run a specific step.</p>
+
+        <h3>Direct Command Mode</h3>
+        <p>For faster execution, you can pass the target name directly in your PowerShell terminal. This skips the menu and executes the code immediately.</p>
+
+        <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+            <tr style="background-color: #f1f3f5; text-align: left;">
+                <th style="padding: 10px; border: 1px solid #dee2e6;">Command</th>
+                <th style="padding: 10px; border: 1px solid #dee2e6;">What it does</th>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #dee2e6;"><code>.\make.bat all</code></td>
+                <td style="padding: 10px; border: 1px solid #dee2e6;">Runs steps 1 through 4 sequentially.</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #dee2e6;"><code>.\make.bat generate</code></td>
+                <td style="padding: 10px; border: 1px solid #dee2e6;">Runs <code>01_generate_data_v2.py</code>.</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #dee2e6;"><code>.\make.bat features</code></td>
+                <td style="padding: 10px; border: 1px solid #dee2e6;">Runs <code>02_build_features_icare.py</code>.</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #dee2e6;"><code>.\make.bat evaluate</code></td>
+                <td style="padding: 10px; border: 1px solid #dee2e6;">Runs <code>03_evaluate_scores_v2.py</code>.</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #dee2e6;"><code>.\make.bat validate</code></td>
+                <td style="padding: 10px; border: 1px solid #dee2e6;">Runs the clinical audit against <code>cases.csv</code>.</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #dee2e6;"><code>.\make.bat search</code></td>
+                <td style="padding: 10px; border: 1px solid #dee2e6;">Generates the ICD/SNOMED keyword report.</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #dee2e6;"><code>.\make.bat test</code></td>
+                <td style="padding: 10px; border: 1px solid #dee2e6;">Runs the Pytest suite to check for logic drift.</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc-sidebar">
+        <h4>On this page</h4>
+        <a href="#folder-structure">1. Folder Structure</a>
+        <a href="#using-make">2. Using make</a>
+    </div>
+
+</body>
+</html>

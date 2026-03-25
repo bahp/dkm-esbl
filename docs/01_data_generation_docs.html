@@ -2,143 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Synthetic Clinical Data Generator - Documentation</title>
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e67e22;
-            --bg-color: #f8f9fa;
-            --text-color: #333;
-            --code-bg: #282c34;
-            --code-color: #abb2bf;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            margin: 0;
-            display: flex;
-        }
-        /* Sidebar Navigation */
-        .sidebar {
-            width: 260px;
-            background: var(--bg-color);
-            padding: 20px;
-            height: 100vh;
-            position: fixed;
-            overflow-y: auto;
-            border-right: 1px solid #e1e4e8;
-        }
-        .sidebar h3 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-        .sidebar a {
-            display: block;
-            padding: 8px 10px;
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: 500;
-            border-radius: 4px;
-            margin-bottom: 5px;
-            font-size: 0.95rem;
-        }
-        .sidebar a:hover {
-            background: #e1e4e8;
-            color: var(--primary-color);
-        }
-        .sidebar .sub-nav {
-            margin-left: 15px;
-            font-size: 0.85rem;
-        }
-        /* Main Content */
-        .content {
-            margin-left: 300px;
-            padding: 40px;
-            max-width: 900px;
-        }
-        h1, h2, h3, h4 {
-            color: var(--primary-color);
-            margin-top: 40px;
-        }
-        h1 { font-size: 2.5em; margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        h3 { color: var(--secondary-color); border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
-        p { font-size: 1.05rem; }
-
-        /* Code Formatting */
-        code {
-            background: #eef1f5;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: "Courier New", Courier, monospace;
-            color: #d63200;
-            font-size: 0.95em;
-        }
-        pre {
-            background: var(--code-bg);
-            color: var(--code-color);
-            padding: 15px;
-            border-radius: 6px;
-            overflow-x: auto;
-            font-family: "Courier New", Courier, monospace;
-            border-left: 4px solid var(--secondary-color);
-        }
-        pre code {
-            background: transparent;
-            color: inherit;
-            padding: 0;
-        }
-        /* Callouts */
-        .note {
-            background: #e8f4fd;
-            border-left: 5px solid var(--secondary-color);
-            padding: 15px 20px;
-            margin: 20px 0;
-            border-radius: 0 4px 4px 0;
-        }
-        .note strong { color: var(--secondary-color); }
-        .advanced {
-            background: #fdf3e8;
-            border-left: 5px solid var(--accent-color);
-            padding: 15px 20px;
-            margin: 20px 0;
-            border-radius: 0 4px 4px 0;
-        }
-        .advanced strong { color: var(--accent-color); }
-
-        /* Tables */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-        th { background-color: #f2f2f2; }
-    </style>
+    <title>Data Generation</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="sidebar">
-        <h3>📚 Table of Contents</h3>
-        <a href="#intro">1. Introduction</a>
-        <a href="#params">2. Global Parameters</a>
-        <a href="#dictionary">3. The Clinical Dictionary</a>
-        <a href="#tables-advanced">4. Advanced: Table Architectures</a>
-        <a href="#schema-types" class="sub-nav">- Relational vs EAV</a>
-        <a href="#map-to" class="sub-nav">- The map_to Keyword</a>
-        <a href="#columns-deepdive">5. Column Types Deep-Dive</a>
-        <a href="#generation">6. How Data is Created</a>
-        <a href="#running">7. Running the Tool</a>
+    <div class="nav-sidebar">
+        <h3>Pipeline Docs</h3>
+        <ul>
+            <li><a href="00_architecture_docs.html">Architecture & Make</a></li>
+            <li><a href="01_data_generation_docs.html" class="active">Data Generation</a></li>
+            <li><a href="02_feature_building_docs.html">Feature Building</a></li>
+            <li><a href="03_pipeline_execution_docs.html">Pipeline Execution</a></li>
+            <li><a href="04_pipeline_evaluation_docs.html">Pipeline Evaluation</a></li>
+            <li><a href="05_validation_docs.html">Validation & Testing</a></li>
+        </ul>
     </div>
 
-    <div class="content">
+   <div class="content">
         <h1 id="intro">Synthetic Clinical Data Generator</h1>
         <p>Welcome! This tool allows you to generate highly realistic, fake patient data. Instead of hard-coding values, this system uses a flexible "blueprint" (a YAML configuration file) to build a relational database of patients, vitals, labs, and medications.</p>
 
@@ -240,8 +121,19 @@ UPDATE_DT_TM:
 
         <h2 id="running">7. Running the Tool</h2>
         <p>Open your terminal/command prompt and run:</p>
-        <pre><code>python scripts/01_generate_data.py</code></pre>
+        <pre><code>python -m scripts.01_generate_data </code></pre>
         <p>Your newly minted synthetic tables will be saved to the <code>data/synthetic/</code> directory as fully populated CSV files.</p>
     </div>
+
+    <div class="toc-sidebar">
+        <h4>On this page</h4>
+        <a href="#params">1. Global Parameters</a>
+        <a href="#dictionary">2. The Clinical Dictionary</a>
+        <a href="#tables-advanced">3. Table Architectures</a>
+        <a href="#columns-deepdive">4. Column Types Deep-Dive</a>
+        <a href="#generation">5. How Data is Created</a>
+        <a href="#running">6. Running the Tool</a>
+    </div>
+
 </body>
 </html>
