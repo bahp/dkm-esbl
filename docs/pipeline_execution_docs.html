@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipeline Execution Guide - Documentation</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e67e22;
+            --success-color: #27ae60;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --code-bg: #282c34;
+            --code-color: #abb2bf;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+        }
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 260px;
+            background: var(--bg-color);
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+            border-right: 1px solid #e1e4e8;
+        }
+        .sidebar h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        .sidebar a {
+            display: block;
+            padding: 8px 10px;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .sidebar a:hover {
+            background: #e1e4e8;
+            color: var(--primary-color);
+        }
+        /* Main Content */
+        .content {
+            margin-left: 300px;
+            padding: 40px;
+            max-width: 950px;
+        }
+        h1, h2, h3, h4 {
+            color: var(--primary-color);
+            margin-top: 40px;
+        }
+        h1 { font-size: 2.5em; margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        h3 { color: var(--secondary-color); border-bottom: 1px dashed #ccc; padding-bottom: 5px; margin-top: 30px; }
+        p, li { font-size: 1.05rem; }
+
+        /* Code Formatting */
+        code {
+            background: #eef1f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", Courier, monospace;
+            color: #d63200;
+            font-size: 0.95em;
+        }
+        pre {
+            background: var(--code-bg);
+            color: var(--code-color);
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: "Courier New", Courier, monospace;
+            border-left: 4px solid var(--secondary-color);
+            margin: 15px 0;
+        }
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        /* Callouts */
+        .note {
+            background: #e8f4fd;
+            border-left: 5px solid var(--secondary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .note strong { color: var(--secondary-color); }
+        .advanced {
+            background: #fdf3e8;
+            border-left: 5px solid var(--accent-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .advanced strong { color: var(--accent-color); }
+        .success {
+            background: #eafaf1;
+            border-left: 5px solid var(--success-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Terminal styling */
+        .terminal {
+            background-color: #1e1e1e;
+            color: #4af626;
+            font-family: "Courier New", Courier, monospace;
+            padding: 15px;
+            border-radius: 6px;
+        }
+        .terminal span { color: #fff; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h3>📚 Table of Contents</h3>
+        <a href="#intro">1. Introduction</a>
+        <a href="#rules">2. The Golden Rule of Execution</a>
+        <a href="#step1">3. Step 1: Data Generation</a>
+        <a href="#step2">4. Step 2: Feature Building</a>
+        <a href="#outputs">5. Understanding the Outputs</a>
+    </div>
+
+    <div class="content">
+        <h1 id="intro">Pipeline Execution Guide</h1>
+        <p>Now that your YAML configuration files are set up, it is time to run the pipeline. The architecture is split into two distinct steps to ensure modularity:</p>
+        <ol>
+            <li><strong>Data Generation (<code>01_generate_data_v2.py</code>)</strong>: Reads the blueprints and builds the raw, messy hospital database.</li>
+            <li><strong>Feature Engineering (<code>02_build_features_icare.py</code>)</strong>: Cleans the messy database, pivots the time-series data, and calculates advanced clinical scores.</li>
+        </ol>
+
+        <hr>
+
+        <h2 id="rules">⚠️ The Golden Rule of Execution</h2>
+        <p>Because the pipeline relies on shared resources (like the <code>src/</code> directory and the <code>config/</code> files), you <strong>must always run these scripts from the root directory of your project</strong>. Furthermore, you must run them as Python modules using the <code>-m</code> flag.</p>
+
+        <div class="advanced">
+            <strong>⚙️ Why the <code>-m</code> flag?</strong><br>
+            If you just run <code>python scripts/01_generate_data_v2.py</code>, Python assumes the <code>scripts/</code> folder is the center of the universe. It will throw an error saying <code>ModuleNotFoundError: No module named 'src'</code>. <br><br>
+            By running <code>python -m scripts.01_generate_data_v2</code> from the project root, you tell Python: <em>"Hey, load the whole project into memory first, then execute this specific script."</em> This ensures all your relative paths and imports work flawlessly.
+        </div>
+
+        <hr>
+
+        <h2 id="step1">Step 1: Running the Data Generator</h2>
+        <p>This script acts as the hospital simulator. It reads your <code>data_config_v2.yaml</code>, generates a cohort of synthetic patients, and builds interconnected relational tables (like Episodes, Pharmacy, and Vitals).</p>
+
+        <h3>The Command</h3>
+        <p>Open your terminal, ensure you are in the project root folder, and run:</p>
+        <div class="terminal">
+            <span>$</span> python -m scripts.01_generate_data_v2
+        </div>
+
+        <h3>What to Expect</h3>
+        <p>When the script runs, it will print a log to your terminal showing you exactly which tables it is building. It automatically creates a new, timestamped directory so you never overwrite old data.</p>
+        <pre><code>==================================================
+🧬 [Step 1] Dynamic Synthetic Data Generation
+==================================================
+
+📂 TARGET SAVE DIRECTORY: /your/path/data/synthetic/2026-03-25_103015
+
+Generating configured tables for 100 patients...
+ -> Building ICARE_EPISODES_ANON [relational]...
+ -> Building ICARE_VITAL_SIGNS_ANON [eav_timeseries]...
+ -> Building ICARE_PHARMACY_PRESCRIBING_ANON [relational]...
+
+✅ Success! All data saved dynamically to: data/synthetic/2026-03-25_103015</code></pre>
+
+        <hr>
+
+        <h2 id="step2">Step 2: Running the Feature Builder</h2>
+        <p>Once the raw data exists, it's time to engineer the features. This script is highly intelligent: it automatically finds the <strong>most recently created folder</strong> in your <code>data/synthetic/</code> directory, loads those raw CSVs, and processes them according to your <code>feature_config.yaml</code>.</p>
+
+        <h3>The Command</h3>
+        <p>From the project root folder, run:</p>
+        <div class="terminal">
+            <span>$</span> python -m scripts.02_build_features_icare
+        </div>
+
+        <h3>What to Expect</h3>
+        <p>This script performs a lot of heavy lifting. First, it pivots the long EAV (Entity-Attribute-Value) tables into wide time-series formats. Then, it triggers your Feature Pipeline.</p>
+        <pre><code>==================================================
+⚙️  [Step 2] Feature Engineering: ICARE Edition
+==================================================
+
+📂 Loading data from run: 2026-03-25_103015
+✅ Raw ICARE tables loaded successfully.
+  -> Vitals pivoted. Shape: (1440, 6)
+  -> Labs pivoted. Shape: (350, 4)
+  -> Combined Time-Series Shape: (1790, 10)
+  -> Static (Episodes) rows: 100
+
+🚀 Starting Feature Pipeline...
+Processing base features...
+  🔍 Computing phenotype: is_aki...
+     ✅ is_aki added. Unique values: [0 1]
+  🔍 Computing score: charlson_score...
+     ✅ charlson_score added. Unique values: [3 unique values]
+
+✨ SUCCESS! Engineered 45 features across 1790 rows.
+📍 Saved to: data/processed/2026-03-25_103015/features_engineered_icare.csv</code></pre>
+
+        <hr>
+
+        <h2 id="outputs">Understanding the Folder Architecture</h2>
+        <p>After running both scripts successfully, your project's <code>data/</code> folder will look like this. Notice how the system uses identical timestamps to link the raw data run to its corresponding processed data run.</p>
+
+        <pre><code>📦 project_root/
+ ┣ 📂 config/
+ ┃ ┣ 📜 data_config_v2.yaml
+ ┃ ┗ 📜 feature_config.yaml
+ ┣ 📂 data/
+ ┃ ┣ 📂 synthetic/
+ ┃ ┃ ┗ 📂 2026-03-25_103015/                <-- Output of Step 1
+ ┃ ┃   ┣ 📜 icare_episodes_anon.csv
+ ┃ ┃   ┣ 📜 icare_microbiology_anon.csv
+ ┃ ┃   ┣ 📜 icare_pharmacy_prescribing_anon.csv
+ ┃ ┃   ┗ 📜 icare_vital_signs_anon.csv
+ ┃ ┗ 📂 processed/
+ ┃   ┗ 📂 2026-03-25_103015/                <-- Output of Step 2
+ ┃     ┗ 📜 features_engineered_icare.csv   <-- Your final ML-ready dataset!
+ ┣ 📂 scripts/
+ ┃ ┣ 📜 01_generate_data_v2.py
+ ┃ ┗ 📜 02_build_features_icare.py
+ ┗ 📂 src/</code></pre>
+
+        <div class="success">
+            <strong>🎉 You're Ready for Machine Learning!</strong><br>
+            The <code>features_engineered_icare.csv</code> file now contains perfectly aligned timestamps, imputed missing values, calculated clinical scores, and 1/0 binary flags for advanced phenotypes. It is ready to be loaded into Pandas, Scikit-Learn, or PyTorch for predictive modeling.
+        </div>
+
+    </div>
+</body>
+</html>
