@@ -79,7 +79,7 @@ goto :eof
 echo.
 echo.
 echo --- Running Unit Tests ---
-pytest tests/test_phenotypes.py tests/test_scores.py
+%PYTHON% -m pytest tests/test_phenotypes.py tests/test_scores.py
 timeout /t 2 >nul
 goto :eof
 
